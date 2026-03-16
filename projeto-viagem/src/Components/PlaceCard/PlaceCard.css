@@ -1,4 +1,48 @@
+#cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-left: 17rem;
+}
+
 .card{
-    background-color: white;
-    color: black;
+    background-color: rgb(37, 37, 37);
+    width: 65vh;
+    text-align: center;
+    margin: 2rem;
+    border-radius: 20px;
+}
+
+.card h2{
+    padding: 0.5rem;
+    border-bottom: 2px solid white;
+    width: 50vh;
+    margin: 1rem auto;
+}
+
+.city{
+    margin-top: 1rem;
+}
+
+.city p{
+    margin-right: 23rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.7rem;
+}
+
+.cities img{
+    width: 50vh;
+    height: 30vh;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0);
+}
+
+.price{
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    margin-right: 26rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    background-color: black;
 }

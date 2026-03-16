@@ -1,15 +1,31 @@
 import "./PlaceCard.css"
 
-function PlaceCard({id, country, city, price, img}) {
+function PlaceCard({id, country, city1, city2, city3, price,}) {
   return (
     <>
-        <div className="card">
-                <ul key={id}>
-                    <img src={img} alt="" />
-                    <h2>{country}</h2>
-                    <li>{city}</li>
-                    <li>{price}</li>
-                </ul>
+        <div className="card" key={id}>
+            <h2>{country}</h2>
+
+            <div className="cities">
+
+                <div className="city">
+                    <p>{city1.nome}</p>
+                    <img src={city1.img} alt={city1.nome} />
+                </div>
+
+                <div className="city">
+                    <p>{city2.nome}</p>
+                    <img src={city2.img} alt={city2.nome} />
+                </div>
+
+                <div className="city">
+                    <p>{city3.nome}</p>
+                    <img src={city3.img} alt={city3.nome} />
+                </div>
+
+            </div>
+
+            <p className="price">Price: R$ {price}</p>
         </div>
     </>
     )
