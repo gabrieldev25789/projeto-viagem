@@ -7,7 +7,7 @@ function NavBar() {
     <div id='intro' className='NavBar'>
 
     <div>
-        <h1>Welcome to GrizzyFlyes</h1>
+        <h1>GrizzyFlyes</h1>
     </div>
 
     <div>
