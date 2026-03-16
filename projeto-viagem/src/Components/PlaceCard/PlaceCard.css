@@ -1,23 +1,24 @@
 #cards-container{
     display: flex;
     flex-wrap: wrap;
-    text-align: center;
-    margin-left: 17rem;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
 }
 
 .card{
-    background-color: rgb(37, 37, 37);
-    width: 65vh;
+    background-color: rgba(119, 119, 119, 0.1);
+    width: clamp(55rem, 25vw, 24rem);
     text-align: center;
-    margin: 2rem;
-    border-radius: 20px;
+    border-radius: 1rem;
+    padding: 1rem;
 }
 
 .card h2{
     padding: 0.5rem;
     border-bottom: 2px solid white;
-    width: 50vh;
-    margin: 1rem auto;
+    width: 80%;
+    margin: 0 auto 1rem auto;
 }
 
 .city{
@@ -25,24 +26,46 @@
 }
 
 .city p{
-    margin-right: 23rem;
-    font-size: 1.4rem;
-    margin-bottom: 0.7rem;
+    font-size: 1.7rem;
+    margin-bottom: 0.5rem;
 }
 
 .cities img{
-    width: 50vh;
-    height: 30vh;
-    border-radius: 20px;
+    width: 90%;
+    height: 50vh;
+    border-radius: 1rem;
     box-shadow: 5px 5px 5px rgb(0, 0, 0);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.cities img:hover{
+    transform: scale(1.05);
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.6);
 }
 
 .price{
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     margin-top: 1rem;
-    margin-right: 26rem;
     padding: 0.5rem;
-    border-radius: 10px;
-    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
     background-color: black;
+    display: inline-block;
+}
+
+/* Tablet */
+@media (max-width: 900px){
+    .card{
+        width: 45%;
+    }
+
+    .cities img{
+        height: auto;
+    }
+}
+
+/* Celular */
+@media (max-width: 600px){
+    .card{
+        width: 100%;
+    }
 }
