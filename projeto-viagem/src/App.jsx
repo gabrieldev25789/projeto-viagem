@@ -1,6 +1,7 @@
 import './App.css'
 import NavBar from './Components/NavBar/NavBar'
 import Main from './Components/Main/Main'
+import PlaceCard from './Components/PlaceCard/PlaceCard'
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
     <>
     <NavBar />
     <Main />
+    <PlaceCard />
     </>
   )
 }
