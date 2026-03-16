@@ -1,4 +1,3 @@
-import React from 'react'
 import "./Main.css"
 import img from "../../assets/imgs/main-img.jpg"
 
