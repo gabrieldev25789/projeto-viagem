@@ -1,56 +1,68 @@
-#cards-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    padding: 2rem;
+#cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start; 
+  gap: 1.5rem;
+  padding: 2rem;
 }
 
-.card{
-    background-color: rgba(119, 119, 119, 0.1);
-    width: clamp(55rem, 25vw, 24rem);
-    text-align: center;
-    border-radius: 1rem;
-    padding: 1rem;
+.card {
+    color: black;
+  background: #696666;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  width: clamp(240px, 25vw, 320px);
+  padding: 1.5rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-.card h2{
-    padding: 0.5rem;
-    border-bottom: 2px solid white;
-    width: 80%;
-    margin: 0 auto 1rem auto;
+.card:hover {
+  border-color: rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 
-.city{
-    margin-top: 1rem;
+.card h2 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.city p{
-    font-size: 1.7rem;
-    margin-bottom: 0.5rem;
+.city { margin-top: 0.75rem; }
+
+.city p {
+  font-size: 0.875rem;
+  color: #000000;
+  margin-bottom: 0.5rem;
 }
 
-.cities img{
-    width: 90%;
-    height: 50vh;
-    border-radius: 1rem;
-    box-shadow: 5px 5px 5px rgb(0, 0, 0);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+.cities img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
-.cities img:hover{
-    transform: scale(1.05);
-    box-shadow: 10px 10px 20px rgba(0,0,0,0.6);
+.cities img:hover { transform: scale(1.02); }
+
+.price {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: #f5f5f5;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
 }
 
-.price{
-    font-size: 1.1rem;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    background-color: black;
-    display: inline-block;
-}
+.hide { display: none; }
+
+.cities { display: block; }
 
 /* Tablet */
 @media (max-width: 900px){
