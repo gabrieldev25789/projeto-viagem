@@ -20,17 +20,23 @@ export const places = [
     country: "France",
     city1: {
       nome: "Paris",
-      img: paris
+      img: paris,
+      price: 4200,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+
     },
     city2: {
       nome: "Bordeaux",
-      img: bordeaux
+      img: bordeaux,
+      price: 4200,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
     city3: {
       nome: "Lyon",
-      img: lyon
+      img: lyon,
+      price: 4200,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
-    price: 4200
   },
   
   {
@@ -38,17 +44,22 @@ export const places = [
     country: "USA",
     city1: {
       nome: "New York",
-      img: newyork
+      img: newyork,
+      price: 4200,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
     city2: {
       nome: "Los Angeles",
-      img: losangeles
+      img: losangeles,
+      price: 4200,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
     city3: {
       nome: "Miami",
-      img: miami
+      img: miami,
+      price: 4200,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
-    price: 3500
   },
   
   {
@@ -56,17 +67,22 @@ export const places = [
     country: "Italy",
     city1: {
       nome: "Milano",
-      img: milano
+      img: milano,
+      price: 3500,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
     city2: {
       nome: "Roma",
-      img: roma
+      img: roma,
+      price: 3500,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
     city3: {
       nome: "Turim",
-      img: turim
+      img: turim,
+      price: 3500,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
-    price: 5200
   },
   
   {
@@ -74,16 +90,21 @@ export const places = [
     country: "Spain",
     city1: {
       nome: "Barcelona",
-      img: barcelona
+      img: barcelona,
+      price: 5200,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
     city2: {
       nome: "Madrid",
-      img: madrid
+      img: madrid,
+      price: 5200,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
     city3: {
       nome: "Granada",
-      img: granada
+      img: granada,
+      price: 5200,
+      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
     },
-    price: 4800
   }
 ]
