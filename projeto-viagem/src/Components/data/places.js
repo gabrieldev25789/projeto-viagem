@@ -21,21 +21,20 @@ export const places = [
     city1: {
       nome: "Paris",
       img: paris,
-      price: 4200,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
-
+      price: 4800,
+      description: "Paris is known as the city of love, full of iconic landmarks like the Eiffel Tower, charming cafes, and a rich artistic history that attracts millions of visitors every year."
     },
     city2: {
       nome: "Bordeaux",
       img: bordeaux,
-      price: 4200,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      price: 3900,
+      description: "Bordeaux is famous for its world-class wines, elegant architecture, and relaxed lifestyle, offering a perfect mix of culture and gastronomy."
     },
     city3: {
       nome: "Lyon",
       img: lyon,
-      price: 4200,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      price: 4100,
+      description: "Lyon is a culinary capital of France, known for its traditional cuisine, historic old town, and vibrant cultural scene."
     },
   },
   
@@ -45,20 +44,20 @@ export const places = [
     city1: {
       nome: "New York",
       img: newyork,
-      price: 4200,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      price: 5500,
+      description: "New York City is a fast-paced metropolis filled with skyscrapers, famous attractions like Times Square, and endless entertainment options."
     },
     city2: {
       nome: "Los Angeles",
       img: losangeles,
-      price: 4200,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      price: 5300,
+      description: "Los Angeles is the heart of the entertainment industry, offering sunny beaches, Hollywood glamour, and a diverse cultural scene."
     },
     city3: {
       nome: "Miami",
       img: miami,
-      price: 4200,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      price: 5000,
+      description: "Miami is known for its beautiful beaches, vibrant nightlife, and a strong Latin influence that shapes its unique culture."
     },
   },
   
@@ -68,20 +67,20 @@ export const places = [
     city1: {
       nome: "Milano",
       img: milano,
-      price: 3500,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      price: 3700,
+      description: "Milan is a global fashion capital, combining modern lifestyle with historic landmarks and a thriving business environment."
     },
     city2: {
       nome: "Roma",
       img: roma,
-      price: 3500,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      price: 4000,
+      description: "Rome is a city full of ancient history, where you can explore iconic sites like the Colosseum and the Vatican while enjoying authentic Italian cuisine."
     },
     city3: {
       nome: "Turim",
       img: turim,
-      price: 3500,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      price: 3400,
+      description: "Turin is known for its elegant architecture, rich history, and as a gateway to the Italian Alps, offering a quieter but charming experience."
     },
   },
   
@@ -91,20 +90,20 @@ export const places = [
     city1: {
       nome: "Barcelona",
       img: barcelona,
-      price: 5200,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      price: 5600,
+      description: "Barcelona blends stunning architecture by Gaudí, beautiful beaches, and a lively atmosphere full of art and culture."
     },
     city2: {
       nome: "Madrid",
       img: madrid,
       price: 5200,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      description: "Madrid is Spain’s capital, known for its royal palaces, world-class museums, and energetic nightlife."
     },
     city3: {
       nome: "Granada",
       img: granada,
-      price: 5200,
-      description: "Description Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur, et! Praesentium consectetur quae nisi modi dicta, maiores eligendi magni rem, nam quasi necessitatibus minima voluptates pariatur, aut culpa quas minus?"
+      price: 4700,
+      description: "Granada offers a unique mix of cultures, highlighted by the Alhambra palace and its breathtaking views of the Sierra Nevada mountains."
     },
   }
 ]
