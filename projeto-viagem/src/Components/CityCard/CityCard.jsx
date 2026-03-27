@@ -1,9 +1,10 @@
 import { useState } from "react"
 
 
-function CityCard({ city, onGoCity}) {
+// CityCard.jsx — mais simples, sem estado de lista
+function CityCard({ city, onGoCity, onAddCity }) {
+  console.log("CityCard onAddCity:", onAddCity)
   const [showDes, setShowDes] = useState(false)
-
 
   return (
     <div className="city">
@@ -11,12 +12,11 @@ function CityCard({ city, onGoCity}) {
       <img src={city.img} alt={city.nome} />
       <p className="price">Price: R$ {city.price}</p>
 
-      <button 
-        className="see-description" 
-        onClick={() => setShowDes(prev => !prev)}
-      >
-        {showDes ? "Close" : "See description"}
+      <button onClick={() => setShowDes(prev => !prev)}>
+        {showDes ? "Fechar" : "Ver descrição"}
       </button>
+
+      <button onClick={() => onAddCity(city)}>Adicionar</button>
 
       <button onClick={() => onGoCity(city)}>GO</button>
 
