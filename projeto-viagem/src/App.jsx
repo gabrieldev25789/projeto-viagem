@@ -8,10 +8,18 @@ function App() {
   const [showText, setShowText] = useState("")
   const [priceCity, setPriceCity] = useState([])
 
-  function addCity(city) {
-    console.log("addCity chamado:", city)
-    setPriceCity(prev => [...prev, { nome: city.nome, price: city.price }])
-  }
+function addCity(city) {
+
+  setPriceCity(prev => {
+    const newList = [...prev, { nome: city.nome, price: city.price }]
+
+    const total = newList.reduce((acc, item) => acc + item.price, 0)
+
+    console.log("Total:", total)
+
+    return newList
+  })
+}
 
   function goCity(city) {
     setShowText(`I wanna go to ${city.nome}, this gonna cost me R$ ${city.price}`)
