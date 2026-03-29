@@ -2,8 +2,8 @@ import { useState } from "react"
 
 
 // CityCard.jsx — mais simples, sem estado de lista
-function CityCard({ city, onGoCity, onAddCity }) {
-  console.log("CityCard onAddCity:", onAddCity)
+function CityCard({ city, onAddCity }) {
+  
   const [showDes, setShowDes] = useState(false)
 
   return (
@@ -17,8 +17,6 @@ function CityCard({ city, onGoCity, onAddCity }) {
       </button>
 
       <button onClick={() => onAddCity(city)}>Adicionar</button>
-
-      <button onClick={() => onGoCity(city)}>GO</button>
 
       <p className={showDes ? "description" : "hide"}>
         {city.description}
