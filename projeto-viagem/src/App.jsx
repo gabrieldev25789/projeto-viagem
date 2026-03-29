@@ -5,25 +5,25 @@ import Main from './Components/Main/Main'
 import Places from "./pages/Places"
 
 function App() {
-  const [showText, setShowText] = useState("")
   const [priceCity, setPriceCity] = useState([])
+  const [totalPrice, setTotalPrice]= useState("")
 
 function addCity(city) {
+  priceCity.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD"
+  })
 
   setPriceCity(prev => {
     const newList = [...prev, { nome: city.nome, price: city.price }]
 
     const total = newList.reduce((acc, item) => acc + item.price, 0)
-
-    console.log("Total:", total)
+    setTotalPrice(total)
 
     return newList
   })
-}
 
-  function goCity(city) {
-    setShowText(`I wanna go to ${city.nome}, this gonna cost me R$ ${city.price}`)
-  }
+}
 
   return (
     <>
@@ -33,16 +33,18 @@ function addCity(city) {
       <div id="places">
         <h1 className='places-title'>Choose your destiny wisely</h1>
 
-        <Places goCity={goCity} onAddCity={addCity} /> 
+        <Places onAddCity={addCity} /> 
 
-        {showText && <p>{showText}</p>}
+       
       </div>
 
       {priceCity.length > 0 && (
         <ul>
-          {priceCity.map(c => (
-            <li key={c.nome}>{c.nome} - R$ {c.price}</li>
+        <h2>{totalPrice}</h2>
+            {priceCity.map(c => (
+            <li key={c.nome}>{c.nome} - USD {c.price}</li>
           ))}
+      
         </ul>
       )}
     </>
