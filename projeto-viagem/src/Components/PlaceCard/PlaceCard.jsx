@@ -3,13 +3,14 @@ import "./PlaceCard.css"
 import CityCard from "../CityCard/CityCard"
 
 
-function PlaceCard({ id, country, city1, city2, city3, onAddCity }){
+function PlaceCard({ id, country, continet, city1, city2, city3, onAddCity }){
 
     const [show, setShow] = useState(false) 
     
     return ( 
     <div className="card" key={id}> 
-        <h2>{country}</h2> 
+        <h2>{continet}</h2>
+        <h3>{country}</h3> 
 
         <button onClick={() => setShow(prev => !prev)}> 
             {show ? "Fechar" : "Clique para ver cidades"} 
