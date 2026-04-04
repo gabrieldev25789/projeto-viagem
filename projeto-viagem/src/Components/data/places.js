@@ -18,6 +18,7 @@ export const places = [
   {
     id: 1,
     country: "France",
+    continet: "Europe",
     city1: {
       nome: "Paris",
       img: paris,
@@ -41,6 +42,7 @@ export const places = [
   {
     id: 2,
     country: "USA",
+    continet: "North America",
     city1: {
       nome: "New York",
       img: newyork,
@@ -64,6 +66,7 @@ export const places = [
   {
     id: 3,
     country: "Italy",
+    continet: "Europe",
     city1: {
       nome: "Milano",
       img: milano,
@@ -87,6 +90,7 @@ export const places = [
   {
     id: 4,
     country: "Spain",
+    continet: "Europe",
     city1: {
       nome: "Barcelona",
       img: barcelona,
