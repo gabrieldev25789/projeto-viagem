@@ -1,0 +1,82 @@
+#intro{
+    background-color: rgba(20, 20, 20, 0.39); 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+}
+
+#list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+}
+
+#list li{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #d3d3d3;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+#list li:hover{
+    color: #0077ff;
+}
+
+#list li::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: #0077ff;
+    transition: width 0.3s ease;
+}
+
+#list li:hover::after{
+    width: 100%;
+}
+
+
+/* TABLETS */
+@media (max-width: 900px){
+
+    #intro{
+        padding: 0.8rem;
+    }
+
+    #list{
+        gap: 1.2rem;
+    }
+
+    
+    #list li{
+        font-size: 1rem;
+    }
+
+}
+
+
+/* CELULARES */
+@media (max-width: 600px){
+
+    #intro{
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    #list{
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    #list li{
+        font-size: 0.95rem;
+    }
+
+}
