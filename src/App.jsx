@@ -1,5 +1,5 @@
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import NavBar from './Components/NavBar/NavBar'
 import Main from './Components/Main/Main'
 import Places from './Components/Places/Places'
@@ -13,15 +13,22 @@ function App() {
       setShow((prev)=> !prev)
   }
 
-  function chooseCity(name, price){
-      console.log(name, price)
-      setLista((prev)=> [...prev, {name, price}])
+  function chooseCity(id, name, price){
+
+    setLista((prev)=>{
+      const exist = prev.find(item => item.id === id)
+
+      if(exist){
+        return prev.map(item => 
+          item.id === id 
+          ? {...item, amount: item.amount + 1} 
+          : item 
+        )
+      }
+
+      return [...prev, {id, name, price, amount: 1 }]
+    })
   }
-
-    useEffect(()=>{
-      console.log(lista)
-    }, [lista])
-
   return (
     <>
       <NavBar />
