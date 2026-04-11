@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import "./Cart.css"
 
-function Cart({ lista = [] }) {
+function Cart({ lista = [], removeCity }) {
   const [show, setShow] = useState(false)
 
 const total = lista.reduce(
@@ -22,15 +22,37 @@ const total = lista.reduce(
           </div>
 
           <div className='cart-body'>
-            {lista.map((item) => (
-              <div className='cart-item' key={item.name}>
-                <h4 className='cart-name'>
-                  {item.name} {item.amount > 1 && `(${item.amount})`}
-                </h4>
-                <p className='cart-price'>USD {(item.price).toFixed(2)}</p>
-              </div>
-              
-            ))}
+          <table className='cart-table'>
+
+              <colgroup>
+                  <col />
+                  <col />
+                  <col />
+              </colgroup>
+
+             <thead>
+                <tr>
+                  <th className='cart-th'>City</th>
+                  <th className='cart-th'>Price</th>
+                </tr>
+              </thead>
+
+            <tbody>
+              {lista.map((item) => (
+              <tr className='cart-item' key={item.id}>
+                
+                <td className='cart-name'>
+                    {item.name} {item.amount > 1 && `(${item.amount})`}
+                </td>
+
+                <td className='cart-price'>USD {item.price.toFixed(2)}</td>
+                <td>
+                  <button className='cart-btn' onClick={() => removeCity(item.id)}>Remove</button>
+                </td>
+              </tr>
+              ))}
+            </tbody>
+          </table>
           </div>
 
           <div className='cart-footer'>
