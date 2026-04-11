@@ -48,8 +48,17 @@ function removeCity(id){
       <NavBar />
       <Main />
       <button onClick={() => showDestinations()}>{show ? "Click to close" : "Click to see destinations"}</button>
-      {show && <Places chooseCity={chooseCity}/>}
-      {show && <Cart lista={lista} removeCity={removeCity}/> }
+    
+    <div className='place-cart-container'>
+        {show && <Places chooseCity={chooseCity} />}
+        
+        {show && (
+        <aside>
+            <Cart lista={lista} removeCity={removeCity} />
+        </aside>
+        )}
+    </div>
+
     </>
   )
 }
