@@ -13,7 +13,7 @@ return (
       <li className='cities-li'>
         <ul className='cities-ul'>
           {place.cities.map((city) => (
-            <li className='city-card' key={city.name} onClick={() => chooseCity(city.name, city.price)}>
+            <li className='city-card' key={city.name} onClick={() => chooseCity(city.id, city.name, city.price)}>
               <img className='city-img' src={city.img} alt={city.name} />
               <div className='city-info'>
                 <h3 className='city-name'>{city.name}</h3>
