@@ -37,27 +37,4 @@ function Cart({ lista = [] }) {
   )
 }
 
-{/*
-function Cart({ lista }) {
-
-    const [show, setShow] = useState(false)
-
-    function showCart(){
-       setShow((prev)=> !prev)
-        console.log(lista)
-    }
-
-  return (
-    <div>
-    <button className='cart-btn' onClick={() => showCart()}>{show ? "Click to close" : "Click to see cart"}</button> 
-      {show && lista.map((item) => (
-        <div className='cart-container' key={item.name}>
-          <h4 className='cart-name'>City: {item.name}</h4>
-          <p className='cart-price'>Price: USD {(item.price).toFixed(2)}</p>
-        </div>
-      ))}
-    </div>
-  )
-}
-*/}
 export default Cart 
