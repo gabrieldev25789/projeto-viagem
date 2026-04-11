@@ -29,13 +29,27 @@ function App() {
       return [...prev, {id, name, price, amount: 1 }]
     })
   }
+
+function removeCity(id){
+  setLista((prev) =>
+    prev
+      .map(item => {
+        if(item.id === id){
+          return { ...item, amount: item.amount - 1 }
+        }
+        return item
+      })
+      .filter(item => item.amount > 0)
+  )
+}
+
   return (
     <>
       <NavBar />
       <Main />
       <button onClick={() => showDestinations()}>{show ? "Click to close" : "Click to see destinations"}</button>
-      {show && <Places  chooseCity={chooseCity}/>}
-      {show && <Cart lista={lista}/> }
+      {show && <Places chooseCity={chooseCity}/>}
+      {show && <Cart lista={lista} removeCity={removeCity}/> }
     </>
   )
 }
