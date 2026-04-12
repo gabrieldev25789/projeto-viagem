@@ -22,7 +22,7 @@ function Search({ chooseCity }) {
         onChange={(e) => setValue(e.target.value)}
       />
 
-      <Places placesData={filteredPlaces} chooseCity={chooseCity} />
+      <Places key={valueReset} placesData={filteredPlaces} chooseCity={chooseCity} />
     </div>
   )
 }
