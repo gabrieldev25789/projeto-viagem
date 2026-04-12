@@ -20,7 +20,7 @@ function Places({ placesData = places, chooseCity }) {
                 >
                   <li
                     className='city-card'
-                    onClick={() => chooseCity(city.id, city.name, city.price)}
+                    onClick={() => chooseCity(city.id, city.name, city.price, city.img)}
                   >
                     <img className='city-img' src={city.img} alt={city.name} />
                     <div className='city-info'>
