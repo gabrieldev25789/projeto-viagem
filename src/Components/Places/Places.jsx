@@ -12,19 +12,24 @@ function Places({ placesData = places, chooseCity }) {
 
           <li className='cities-li'>
             <ul className='cities-ul'>
-              {place.cities.map((city) => (
-                <li 
-                  className='city-card' 
+              {place.cities.map((city, index) => (
+                <div
+                  className='city-card-wrapper'
                   key={city.id}
-                  onClick={() => chooseCity(city.id, city.name, city.price)}
+                  style={{ animationDelay: `${index * 60}ms` }}
                 >
-                  <img className='city-img' src={city.img} alt={city.name} />
-                  <div className='city-info'>
-                    <h3 className='city-name'>{city.name}</h3>
-                    <p className='city-price'>R$ {city.price}</p>
-                    <p className='city-description'>{city.description}</p>
-                  </div>
-                </li>
+                  <li
+                    className='city-card'
+                    onClick={() => chooseCity(city.id, city.name, city.price)}
+                  >
+                    <img className='city-img' src={city.img} alt={city.name} />
+                    <div className='city-info'>
+                      <h3 className='city-name'>{city.name}</h3>
+                      <p className='city-price'>R$ {city.price}</p>
+                      <p className='city-description'>{city.description}</p>
+                    </div>
+                  </li>
+                </div>
               ))}
             </ul>
           </li>
