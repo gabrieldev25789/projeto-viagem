@@ -1,13 +1,27 @@
 import './App.css'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useState} from 'react'
 import NavBar from './Components/NavBar/NavBar'
 import Main from './Components/Main/Main'
-import Places from './Components/Places/Places'
 import Cart from './Components/Cart/Cart'
+import Search from './Components/Search/Search'
+import Requested from './Components/Requested/Requested'
+import Home from './Components/Home/Home'
 
 function App() {
     const [show, setShow] = useState(false)
-    const [lista, setLista] = useState([])
+    const [list, setList] = useState([])
+
+    const navigate = useNavigate()
+
+    const total = list.reduce(
+      (acc, item) => acc + (Number(item.price) || 0) * (Number(item.amount) || 0),
+      0
+    )
+
+  function finish() {
+    navigate('/requested', { state: { list, total } })
+  }
 
   function showDestinations(){
       setShow((prev)=> !prev)
@@ -15,7 +29,7 @@ function App() {
 
   function chooseCity(id, name, price){
 
-    setLista((prev)=>{
+    setList((prev)=>{
       const exist = prev.find(item => item.id === id)
 
       if(exist){
@@ -31,7 +45,7 @@ function App() {
   }
 
 function removeCity(id){
-  setLista((prev) =>
+  setList((prev) =>
     prev
       .map(item => {
         if(item.id === id){
@@ -44,22 +58,24 @@ function removeCity(id){
 }
 
   return (
-    <>
-      <NavBar />
-      <Main />
-      <button onClick={() => showDestinations()}>{show ? "Click to close" : "Click to see destinations"}</button>
-    
-    <div className='place-cart-container'>
-        {show && <Places chooseCity={chooseCity} />}
-        
-        {show && (
-        <aside>
-            <Cart lista={lista} removeCity={removeCity} />
-        </aside>
-        )}
-    </div>
-
-    </>
+    <Routes>
+      <Route path="/" element={
+        <>
+          <NavBar />
+          <Main />
+          <button onClick={showDestinations}>{show ? "Click to close" : "Click to see destinations"}</button>
+          <div className='place-cart-container'>
+            {show && <Search chooseCity={chooseCity} />}
+            {show && (
+              <aside>
+                <Cart list={list} removeCity={removeCity} finish={finish} />
+              </aside>
+            )}
+          </div>
+        </>
+      } />
+      <Route path="/requested" element={<Requested />} />
+    </Routes>
   )
 }
 
