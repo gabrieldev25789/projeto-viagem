@@ -6,7 +6,6 @@ import Main from './Components/Main/Main'
 import Cart from './Components/Cart/Cart'
 import Search from './Components/Search/Search'
 import Requested from './Components/Requested/Requested'
-import Home from './Components/Home/Home'
 
 function App() {
     const [show, setShow] = useState(false)
@@ -27,7 +26,7 @@ function App() {
       setShow((prev)=> !prev)
   }
 
-  function chooseCity(id, name, price){
+  function chooseCity(id, name, price, img){
 
     setList((prev)=>{
       const exist = prev.find(item => item.id === id)
@@ -40,8 +39,10 @@ function App() {
         )
       }
 
-      return [...prev, {id, name, price, amount: 1 }]
+      return [...prev, {id, name, price, img, amount: 1  }]
     })
+
+    console.log(img)
   }
 
 function removeCity(id){
@@ -63,15 +64,15 @@ function removeCity(id){
         <>
           <NavBar />
           <Main />
-          <button onClick={showDestinations}>{show ? "Click to close" : "Click to see destinations"}</button>
-          <div className='place-cart-container'>
-            {show && <Search chooseCity={chooseCity} />}
-            {show && (
-              <aside>
-                <Cart list={list} removeCity={removeCity} finish={finish} />
-              </aside>
-            )}
-          </div>
+          <button onClick={showDestinations}>
+            {show ? "Click to close" : "Click to see destinations"}
+          </button>
+          {show && (
+            <div className="place-cart-container">
+              <Search chooseCity={chooseCity} />
+              <Cart list={list} removeCity={removeCity} finish={finish} />
+            </div>
+          )}
         </>
       } />
       <Route path="/requested" element={<Requested />} />
