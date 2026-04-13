@@ -1,68 +1,75 @@
 import { useState } from 'react'
 import "./Cart.css"
 
-function Cart({ lista = [], removeCity }) {
+function Cart({ list = [], removeCity, finish }) {
   const [show, setShow] = useState(false)
 
-const total = lista.reduce(
-  (acc, item) => acc + (Number(item.price) || 0) * (Number(item.amount) || 0),
-  0
-)
+  const total = list.reduce(
+    (acc, item) => acc + (Number(item.price) || 0) * (Number(item.amount) || 0),
+    0
+  )
 
   return (
-    <>
-      <button className='cart-btn' onClick={() => setShow((prev) => !prev)}>
-        {show ? "Close cart" : "View cart"}
+    <aside className={`cart-aside ${show ? 'open' : ''}`}>
+
+      <button className='cart-btn' onClick={() => setShow(prev => !prev)}>
+        🛒 {show ? 'Close Cart' : `View Cart (${list.length})`}
       </button>
 
-      {show && (
-        <div className='cart-container'>
-          <div className='cart-header'>
-            <p className='cart-header-label'>Cart</p>
-          </div>
+    
+      <div className='cart-container'>
+        <div className='cart-header'>
+          <p className='cart-header-label'>Cart</p>
+          <button className='cart-close' onClick={() => setShow(false)}>✕</button>
+        </div>
 
-          <div className='cart-body'>
+        <div className='cart-body'>
           <table className='cart-table'>
-
-              <colgroup>
-                  <col />
-                  <col />
-                  <col />
-              </colgroup>
-
-             <thead>
-                <tr>
-                  <th className='cart-th'>City</th>
-                  <th className='cart-th'>Price</th>
-                </tr>
-              </thead>
-
-            <tbody>
-              {lista.map((item) => (
-              <tr className='cart-item' key={item.id}>
-                
-                <td className='cart-name'>
-                    {item.name} {item.amount > 1 && `(${item.amount})`}
-                </td>
-
-                <td className='cart-price'>USD {item.price.toFixed(2)}</td>
-                <td>
-                  <button className='cart-btn' onClick={() => removeCity(item.id)}>Remove</button>
-                </td>
+            <thead>
+              <tr>
+                <th className='cart-th'>City</th>
+                <th className='cart-th'>Price</th>
+                <th className='cart-th'></th>
               </tr>
-              ))}
+            </thead>
+            <tbody>
+              {list.length === 0 ? (
+                <tr>
+                  <td colSpan={3} style={{ textAlign: 'center', padding: '1rem', color: '#aaa', fontSize: '0.85rem' }}>
+                    No cities added yet.
+                  </td>
+                </tr>
+              ) : (
+                list.map((item) => (
+                  <tr className='cart-item' key={item.id}>
+                    <td className='cart-name'>
+                      {item.name} {item.amount > 1 && `(${item.amount})`}
+                    </td>
+                    <td className='cart-price'>USD {Number(item.price).toFixed(2)}</td>
+                    <td>
+                      <button className='cart-remove-btn' onClick={() => removeCity(item.id)}>✕</button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
-          </div>
-
-          <div className='cart-footer'>
-            <p className='cart-total-label'>Total</p>
-            <p className='cart-total-value'>USD {(total).toFixed(2)}</p>
-          </div>
         </div>
-      )}
-    </>
+
+        <div className='cart-footer'>
+          <p className='cart-total-label'>Total</p>
+          <p className='cart-total-value'>USD {total.toFixed(2)}</p>
+          {total > 0 && (
+            <button className='cart-finish-btn' onClick={finish}>
+              Finish
+            </button>
+          )}
+        </div>
+      </div>
+    </aside>
   )
 }
 
-export default Cart 
+export default Cart
+
+
