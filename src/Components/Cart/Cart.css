@@ -1,6 +1,17 @@
+/* ── Aside: ancora o botão e anima a largura ── */
+.cart-aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
+    width: auto;
+    /* sem overflow: hidden aqui */
+}
+
+/* ── Botão ── */
 .cart-btn {
+    white-space: nowrap;
     padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
     border-radius: 2rem;
     border: 0.0625rem solid #e0e0e0;
     background-color: #fff;
@@ -8,29 +19,53 @@
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0.75rem;
     transition: background-color 0.15s ease;
+    flex-shrink: 0; 
+    pointer-events: auto;      
 }
 
 .cart-btn:hover {
     background-color: #f5f5f5;
 }
 
+/* ── Container: fechado por padrão ── */
 .cart-container {
     display: flex;
     flex-direction: column;
-    gap: 0rem;
     background-color: #fff;
     border-radius: 1rem;
     border: 0.0625rem solid #ececec;
     box-shadow: 0 0.125rem 0.75rem rgba(0, 0, 0, 0.06);
-    max-width: 16rem;
-    overflow: hidden;
+    width: 0;
+    max-width: calc(100vw - 3rem);
+    box-sizing: border-box;
+    overflow: hidden;       
+    opacity: 0;
+    pointer-events: none;
+    transition: width 0.25s ease, opacity 0.2s ease;
 }
 
+/* ── Aberto ── */
+.cart-aside.open .cart-container {
+    width: 22rem;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ── Header ── */
 .cart-header {
     padding: 0.75rem 1rem;
     background-color: #fafafa;
     border-bottom: 0.0625rem solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .cart-header-label {
@@ -42,37 +77,85 @@
     margin: 0;
 }
 
+.cart-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b90f0f;
+    
+    font-size: 1rem;
+    padding: 0;
+    line-height: 1;
+}
+
+.cart-close:hover { color: #fa0000; }
+
+/* ── Body ── */
 .cart-body {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem 0;
+    overflow-y: auto;
+    max-height: 60vh;
 }
 
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* ── Tabela ── */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    box-sizing: border-box;
+}
+
+.cart-th {
     padding: 0.5rem 1rem;
-    transition: background-color 0.15s ease;
+    text-align: left;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #000;
+    border-bottom: 0.0625rem solid #f0f0f0;
 }
 
-.cart-item:hover {
-    background-color: #fafafa;
+.cart-item td {
+    padding: 0.4rem 1rem;
+    vertical-align: middle;
+}
+
+.cart-item:hover td { background-color: #fafafa; }
+
+.cart-item td:last-child {
+    text-align: right;
+    white-space: nowrap;
+    width: 3rem;
 }
 
 .cart-name {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: #1a1a1a;
-    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .cart-price {
     font-size: 0.9rem;
     color: #0e0d0d;
-    margin: 0;
+    white-space: nowrap;
 }
 
+.cart-remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b90f0f;
+    font-size: 1rem;
+    padding: 0;
+    transition: color 0.15s ease;
+}
+
+.cart-remove-btn:hover { color: #fa0000; }
+
+/* ── Footer ── */
 .cart-footer {
     display: flex;
     justify-content: space-between;
@@ -80,6 +163,8 @@
     padding: 0.75rem 1rem;
     border-top: 0.0625rem solid #f0f0f0;
     background-color: #fafafa;
+    flex-shrink: 0;
+    gap: 0.5rem;
 }
 
 .cart-total-label {
@@ -96,4 +181,30 @@
     font-weight: 700;
     color: #111;
     margin: 0;
+    flex: 1;
+    text-align: right;
+}
+
+.cart-finish-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 2rem;
+    border: none;
+    background-color: #111;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    white-space: nowrap;
+}
+
+.cart-finish-btn:hover { background-color: #333; }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+    .cart-aside.open .cart-container {
+        width: min(22rem, calc(100vw - 2rem));
+    }
+
+    .cart-body { max-height: 50vh; }
 }
