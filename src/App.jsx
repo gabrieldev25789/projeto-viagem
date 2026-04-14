@@ -28,10 +28,28 @@ function App() {
     setShow((prev) => !prev)
   }
 
-  function chooseCity(id, name, price, img) {
-    console.log("clicou")
+
+function chooseCity(id, name, price, img) {
+
+      if (!dates) {
+        alert("Choose dates")
+        return
+      }
+
+      const newItem = {
+      id,
+      name,
+      price,
+      img,
+      amount: 1,
+      startDate: dates.startDate,
+      endDate: dates.endDate,
+      nights: dates.nights
+    } 
+
     setList((prev) => {
       const exist = prev.find(item => item.id === id)
+
       if (exist) {
         return prev.map(item =>
           item.id === id
@@ -39,9 +57,10 @@ function App() {
             : item
         )
       }
-      return [...prev, { id, name, price, img, amount: 1 }]
-    })
-  }
+
+      return [...prev, newItem] 
+    }) 
+}
 
   function removeCity(id) {
     setList((prev) =>
@@ -51,17 +70,22 @@ function App() {
     )
   }
 
-  function handleSearch({ startDate, endDate, nights }) {
-    setDates({ startDate, endDate, nights })
+function handleSearch({ startDate, endDate, nights }) {
 
-    const payload = {
-      checkIn: startDate.toISOString().split("T")[0],
-      checkOut: endDate.toISOString().split("T")[0],
-      nights,
-    }
+  const toISODate = (date) =>
+    new Date(date).toISOString().split("T")[0]
 
-    console.log("Payload:", payload)
+  const payload = {
+    checkIn: toISODate(startDate),
+    checkOut: toISODate(endDate),
+    nights,
   }
+
+  setDates({ startDate, endDate, nights })
+
+  console.log("Payload:", payload)
+
+}
 
   return (
     <Routes>
@@ -69,8 +93,9 @@ function App() {
         <>
           <NavBar />
           <Main />
-          <FlightSearch onSearch={handleSearch} />
 
+         {/* {showClendar &&  <FlightSearch onSearch={handleSearch} />} */}
+          <FlightSearch onSearch={handleSearch}/>
           <button onClick={showDestinations}>
             {show ? "Click to close" : "Click to see destinations"}
           </button>
