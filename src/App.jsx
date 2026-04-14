@@ -105,19 +105,7 @@ function handleSearch({ startDate, endDate, nights }) {
               <Cart list={list} removeCity={removeCity} finish={finish} />
             </div>
           )}
-          {dates && (
-         <p>
-            {new Date(dates.startDate).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric"
-            })} — {new Date(dates.endDate).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric"
-            })} · {dates.nights} nights
-          </p>
-          )}
+          
         </>
       } />
       <Route path="/requested" element={<Requested />} />
