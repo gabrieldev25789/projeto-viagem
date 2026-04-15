@@ -12,6 +12,8 @@ function App() {
   const [show, setShow] = useState(false)
   const [list, setList] = useState([])
   const [dates, setDates] = useState(null)
+  const [showCalendar, setShowCalendar] = useState(false)
+  const [pendingCity, setPendingCity] = useState(null) 
 
   const navigate = useNavigate()
 
@@ -28,39 +30,43 @@ function App() {
     setShow((prev) => !prev)
   }
 
+  function chooseCity(id, name, price, img) {
+    setPendingCity({ id, name, price, img })
+    setShowCalendar(true)
+  }
 
-function chooseCity(id, name, price, img) {
+  function handleSearch({ startDate, endDate, nights }) {
+    if (!pendingCity) return
 
-      if (!dates) {
-        alert("Choose dates")
-        return
-      }
+    if (nights > 30) {
+      alert("You can only stay for 30 nights")
+      return
+    }
 
-      const newItem = {
-      id,
-      name,
-      price,
-      img,
+    const toISODate = (date) => new Date(date).toISOString().split("T")[0]
+
+    const newItem = {
+      ...pendingCity,
       amount: 1,
-      startDate: dates.startDate,
-      endDate: dates.endDate,
-      nights: dates.nights
-    } 
+      startDate: toISODate(startDate),
+      endDate: toISODate(endDate),
+      nights,
+    }
+
+    setDates({ startDate, endDate, nights })
+    setPendingCity(null)
+    setShowCalendar(false)
 
     setList((prev) => {
-      const exist = prev.find(item => item.id === id)
-
+      const exist = prev.find(item => item.id === pendingCity.id)
       if (exist) {
         return prev.map(item =>
-          item.id === id
-            ? { ...item, amount: item.amount + 1 }
-            : item
+          item.id === pendingCity.id ? { ...item, amount: item.amount + 1 } : item
         )
       }
-
-      return [...prev, newItem] 
-    }) 
-}
+      return [...prev, newItem]
+    })
+  }
 
   function removeCity(id) {
     setList((prev) =>
@@ -70,23 +76,6 @@ function chooseCity(id, name, price, img) {
     )
   }
 
-function handleSearch({ startDate, endDate, nights }) {
-
-  const toISODate = (date) =>
-    new Date(date).toISOString().split("T")[0]
-
-  const payload = {
-    checkIn: toISODate(startDate),
-    checkOut: toISODate(endDate),
-    nights,
-  }
-
-  setDates({ startDate, endDate, nights })
-
-  console.log("Payload:", payload)
-
-}
-
   return (
     <Routes>
       <Route path="/" element={
@@ -94,18 +83,20 @@ function handleSearch({ startDate, endDate, nights }) {
           <NavBar />
           <Main />
 
-         {/* {showClendar &&  <FlightSearch onSearch={handleSearch} />} */}
-          <FlightSearch onSearch={handleSearch}/>
+          {showCalendar && (
+            <FlightSearch onSearch={handleSearch} />
+          )}
+
           <button onClick={showDestinations}>
             {show ? "Click to close" : "Click to see destinations"}
           </button>
+
           {show && (
             <div className="place-cart-container">
               <Search chooseCity={chooseCity} />
               <Cart list={list} removeCity={removeCity} finish={finish} />
             </div>
           )}
-          
         </>
       } />
       <Route path="/requested" element={<Requested />} />
