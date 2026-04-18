@@ -9,6 +9,7 @@ import Requested from '../pages/Requested'
 import FlightSearch from './Components/FlightSearch/FlightSearch'
 import { places } from './Components/data/places'
 import Places from './Components/Places/Places'
+import Message from './Components/Message/Message'
 
 function App() {
   const [show, setShow] = useState(false)
@@ -20,6 +21,10 @@ function App() {
   const [select, setSelect] = useState(false)
 
   const [array, setArray] = useState([])
+
+  const [message, setMessage] = useState("")
+
+  const [cityName, setCityName] = useState("")
 
   const navigate = useNavigate()
 
@@ -44,14 +49,21 @@ function App() {
     return true 
   }
 
+function cityAdd() {
+  setMessage({ text: `City added successfully`, type: "add"});
+}
+
+function error() {
+  setMessage({ text: "You can only stay for 30 nights", type: "erro" });
+}
+
   function handleSearch({ startDate, endDate, nights }) {
     if (!pendingCity) return
 
     if (nights > 30) {
-      alert("You can only stay for 30 nights")
-      return
+      error()
+      return 
     }
-
     const toISODate = (date) => new Date(date).toISOString().split("T")[0]
 
     const newItem = {
@@ -77,6 +89,7 @@ function App() {
     }) 
       
     setArray((prev)=> [...prev, newItem])   
+    cityAdd()
   }
 
   function removeCity(id) {
@@ -86,6 +99,12 @@ function App() {
         .filter(item => item.amount > 0)
     )
   }
+
+  useEffect(() => {
+  if (!message) return;
+  const timer = setTimeout(() => setMessage(null), 2000);
+  return () => clearTimeout(timer);
+}, [message]);
 
   const [selectCity, setSelectCity] = useState(null)
   const [value, setValue] = useState("")
@@ -104,7 +123,11 @@ function App() {
         <>
           <NavBar />
           <Main />
-
+          {message && (
+            <div style={{ display: "flex", justifyContent: "center", padding: "1rem" }}>
+              <Message message={message.text} type={message.type} />
+            </div>
+          )}
           {showCalendar && (
             <FlightSearch onSearch={handleSearch} setSelectCity={setSelectCity}/>
           )}
