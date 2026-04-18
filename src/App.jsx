@@ -40,7 +40,7 @@ function App() {
   function chooseCity(id, name, price, img) {
     setPendingCity({ id, name, price, img })
     setShowCalendar(true)
-    
+    setSelectCity(id)
     return true 
   }
 
@@ -87,7 +87,7 @@ function App() {
     )
   }
 
-  /*const [selectCity, setSelectCity] = useState("")*/
+  const [selectCity, setSelectCity] = useState(null)
   const [value, setValue] = useState("")
   
   const valueReset = value.toLowerCase().trim()
@@ -106,7 +106,7 @@ function App() {
           <Main />
 
           {showCalendar && (
-            <FlightSearch onSearch={handleSearch} />
+            <FlightSearch onSearch={handleSearch} setSelectCity={setSelectCity}/>
           )}
 
           <button onClick={showDestinations}>
@@ -116,7 +116,12 @@ function App() {
           {show && (
             <div className="place-cart-container">
               <Search chooseCity={chooseCity} />
-              <Places key={valueReset} placesData={filteredPlaces} chooseCity={chooseCity}/>
+              <Places 
+              key={valueReset} 
+              placesData={filteredPlaces} 
+              chooseCity={chooseCity}
+              selectCity={selectCity}
+              setSelectCity={selectCity}/>
               <Cart list={list} removeCity={removeCity} finish={finish} />
             </div>
           )}
