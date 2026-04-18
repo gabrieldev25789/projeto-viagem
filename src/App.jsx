@@ -1,12 +1,14 @@
 import './App.css'
 import { Routes, Route, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import NavBar from './Components/NavBar/NavBar'
 import Main from './Components/Main/Main'
 import Cart from './Components/Cart/Cart'
 import Search from './Components/Search/Search'
-import Requested from './Components/Requested/Requested'
+import Requested from '../pages/Requested'
 import FlightSearch from './Components/FlightSearch/FlightSearch'
+import { places } from './Components/data/places'
+import Places from './Components/Places/Places'
 
 function App() {
   const [show, setShow] = useState(false)
@@ -14,6 +16,10 @@ function App() {
   const [dates, setDates] = useState(null)
   const [showCalendar, setShowCalendar] = useState(false)
   const [pendingCity, setPendingCity] = useState(null) 
+
+  const [select, setSelect] = useState(false)
+
+  const [array, setArray] = useState([])
 
   const navigate = useNavigate()
 
@@ -27,12 +33,15 @@ function App() {
   }
 
   function showDestinations() {
+    setShowCalendar(false)
     setShow((prev) => !prev)
   }
 
   function chooseCity(id, name, price, img) {
     setPendingCity({ id, name, price, img })
     setShowCalendar(true)
+    
+    return true 
   }
 
   function handleSearch({ startDate, endDate, nights }) {
@@ -51,12 +60,12 @@ function App() {
       startDate: toISODate(startDate),
       endDate: toISODate(endDate),
       nights,
-    }
+    } 
 
     setDates({ startDate, endDate, nights })
     setPendingCity(null)
-    setShowCalendar(false)
-
+    setShowCalendar(false) 
+    
     setList((prev) => {
       const exist = prev.find(item => item.id === pendingCity.id)
       if (exist) {
@@ -65,7 +74,9 @@ function App() {
         )
       }
       return [...prev, newItem]
-    })
+    }) 
+      
+    setArray((prev)=> [...prev, newItem])   
   }
 
   function removeCity(id) {
@@ -75,6 +86,17 @@ function App() {
         .filter(item => item.amount > 0)
     )
   }
+
+  /*const [selectCity, setSelectCity] = useState("")*/
+  const [value, setValue] = useState("")
+  
+  const valueReset = value.toLowerCase().trim()
+
+  const filteredPlaces = valueReset
+    ? places.filter(place =>
+        place.country.toLowerCase().includes(valueReset)
+      )
+    : places
 
   return (
     <Routes>
@@ -94,6 +116,7 @@ function App() {
           {show && (
             <div className="place-cart-container">
               <Search chooseCity={chooseCity} />
+              <Places key={valueReset} placesData={filteredPlaces} chooseCity={chooseCity}/>
               <Cart list={list} removeCity={removeCity} finish={finish} />
             </div>
           )}
