@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { places } from '../data/places'
 import "./Places.css"
 
-function Places({ placesData = places, chooseCity }) {
+function Places({ placesData = places, chooseCity, selectCity, setSelectCity }) {
+
   return (
     <div className='infos-container'>
       {placesData.map((place) => (
@@ -16,16 +17,16 @@ function Places({ placesData = places, chooseCity }) {
                 <div
                   className='city-card-wrapper'
                   key={city.id}
-                  style={{ animationDelay: `${index * 60}ms` }}
+                  style={{ animationDelay: `${index * 60}ms`}}
                 >
                   <li
-                    className='city-card'
-                    onClick={() => chooseCity(city.id, city.name, city.price, city.img)}
+                  onClick={() => {chooseCity(city.id, city.name, city.price, city.img), setSelectCity(city.id)}}
+                  className={`city-card ${selectCity === city.id ? "select" : ""}`}
                   >
                     <img className='city-img' src={city.img} alt={city.name} />
                     <div className='city-info'>
                       <h3 className='city-name'>{city.name}</h3>
-                      <p className='city-price'>R$ {city.price}</p>
+                      <p className='city-price'>USD {(city.price).toFixed(2)}</p>
                       <p className='city-description'>{city.description}</p>
                     </div>
                   </li>
