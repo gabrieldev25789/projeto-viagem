@@ -142,7 +142,9 @@ function error() {
             <div className="place-cart-container">
               <Search 
               chooseCity={chooseCity} 
-              setActive={setActive}/>
+              setActive={setActive}
+              selectCity={selectCity}
+              setSelectCity={setSelectCity}/>
 
             {!active && (
               <Places 
@@ -150,8 +152,8 @@ function error() {
               placesData={filteredPlaces} 
               chooseCity={chooseCity}
               selectCity={selectCity}
-              setSelectCity={selectCity}/>
-             )} 
+              setSelectCity={setSelectCity}/>
+            )} 
 
               <Cart list={list} removeCity={removeCity} finish={finish} />
             </div>
