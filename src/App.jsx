@@ -21,6 +21,8 @@ function App() {
 
   const [filteredPlaces, setFilteredPlaces] = useState(places)
 
+  const [selectCity, setSelectCity] = useState(null)
+
   const navigate = useNavigate()
 
   const total = list.reduce(
@@ -35,6 +37,9 @@ function App() {
   function showDestinations() {
     setShowCalendar(false)
     setShow((prev) => !prev)
+    if(show){
+      setSelectCity(null)
+    }
   }
 
   function chooseCity(id, name, price, img) {
@@ -100,7 +105,6 @@ function error() {
   return () => clearTimeout(timer);
 }, [message]);
 
-  const [selectCity, setSelectCity] = useState(null)
 
   return (
     <Routes>
@@ -117,8 +121,11 @@ function error() {
             <FlightSearch onSearch={handleSearch} setSelectCity={setSelectCity}/>
           )}
 
-          <button onClick={showDestinations}>
-            {show ? "Click to close" : "Click to see destinations"}
+          <button className={`dest-btn ${show ? "open" : ""}`} onClick={showDestinations}>
+            <svg className="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6">
+              <path d="M3 6l5 5 5-5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span>{show ? "Click to close" : "Click to see destinations"}</span>
           </button>
 
           {show && (
