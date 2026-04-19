@@ -14,15 +14,12 @@ import Message from './Components/Message/Message'
 function App() {
   const [show, setShow] = useState(false)
   const [list, setList] = useState([])
-  const [dates, setDates] = useState(null)
   const [showCalendar, setShowCalendar] = useState(false)
   const [pendingCity, setPendingCity] = useState(null) 
 
-  const [array, setArray] = useState([])
-
   const [message, setMessage] = useState("")
 
-  const [active, setActive] = useState(false)
+  const [filteredPlaces, setFilteredPlaces] = useState(places)
 
   const navigate = useNavigate()
 
@@ -72,7 +69,6 @@ function error() {
       nights,
     } 
 
-    setDates({ startDate, endDate, nights })
     setPendingCity(null)
     setShowCalendar(false) 
     
@@ -86,7 +82,6 @@ function error() {
       return [...prev, newItem]
     }) 
       
-    setArray((prev)=> [...prev, newItem])   
     console.log(newItem)
     cityAdd()
   }
@@ -106,15 +101,6 @@ function error() {
 }, [message]);
 
   const [selectCity, setSelectCity] = useState(null)
-  const value = ""
-  
-  const valueReset = value.toLowerCase().trim()
-
-  const filteredPlaces = valueReset
-    ? places.filter(place =>
-        place.country.toLowerCase().includes(valueReset)
-      )
-    : places
 
   return (
     <Routes>
@@ -136,28 +122,27 @@ function error() {
           </button>
 
           {show && (
-            <div className="place-cart-container">
+        <div className="place-cart-container">
+          <div className="search-places-wrapper"> 
               <Search 
-              chooseCity={chooseCity} 
-              setActive={setActive}
-              selectCity={selectCity}
-              setSelectCity={setSelectCity}/>
+                chooseCity={chooseCity} 
+                selectCity={selectCity}
+                setSelectCity={setSelectCity}
+                onFilter={setFilteredPlaces}/>
 
-            {!active && (
               <Places 
-              key={valueReset} 
-              placesData={filteredPlaces} 
-              chooseCity={chooseCity}
-              selectCity={selectCity}
-              setSelectCity={setSelectCity}/>
-            )} 
-
-              <Cart list={list} removeCity={removeCity} finish={finish} />
-            </div>
+                placesData={filteredPlaces} 
+                chooseCity={chooseCity}
+                selectCity={selectCity}
+                setSelectCity={setSelectCity}/>
+            </div> 
+            
+            <Cart list={list} removeCity={removeCity} finish={finish}/>
+          </div>
           )}
         </>
       } />
-      <Route path="/requested" element={<Requested array={array}/>} />
+      <Route path="/requested" element={<Requested /> } />
     </Routes>
   )
 }
