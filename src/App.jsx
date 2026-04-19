@@ -26,6 +26,8 @@ function App() {
 
   const [cityName, setCityName] = useState("")
 
+  const [active, setActive] = useState(false)
+
   const navigate = useNavigate()
 
   const total = list.reduce(
@@ -138,13 +140,19 @@ function error() {
 
           {show && (
             <div className="place-cart-container">
-              <Search chooseCity={chooseCity} />
+              <Search 
+              chooseCity={chooseCity} 
+              setActive={setActive}/>
+
+            {!active && (
               <Places 
               key={valueReset} 
               placesData={filteredPlaces} 
               chooseCity={chooseCity}
               selectCity={selectCity}
               setSelectCity={selectCity}/>
+             )} 
+
               <Cart list={list} removeCity={removeCity} finish={finish} />
             </div>
           )}
