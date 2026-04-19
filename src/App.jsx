@@ -18,13 +18,9 @@ function App() {
   const [showCalendar, setShowCalendar] = useState(false)
   const [pendingCity, setPendingCity] = useState(null) 
 
-  const [select, setSelect] = useState(false)
-
   const [array, setArray] = useState([])
 
   const [message, setMessage] = useState("")
-
-  const [cityName, setCityName] = useState("")
 
   const [active, setActive] = useState(false)
 
@@ -91,6 +87,7 @@ function error() {
     }) 
       
     setArray((prev)=> [...prev, newItem])   
+    console.log(newItem)
     cityAdd()
   }
 
@@ -109,7 +106,7 @@ function error() {
 }, [message]);
 
   const [selectCity, setSelectCity] = useState(null)
-  const [value, setValue] = useState("")
+  const value = ""
   
   const valueReset = value.toLowerCase().trim()
 
@@ -160,7 +157,7 @@ function error() {
           )}
         </>
       } />
-      <Route path="/requested" element={<Requested />} />
+      <Route path="/requested" element={<Requested array={array}/>} />
     </Routes>
   )
 }
