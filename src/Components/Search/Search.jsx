@@ -1,22 +1,25 @@
 import "./Search.css"
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { places } from '../data/places'
 import Places from '../Places/Places'
 
 function Search({ onFilter }) {
   const [value, setValue] = useState("")
 
-  const valueReset = value.toLowerCase().trim()
+  function handleChange(e) {
+    const inputValue = e.target.value
+    setValue(inputValue)
 
-  const filteredPlaces = valueReset
-    ? places.filter(place =>
-        place.country.toLowerCase().includes(valueReset)
-      )
-    : places
+    const valueReset = inputValue.toLowerCase().trim()
 
-  useEffect(() => {
-    onFilter(filteredPlaces)
-  }, [valueReset])
+    const filtered = valueReset
+      ? places.filter(place =>
+          place.country.toLowerCase().includes(valueReset)
+        )
+      : places
+
+    onFilter(filtered)
+  }
 
   return (
     <div className="search-wrap">
@@ -29,7 +32,7 @@ function Search({ onFilter }) {
           type="text"
           placeholder="Search country..."
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={handleChange}
           autoComplete="off"
         />
         {value && (
