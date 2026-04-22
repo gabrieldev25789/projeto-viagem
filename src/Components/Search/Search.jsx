@@ -40,79 +40,42 @@ function handleChange(e, field) {
   onFilter(filtered)
 }
 
-  return (
-    <>
-    <div className="search-wrap">
-      <div className="search-field">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <circle cx="6.5" cy="6.5" r="4.5"/>
-          <path d="M10.5 10.5L14 14" strokeLinecap="round"/>
-        </svg>
-        <input
-          type="text"
-          placeholder="Search city..."
-          value={cityValue}
-          onChange={(e) => handleChange(e, "city")}
-          autoComplete="off"
-        />
-        {cityValue && (
-          <button className="clear-btn" onClick={() => setCityValue('')}>
-            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M2 2l6 6M8 2l-6 6" strokeLinecap="round"/>
-            </svg>
-          </button>
-        )}
-      </div>
-    </div>
+ const fields = [
+  { field: "city",      placeholder: "Search city...",      value: cityValue,      clear: () => setCityValue("") },
+  { field: "continent", placeholder: "Search continent...", value: continentValue, clear: () => setContinentValue("") },
+  { field: "country",   placeholder: "Search country...",   value: countryValue,   clear: () => setCountryValue("") },
+]
 
-
-    <div className="search-wrap">
-      <div className="search-field">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <circle cx="6.5" cy="6.5" r="4.5"/>
-          <path d="M10.5 10.5L14 14" strokeLinecap="round"/>
-        </svg>
-        <input
-          type="text"
-          placeholder="Search continent..."
-          value={continentValue}
-          onChange={(e) => handleChange(e, "continent")}
-          autoComplete="off"
-        />
-        {continentValue && (
-          <button className="clear-btn" onClick={() => setContinentValue('')}>
-            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M2 2l6 6M8 2l-6 6" strokeLinecap="round"/>
-            </svg>
-          </button>
-        )}
+return (
+  <>
+  <div className="search-group">
+    {fields.map(({ field, placeholder, value, clear }) => (
+      <div className="search-wrap" key={field}>
+        <div className="search-field">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="6.5" cy="6.5" r="4.5"/>
+            <path d="M10.5 10.5L14 14" strokeLinecap="round"/>
+          </svg>
+          <input
+            type="text"
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => handleChange(e, field)}
+            autoComplete="off"
+          />
+          {value && (
+            <button className="clear-btn" onClick={clear}>
+              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <path d="M2 2l6 6M8 2l-6 6" strokeLinecap="round"/>
+              </svg>
+            </button>
+          )}
+        </div>
       </div>
-    </div>
-
-    <div className="search-wrap">
-      <div className="search-field">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <circle cx="6.5" cy="6.5" r="4.5"/>
-          <path d="M10.5 10.5L14 14" strokeLinecap="round"/>
-        </svg>
-        <input
-          type="text"
-          placeholder="Search country..."
-          value={countryValue}
-          onChange={(e) => handleChange(e, "country")}
-          autoComplete="off"
-        />
-        {countryValue && (
-          <button className="clear-btn" onClick={() => setCountryValue('')}>
-            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M2 2l6 6M8 2l-6 6" strokeLinecap="round"/>
-            </svg>
-          </button>
-        )}
-      </div>
+    ))}
     </div>
   </>
-  )
+)
     
 }
 
