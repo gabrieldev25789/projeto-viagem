@@ -3,8 +3,7 @@ import { useState } from 'react'
 import { places } from '../data/places'
 import Places from '../Places/Places'
 
-function Search({ onFilter }) {
-const [cityValue, setCityValue] = useState("")
+function Search({ onFilter, setCityValue, cityValue, setCitySearch }) {
 const [continentValue, setContinentValue] = useState("")
 const [countryValue, setCountryValue] = useState("")
 
@@ -37,9 +36,16 @@ function handleChange(e, field) {
       })
     : places
 
+  if (field === "city") {
+    setCitySearch(inputValue)
+  } else {
+    setCitySearch("") 
+  }
+
   onFilter(filtered)
 }
 
+setCitySearch(cityValue)
  const fields = [
   { field: "city",      placeholder: "Search city...",      value: cityValue,      clear: () => setCityValue("") },
   { field: "continent", placeholder: "Search continent...", value: continentValue, clear: () => setContinentValue("") },
@@ -73,7 +79,7 @@ return (
         </div>
       </div>
     ))}
-    </div>
+  </div>
   </>
 )
     
