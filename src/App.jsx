@@ -23,6 +23,9 @@ function App() {
 
   const [selectCity, setSelectCity] = useState(null)
 
+  const [cityValue, setCityValue] = useState("")
+  const [citySearch, setCitySearch] = useState([])
+
   const navigate = useNavigate()
 
   const total = list.reduce(
@@ -50,7 +53,7 @@ function App() {
   }
 
 function cityAdd() {
-  setMessage({ text: `City added successfully`, type: "add"});
+  setMessage({ text: `City added successfully`, type: "add"})
 }
 
 function error() {
@@ -135,13 +138,18 @@ function error() {
                 chooseCity={chooseCity} 
                 selectCity={selectCity}
                 setSelectCity={setSelectCity}
-                onFilter={setFilteredPlaces}/>
+                onFilter={setFilteredPlaces}
+                setCityValue={setCityValue}
+                cityValue={cityValue}
+                setCitySearch={setCitySearch}/>
 
               <Places 
                 placesData={filteredPlaces} 
                 chooseCity={chooseCity}
                 selectCity={selectCity}
-                setSelectCity={setSelectCity}/>
+                setSelectCity={setSelectCity}
+                cityValue={cityValue}
+                citySearch={citySearch}/> 
             </div> 
             
             <Cart list={list} removeCity={removeCity} finish={finish}/>
