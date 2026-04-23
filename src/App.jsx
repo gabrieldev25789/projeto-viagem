@@ -10,6 +10,7 @@ import FlightSearch from './Components/FlightSearch/FlightSearch'
 import { places } from './Components/data/places'
 import Places from './Components/Places/Places'
 import Message from './Components/Message/Message'
+import OrderValue from './Components/OrderValue/OrderValue'
 
 function App() {
   const [show, setShow] = useState(false)
@@ -109,6 +110,28 @@ function error() {
 }, [message]);
 
 
+  const cities = places.flatMap(place => place.cities)
+  let sorted = [...cities]
+
+ const [sortType, setSortType] = useState("")
+
+ const sortedCities = sortType
+  ? [...cities].sort((a, b) =>
+      sortType === "asc" ? a.price - b.price : b.price - a.price
+    )
+  : null 
+
+  function handleSort(type){
+    setSortType(type)
+    if(type === "asc"){
+    sorted.sort((a, b) => a.price - b.price)
+    }
+    
+    if(type === "desc"){
+    sorted.sort((a, b) => b.price - a.price)
+    }
+  }
+
   return (
     <Routes>
       <Route path="/" element={
@@ -134,22 +157,30 @@ function error() {
           {show && (
         <div className="place-cart-container">
           <div className="search-places-wrapper"> 
-              <Search 
-                chooseCity={chooseCity} 
-                selectCity={selectCity}
-                setSelectCity={setSelectCity}
-                onFilter={setFilteredPlaces}
-                setCityValue={setCityValue}
-                cityValue={cityValue}
-                setCitySearch={setCitySearch}/>
+            <Search 
+              chooseCity={chooseCity} 
+              selectCity={selectCity}
+              setSelectCity={setSelectCity}
+              onFilter={setFilteredPlaces}
+              setCityValue={setCityValue}
+              cityValue={cityValue}
+              setCitySearch={setCitySearch}
+            />
 
-              <Places 
+            <OrderValue 
+              handleSort={(type) => handleSort(type)}
+              sorted={sorted}
+            />
+
+            <Places 
                 placesData={filteredPlaces} 
                 chooseCity={chooseCity}
                 selectCity={selectCity}
                 setSelectCity={setSelectCity}
                 cityValue={cityValue}
-                citySearch={citySearch}/> 
+                citySearch={citySearch}
+                sortedCities={sortedCities}
+              /> 
             </div> 
             
             <Cart list={list} removeCity={removeCity} finish={finish}/>
