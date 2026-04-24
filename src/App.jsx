@@ -25,7 +25,7 @@ function App() {
   const [selectCity, setSelectCity] = useState(null)
 
   const [cityValue, setCityValue] = useState("")
-  const [citySearch, setCitySearch] = useState([])
+  const [citySearch, setCitySearch] = useState("")
 
   const [sortValue, setSortValue] = useState("")
 
@@ -144,6 +144,13 @@ function error() {
     }
   }
 
+const [continentValue, setContinentValue] = useState("")
+const [countryValue, setCountryValue] = useState("")
+
+function reset(){
+  [setCityValue, setCountryValue, setContinentValue].forEach((s)=> s("")) 
+}
+
   return (
     <Routes>
       <Route path="/" element={
@@ -180,6 +187,10 @@ function error() {
               setCitySearch={setCitySearch}
               setSortType={setSortType}
               resetValue={resetValue}
+              countryValue={countryValue}
+              setCountryValue={setCountryValue}
+              continentValue={continentValue}
+              setContinentValue={setContinentValue}
             />
             }
 
@@ -188,7 +199,9 @@ function error() {
               sorted={sorted}
               sortValue={sortValue}
               setSortValue={setSortValue}
-            />}
+              reset={reset}
+            />
+            }
 
             <Places 
                 placesData={filteredPlaces} 
