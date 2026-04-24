@@ -46,12 +46,17 @@ function App() {
     }
   }
 
-  function chooseCity(id, name, price, img) {
+function chooseCity(id, name, price, img) {
+  if (selectCity === id) {
+    setSelectCity(null)
+    setShowCalendar(false)
+    setPendingCity(null)
+  } else {
     setPendingCity({ id, name, price, img })
     setShowCalendar(true)
     setSelectCity(id)
-    return true 
   }
+}
 
 function cityAdd() {
   setMessage({ text: `City added successfully`, type: "add"})
@@ -157,6 +162,7 @@ function error() {
           {show && (
         <div className="place-cart-container">
           <div className="search-places-wrapper"> 
+          {!showCalendar && 
             <Search 
               chooseCity={chooseCity} 
               selectCity={selectCity}
@@ -165,12 +171,14 @@ function error() {
               setCityValue={setCityValue}
               cityValue={cityValue}
               setCitySearch={setCitySearch}
+              setSortType={setSortType}
             />
+            }
 
-            <OrderValue 
+           {!showCalendar && <OrderValue 
               handleSort={(type) => handleSort(type)}
               sorted={sorted}
-            />
+            /> }
 
             <Places 
                 placesData={filteredPlaces} 
