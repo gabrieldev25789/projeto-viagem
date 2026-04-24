@@ -21,8 +21,8 @@ if (sortedCities) {
                 <li className='cities-li'>
                   <ul className='cities-ul'>
                     <li
-                      onClick={() => { chooseCity(city.id, city.name, city.price, city.img); setSelectCity(city.id) }}
-                      className={`city-card ${selectCity === city.id ? "select" : ""}`}
+                      onClick={() => { chooseCity(city.id, city.name, city.price, city.img)}}
+                      className={ `city-card ${selectCity === city.id ? "select" : ""}`}
                     >
                       <img className='city-img' src={city.img} alt={city.name} />
                       <div className='city-info'>
@@ -58,7 +58,7 @@ if (sortedCities) {
                 .map((city, index) => (
                   <div className='city-card-wrapper' key={city.id} style={{ animationDelay: `${index * 60}ms` }}>
                     <li
-                      onClick={() => { chooseCity(city.id, city.name, city.price, city.img); setSelectCity(city.id) }}
+                      onClick={() => { chooseCity(city.id, city.name, city.price, city.img)}}
                       className={`city-card ${selectCity === city.id ? "select" : ""}`}
                     >
                       <img className='city-img' src={city.img} alt={city.name} />
