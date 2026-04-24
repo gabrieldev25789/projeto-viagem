@@ -27,6 +27,13 @@ function App() {
   const [cityValue, setCityValue] = useState("")
   const [citySearch, setCitySearch] = useState([])
 
+  const [sortValue, setSortValue] = useState("")
+
+   function resetValue(){
+    setSortValue("")
+    handleSort("")
+  }
+
   const navigate = useNavigate()
 
   const total = list.reduce(
@@ -172,13 +179,16 @@ function error() {
               cityValue={cityValue}
               setCitySearch={setCitySearch}
               setSortType={setSortType}
+              resetValue={resetValue}
             />
             }
 
            {!showCalendar && <OrderValue 
               handleSort={(type) => handleSort(type)}
               sorted={sorted}
-            /> }
+              sortValue={sortValue}
+              setSortValue={setSortValue}
+            />}
 
             <Places 
                 placesData={filteredPlaces} 
