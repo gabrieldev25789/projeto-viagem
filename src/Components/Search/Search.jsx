@@ -3,11 +3,13 @@ import { useState } from 'react'
 import { places } from '../data/places'
 import Places from '../Places/Places'
 
-function Search({ onFilter, setCityValue, cityValue, setCitySearch }) {
+function Search({ onFilter, setCityValue, cityValue, setCitySearch, setSortType, resetValue }) {
 const [continentValue, setContinentValue] = useState("")
 const [countryValue, setCountryValue] = useState("")
 
 function handleChange(e, field) {
+  resetValue()
+  setSortType("")
   const inputValue = e.target.value.toLowerCase().trim()
 
   if (field === "city") {
