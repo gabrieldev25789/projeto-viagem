@@ -1,31 +1,22 @@
 import "./OrderValue.css"
-import { places } from "../data/places.js"
 
-  const cities = places.flatMap(place => place.cities)
+function OrderValue({ handleSort, sortValue, setSortValue }) {
 
-function OrderValue() {
-
-   let sorted = [...cities]
-
-  function handleSort(type){
-    if(type === "asc"){
-    sorted.sort((a, b) => a.price - b.price)
-    }
-    
-    if(type === "desc"){
-    sorted.sort((a, b) => b.price - a.price)
-    }
+  function handleChange(value){
+    setSortValue(value)
+    handleSort(value)
   }
 
 return (
     <div className="sort-wrapper">
-      <label htmlFor="sort">Sort by price</label>
 
-      <select id="sort" onChange={(e) => handleSort(e.target.value)}>
+      <label htmlFor="sort">Sort city by price</label>
+      <select id="sort" value={sortValue} onChange={(e) => handleChange(e.target.value)}>
         <option value="">--</option>
         <option value="asc">Low to High</option>
         <option value="desc">High to Low</option>
       </select>
+
     </div>
   )
 }
