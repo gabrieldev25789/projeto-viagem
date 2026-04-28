@@ -29,9 +29,9 @@ function App() {
 
   const [sortValue, setSortValue] = useState("")
 
-   function resetValue(){
+  function resetValue() {
+    setSortType("")
     setSortValue("")
-    handleSort("")
   }
 
   const navigate = useNavigate()
@@ -147,8 +147,16 @@ function error() {
 const [continentValue, setContinentValue] = useState("")
 const [countryValue, setCountryValue] = useState("")
 
-function reset(){
-  [setCityValue, setCountryValue, setContinentValue].forEach((s)=> s("")) 
+const [removeClass, setRemoveClass] = useState(false)
+
+function reset() {
+  setCityValue("")
+  setCountryValue("")
+  setContinentValue("")
+  setCitySearch("")
+  setFilteredPlaces(places)
+  setSortType("")
+  setSortValue("")
 }
 
   return (
@@ -191,6 +199,7 @@ function reset(){
               setCountryValue={setCountryValue}
               continentValue={continentValue}
               setContinentValue={setContinentValue}
+              setRemoveClass={setRemoveClass}
             />
             }
 
@@ -200,6 +209,7 @@ function reset(){
               sortValue={sortValue}
               setSortValue={setSortValue}
               reset={reset}
+              setRemoveClass={setRemoveClass}
             />
             }
 
@@ -211,6 +221,7 @@ function reset(){
                 cityValue={cityValue}
                 citySearch={citySearch}
                 sortedCities={sortedCities}
+                removeCLass={removeClass}
               /> 
             </div> 
             
