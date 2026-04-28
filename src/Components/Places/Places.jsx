@@ -1,7 +1,6 @@
 import "./Places.css"
 
-function Places({ placesData, chooseCity, selectCity, citySearch, sortedCities, removeCLass }) {
-
+function Places({ placesData, chooseCity, selectCity, citySearch, sortedCities, removeCLass, countryValue, continentValue }) {
 
   if (sortedCities) {
     return (
@@ -44,9 +43,21 @@ function Places({ placesData, chooseCity, selectCity, citySearch, sortedCities, 
     )
   }
 
+const placesFound = placesData.map((place) => ({
+  ...place,
+  cities: place.cities.filter(city =>
+    citySearch ? city.name.toLowerCase().includes(citySearch.toLowerCase()) : true
+  )
+})).filter(place => place.cities.length > 0)
+
+if((countryValue || citySearch || continentValue) && placesFound.length === 0) {
+  alert("NÃO ACHOU")
+  return <div className="infos-container hide"></div>
+}
+
   return (
     <div className={`infos-container ${citySearch ? `${!removeCLass ? "infos-container--list" : ""}` : ""}`}>
-      {placesData.map((place) => {
+      {placesFound.map((place) => {
         const filteredCities = place.cities.filter(city =>
           citySearch ? city.name.toLowerCase().includes(citySearch.toLowerCase()) : true
         )
