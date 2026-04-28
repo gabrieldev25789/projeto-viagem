@@ -1,51 +1,87 @@
-.toast {
-  width: 100%;
-  max-width: 420px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.toast-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
 }
 
-.toast-title {
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 32px 28px;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  position: relative;
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.modal.add .modal-icon { background: #e8f5f2; }
+.modal.erro .modal-icon { background: #fdecea; }
+
+.modal-title {
   display: block;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.modal.add .modal-title { color: #085041; }
+.modal.erro .modal-title { color: #A32D2D; }
+
+.modal-description {
   font-size: 14px;
-  margin-bottom: 2px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 28px;
 }
 
-.toast-subtitle {
-  font-size: 12px;
-  opacity: 0.75;
+.modal-btn {
+  padding: 11px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 20px;
 }
+.modal.add .modal-btn { background: #085041; color: white; }
+.modal.erro .modal-btn { background: #A32D2D; color: white; }
 
-.erro {
-  background: #FCEBEB;
-  color: #501313;
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #aaa;
+  padding: 4px 8px;
+  border-radius: 6px;
+  line-height: 1;
 }
+.modal-close:hover { background: #f3f3f3; color: #555; }
 
-.erro .toast-icon {
-  background: #F09595;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
-.add {
-  background: #E1F5EE;
-  color: #04342C;
-}
-
-.add .toast-icon {
-  background: #5DCAA5;
+@keyframes popIn {
+  from { transform: scale(0.88) translateY(16px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
 }
