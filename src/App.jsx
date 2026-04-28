@@ -18,7 +18,7 @@ function App() {
   const [showCalendar, setShowCalendar] = useState(false)
   const [pendingCity, setPendingCity] = useState(null) 
 
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState({ text: "", type: "add", isOpen: false });
 
   const [filteredPlaces, setFilteredPlaces] = useState(places)
 
@@ -66,11 +66,11 @@ function chooseCity(id, name, price, img) {
 }
 
 function cityAdd() {
-  setMessage({ text: `City added successfully`, type: "add"})
+  setMessage({ text: "City added successfully", type: "add", isOpen: true });
 }
 
 function error() {
-  setMessage({ text: "You can only stay for 30 nights", type: "erro" });
+  setMessage({ text: "You can only stay for 30 nights", type: "erro", isOpen: true });
 }
 
   function handleSearch({ startDate, endDate, nights }) {
@@ -115,11 +115,11 @@ function error() {
     )
   }
 
-  useEffect(() => {
-  if (!message) return;
-  const timer = setTimeout(() => setMessage(null), 2000);
+useEffect(() => {
+  if (!message.isOpen) return;
+  const timer = setTimeout(() => setMessage((prev) => ({ ...prev, isOpen: false })), 2000);
   return () => clearTimeout(timer);
-}, [message]);
+}, [message.isOpen]);
 
 
   const cities = places.flatMap(place => place.cities)
@@ -167,7 +167,6 @@ function reset() {
           <Main />
           {message && (
             <div style={{ display: "flex", justifyContent: "center", padding: "1rem" }}>
-              <Message message={message.text} type={message.type} />
             </div>
           )}
           {showCalendar && (
@@ -224,6 +223,13 @@ function reset() {
                 removeCLass={removeClass}
               /> 
             </div> 
+
+          <Message
+              isOpen={message.isOpen}
+              type={message.type}
+              message={message.text}
+              onClose={() => setMessage((prev) => ({ ...prev, isOpen: false }))}
+            />
             
             <Cart list={list} removeCity={removeCity} finish={finish}/>
           </div>
