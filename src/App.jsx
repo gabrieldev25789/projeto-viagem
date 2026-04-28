@@ -29,6 +29,8 @@ function App() {
 
   const [sortValue, setSortValue] = useState("")
 
+  const [hide, setHide] = useState(false)
+
   function resetValue() {
     setSortType("")
     setSortValue("")
@@ -202,13 +204,15 @@ function reset() {
             />
             }
 
-           {!showCalendar && <OrderValue 
+           {!showCalendar && 
+           <OrderValue 
               handleSort={(type) => handleSort(type)}
               sorted={sorted}
               sortValue={sortValue}
               setSortValue={setSortValue}
               reset={reset}
               setRemoveClass={setRemoveClass}
+              hide={hide}
             />
             }
 
@@ -223,6 +227,7 @@ function reset() {
                 removeCLass={removeClass}
                 countryValue={countryValue}
                 continentValue={continentValue}
+                setHide={setHide}
               /> 
             </div> 
 
