@@ -1,10 +1,11 @@
 import "./Places.css"
 
-function Places({ placesData, chooseCity, selectCity, citySearch, sortedCities }) {
+function Places({ placesData, chooseCity, selectCity, citySearch, sortedCities, removeCLass }) {
+
 
   if (sortedCities) {
     return (
-    <div className={`infos-container ${citySearch ? "infos-container--list" : ""}`}>
+      <div className={`infos-container ${citySearch ? `${!removeCLass ? "infos-container--list" : ""}` : ""}`}>
         <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", width: "100%" }}>
           {sortedCities
             .filter(city =>
@@ -44,7 +45,7 @@ function Places({ placesData, chooseCity, selectCity, citySearch, sortedCities }
   }
 
   return (
-    <div className={`infos-container ${citySearch ? "infos-container--list" : ""}`}>
+    <div className={`infos-container ${citySearch ? `${!removeCLass ? "infos-container--list" : ""}` : ""}`}>
       {placesData.map((place) => {
         const filteredCities = place.cities.filter(city =>
           citySearch ? city.name.toLowerCase().includes(citySearch.toLowerCase()) : true
