@@ -221,6 +221,8 @@ function reset() {
                 citySearch={citySearch}
                 sortedCities={sortedCities}
                 removeCLass={removeClass}
+                countryValue={countryValue}
+                continentValue={continentValue}
               /> 
             </div> 
 
