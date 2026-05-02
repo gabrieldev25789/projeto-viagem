@@ -55,6 +55,9 @@ function App() {
     }
   }
 
+  const [showCitySelected, setShowCitySelected] = useState(false)
+  const [citySelected, setCitySelected] = useState("")
+
 function chooseCity(id, name, price, img) {
   if (selectCity === id) {
     setSelectCity(null)
@@ -65,7 +68,11 @@ function chooseCity(id, name, price, img) {
     setShowCalendar(true)
     setSelectCity(id)
   }
+
+  setShowCitySelected(true)
+  setCitySelected(name)
 }
+
 
 function cityAdd() {
   setMessage({ text: "City added successfully", type: "add", isOpen: true });
@@ -228,6 +235,7 @@ function reset() {
                 countryValue={countryValue}
                 continentValue={continentValue}
                 setHide={setHide}
+                setMessage={setMessage}
               /> 
             </div> 
 
@@ -238,7 +246,7 @@ function reset() {
               onClose={() => setMessage((prev) => ({ ...prev, isOpen: false }))}
             />
             
-            <Cart list={list} removeCity={removeCity} finish={finish}/>
+            <Cart list={list} removeCity={removeCity} finish={finish} citySelected={citySelected} showCitySelected={showCitySelected}/>
           </div>
           )}
         </>
