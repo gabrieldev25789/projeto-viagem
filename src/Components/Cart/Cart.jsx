@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import "./Cart.css"
 
-function Cart({ list = [], removeCity, finish }) {
+function Cart({ list = [], removeCity, finish, citySelected, showCitySelected }) {
   const [show, setShow] = useState(false)
 
   const total = list.reduce(
@@ -10,6 +10,7 @@ function Cart({ list = [], removeCity, finish }) {
   )
 
   return (
+    <>
     <aside className={`cart-aside ${show ? 'open' : ''}`}>
 
       <button className='cart-btn' onClick={() => setShow(prev => !prev)}>
@@ -66,7 +67,10 @@ function Cart({ list = [], removeCity, finish }) {
           )}
         </div>
       </div>
+      {showCitySelected && <h3>City selected: <span style={{color: "green"}}>{citySelected}</span></h3>  }
+          
     </aside>
+    </>
   )
 }
 
