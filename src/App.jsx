@@ -11,6 +11,7 @@ import { places } from './Components/data/places'
 import Places from './Components/Places/Places'
 import Message from './Components/Message/Message'
 import OrderValue from './Components/OrderValue/OrderValue'
+import Hotel from './Components/Hotel/Hotel'
 
 function App() {
   const [show, setShow] = useState(false)
@@ -73,8 +74,13 @@ function chooseCity(id, name, price, img) {
   setCitySelected(name)
 }
 
+const [hideHotel, setHideHotel] = useState(false)
+const [showHotel, setShowHotel] = useState(true)
+
 function cityAdd() {
   setMessage({ text: "City added successfully", type: "add", isOpen: true });
+  setShowHotel(true)
+  setHideHotel(true)
   setShowCitySelected(false)
   setSelectCity(null)
 }
@@ -169,6 +175,10 @@ function reset() {
   setSortValue("")
 }
 
+function onSkip(){
+  setHideHotel(false)
+}
+
   return (
     <Routes>
       <Route path="/" element={
@@ -212,7 +222,13 @@ function reset() {
             />
             }
 
-           {!showCalendar && 
+         <Hotel 
+          onSkip={onSkip}
+          hideHotel={hideHotel}
+          showHotel={showHotel}
+          />
+          
+          {!showCalendar && 
            <OrderValue 
               handleSort={(type) => handleSort(type)}
               sorted={sorted}
@@ -222,7 +238,7 @@ function reset() {
               setRemoveClass={setRemoveClass}
               hide={hide}
             />
-            }
+          }
 
             <Places 
                 placesData={filteredPlaces} 
