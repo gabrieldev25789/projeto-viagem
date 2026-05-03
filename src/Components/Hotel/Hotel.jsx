@@ -7,10 +7,12 @@ const hotels = [
     { id: 3, icon: "🌿", name: "Pousada Serra",  stars: "3 stars · Bairro", price: "R$ 220" },
 ]
 
-function Hotel({ onAdd, onSkip }){
+function Hotel({ onAdd, onSkip, hideHotel, showHotel }){
     const [selected, setSelected] = useState(null)
+
+if(showHotel){
   return (
-          <div className="hotel-overlay">
+    <div className={hideHotel ? "hotel-overlay" : "hotel-overlay hide"}>
       <div className="hotel-modal">
         <h2>Add a hotel to your trip?</h2>
         <p className="hotel-subtitle">Choose one of the options below or skip.</p>
@@ -44,6 +46,7 @@ function Hotel({ onAdd, onSkip }){
       </div>
     </div>
   )
+}
 }
 
 export default Hotel
