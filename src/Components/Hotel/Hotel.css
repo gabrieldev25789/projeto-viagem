@@ -1,0 +1,97 @@
+.hotel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.hotel-modal {
+  background: #1a1a1a;
+  border-radius: 14px;
+  padding: 1.75rem;
+  width: 100%;
+  max-width: 560px;
+  border: 1px solid #2e2e2e;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+
+.hotel-modal h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: #f0f0f0;
+}
+
+.hotel-subtitle {
+  font-size: 16px;
+  color: #888;
+  margin: 0 0 1.5rem;
+}
+
+.hotel-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.hotel-card {
+  background: #242424;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.hotel-card:hover {
+  background: #2a2a2a;
+  border-color: #555;
+}
+
+.hotel-card--selected {
+  border: 2px solid #378ADD;
+  background: #1a2a3a;
+}
+
+.hotel-icon  { font-size: 22px; display: block; margin-bottom: 10px; }
+.hotel-name  { font-size: 16px; font-weight: 600; margin: 0 0 4px; color: #f0f0f0; }
+.hotel-stars { font-size: 13px; color: #777; margin: 0 0 10px; }
+.hotel-price { font-size: 17px; font-weight: 600; margin: 0; color: #e0e0e0; }
+.hotel-price span { font-size: 12px; font-weight: 400; color: #666; }
+
+.hotel-actions { display: flex; gap: 10px; }
+
+.btn-add {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  background: #4cb332;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.btn-add:not(:disabled) { opacity: 1; }
+.btn-add:not(:disabled):hover { background: #07ff55; }
+
+.btn-skip {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: #7a1a1a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-skip:hover { background: #9e2020; }
