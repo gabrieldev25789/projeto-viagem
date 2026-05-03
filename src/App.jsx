@@ -73,9 +73,10 @@ function chooseCity(id, name, price, img) {
   setCitySelected(name)
 }
 
-
 function cityAdd() {
   setMessage({ text: "City added successfully", type: "add", isOpen: true });
+  setShowCitySelected(false)
+  setSelectCity(null)
 }
 
 function error() {
