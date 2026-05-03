@@ -263,7 +263,7 @@ function onSkip(){
               onClose={() => setMessage((prev) => ({ ...prev, isOpen: false }))}
             />
             
-            <Cart list={list} removeCity={removeCity} finish={finish} citySelected={citySelected} showCitySelected={showCitySelected}/>
+          {!hideHotel &&  <Cart list={list} removeCity={removeCity} finish={finish} citySelected={citySelected} showCitySelected={showCitySelected}/>}
           </div>
           )}
         </>
