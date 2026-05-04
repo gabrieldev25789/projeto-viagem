@@ -1,13 +1,23 @@
 import { useState } from 'react'
 import "./Cart.css"
 
-function Cart({ list = [], removeCity, finish, citySelected, showCitySelected }) {
+function Cart({ list = [], removeCity, finish, citySelected }) {
   const [show, setShow] = useState(false)
 
   const total = list.reduce(
     (acc, item) => acc + (Number(item.price) || 0) * (Number(item.amount) || 0),
     0
   )
+
+    const groupedList = list.reduce((acc, item) => {
+      const existing = acc.find(i => i.id === item.id)
+      if (existing) {
+        existing.amount += 1
+      } else {
+        acc.push({ ...item, amount: 1 })
+      }
+      return acc
+    }, [])
 
   return (
     <>
@@ -17,7 +27,6 @@ function Cart({ list = [], removeCity, finish, citySelected, showCitySelected })
         🛒 {show ? 'Close Cart' : `View Cart (${list.length})`}
       </button>
 
-    
       <div className='cart-container'>
         <div className='cart-header'>
           <p className='cart-header-label'>Cart</p>
@@ -41,14 +50,14 @@ function Cart({ list = [], removeCity, finish, citySelected, showCitySelected })
                   </td>
                 </tr>
               ) : (
-                list.map((item) => (
-                  <tr className='cart-item' key={item.id}>
+                groupedList.map((item) => (
+                  <tr className='cart-item' key={item.uniqueId}>
                     <td className='cart-name'>
                       {item.name} {item.amount > 1 && `(${item.amount})`}
                     </td>
                     <td className='cart-price'>USD {Number(item.price).toFixed(2)}</td>
                     <td>
-                      <button className='cart-remove-btn' onClick={() => removeCity(item.id)}>✕</button>
+                      <button className='cart-remove-btn' onClick={() => removeCity(item.uniqueId)}>✕</button>
                     </td>
                   </tr>
                 ))
@@ -67,8 +76,8 @@ function Cart({ list = [], removeCity, finish, citySelected, showCitySelected })
           )}
         </div>
       </div>
-      {showCitySelected && <h3>City selected: <span style={{color: "green"}}>{citySelected}</span></h3>  }
-          
+
+    {citySelected && <h3>City selected: <span style={{color: "green"}}>{citySelected}</span></h3>} 
     </aside>
     </>
   )
