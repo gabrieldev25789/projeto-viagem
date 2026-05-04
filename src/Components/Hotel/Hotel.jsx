@@ -1,15 +1,7 @@
 import "./Hotel.css"
-import React, { useState } from 'react'
 
-const hotels = [
-    { id: 1, icon: "🏨", name: "Grand Palace", stars: "5 stars · Centro", price: "R$ 680" },
-    { id: 2, icon: "🛏️", name: "Beira Mar Inn", stars: "4 stars · Praia",  price: "R$ 420" },
-    { id: 3, icon: "🌿", name: "Pousada Serra",  stars: "3 stars · Bairro", price: "R$ 220" },
-]
-
-function Hotel({ onAdd, onSkip, hideHotel, showHotel }){
-    const [selected, setSelected] = useState(null)
-
+function Hotel({ onAdd, onSkip, hideHotel, showHotel, selected, setSelected, hotels }){
+    
 if(showHotel){
   return (
     <div className={hideHotel ? "hotel-overlay" : "hotel-overlay hide"}>
@@ -32,16 +24,16 @@ if(showHotel){
         </div>
 
         <div className="hotel-actions">
-          <button
-            className="btn-add"
-            disabled={!selected}
-            onClick={() => selected && onAdd(hotels.find(h => h.id === selected))}
-          >
-            Add hotel
-          </button>
-          <button className="btn-skip" onClick={onSkip}>
-            No, skip
-          </button>
+        <button
+          className="btn-add"
+          disabled={!selected}
+          onClick={() => onAdd()}
+        >
+          Add hotel
+        </button>
+        <button className="btn-skip" onClick={() => {onSkip()}}>
+            Skip
+        </button>
         </div>
       </div>
     </div>
