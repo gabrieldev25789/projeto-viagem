@@ -1,9 +1,9 @@
 import { useLocation } from 'react-router-dom'
 import "./Requested.css"
 
-function Requested({ array }) {
+function Requested() {
   const { state } = useLocation()
-  const { total = 0 } = state || {}
+  const { list = [] , total = 0 } = state || {}
 
   const formatPrice = (value) =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
@@ -20,7 +20,7 @@ return (
       <h2 className="order-title">Order confirmed!</h2>
 
       <ul className="order-list">
-        {array.map(item => (
+        {list.map(item => (
           <li key={item.id} className="order-card">
             <img className="order-card__img" src={item.img} alt={item.name} />
 
@@ -37,6 +37,14 @@ return (
 
               <div className="order-card__dates">
                 <span>Departure: {formatDate(item.startDate)}</span>
+
+                {item.hotelSelected && (
+                  <div className='order-card-hotel'>
+                    <span>{item.hotelSelected.icon}</span>
+                    <span>{item.hotelSelected.stars}</span>
+                    <span>{item.hotelSelected.price}</span>
+                  </div>
+                )}
                 <span>Return: {formatDate(item.endDate)}</span>
               </div>
             </div>
