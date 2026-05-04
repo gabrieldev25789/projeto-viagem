@@ -98,52 +98,39 @@ function App() {
 
     setShowHotel(true)  
     setHideHotel(true)  
-  }
+}
 
 function addHotel() {
   if (!pendingSearchRef.current) return
 
   const foundHotel = hotels.find(h => h.id === selected) ?? null
-  const newItem = { ...pendingSearchRef.current, hotelSelected: foundHotel }
+  const newItem = {
+    ...pendingSearchRef.current,
+    uniqueId: `${pendingSearchRef.current.id}_${crypto.randomUUID()}`,
+    hotelSelected: foundHotel
+  }
 
-  setList((prev) => {
-    const exist = prev.find(item => item.id === newItem.id)
-    if (exist) {
-      return prev.map(item =>
-        item.id === newItem.id ? { ...item, amount: item.amount + 1 } : item
-      )
-    }
-    return [...prev, newItem]
-  })
-
+  setList((prev) => [...prev, newItem]) 
   pendingSearchRef.current = null
   cityAdd()
 }
 
+function onSkip() {
+  if (!pendingSearchRef.current) return
 
-  function onSkip() {
-    cityAdd()
-    if (!pendingSearchRef.current) return
-
-    const newItem = {
-      ...pendingSearchRef.current,
-      hotelSelected: null
-    }
-
-    setList((prev) => {
-      const exist = prev.find(item => item.id === newItem.id)
-      if (exist) {
-        return prev.map(item =>
-          item.id === newItem.id ? { ...item, amount: item.amount + 1 } : item
-        )
-      }
-      return [...prev, newItem]
-    })
-
-    pendingSearchRef.current = null
-    setCitySelected("")
-    setHideHotel(false)
+  const newItem = {
+    ...pendingSearchRef.current,
+    uniqueId: `${pendingSearchRef.current.id}_${crypto.randomUUID()}`, 
+    hotelSelected: null
   }
+
+  setList((prev) => [...prev, newItem]) 
+
+  pendingSearchRef.current = null
+  setCitySelected("")
+  setHideHotel(false)
+  cityAdd()
+}
 
 function cityAdd() {
   setMessage({ text: "City added successfully", type: "add", isOpen: true })
@@ -154,17 +141,14 @@ function cityAdd() {
   setSelected(null) 
 }
 
-  function error() {
-    setMessage({ text: "You can only stay for 30 nights", type: "erro", isOpen: true })
-  }
+function error() {
+  setMessage({ text: "You can only stay for 30 nights", type: "erro", isOpen: true })
+}
 
-  function removeCity(id) {
-    setList((prev) =>
-      prev
-        .map(item => item.id === id ? { ...item, amount: item.amount - 1 } : item)
-        .filter(item => item.amount > 0)
-    )
-  }
+
+function removeCity(uniqueId) {
+  setList((prev) => prev.filter(item => item.uniqueId !== uniqueId))
+}
 
   function reset() {
     setCityValue("")
