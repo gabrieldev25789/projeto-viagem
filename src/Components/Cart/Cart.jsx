@@ -4,10 +4,9 @@ import "./Cart.css"
 function Cart({ list = [], removeCity, finish, citySelected }) {
   const [show, setShow] = useState(false)
 
-  const total = list.reduce(
-    (acc, item) => acc + (Number(item.price) || 0) * (Number(item.amount) || 0),
-    0
-  )
+    const total = list.reduce(
+      (acc, item) => acc + (Number(item.price) + Number(item.valueNight || 0)) * (Number(item.amount) || 0), 0
+    )
 
     const groupedList = list.reduce((acc, item) => {
       const existing = acc.find(i => i.id === item.id)
@@ -55,7 +54,9 @@ function Cart({ list = [], removeCity, finish, citySelected }) {
                     <td className='cart-name'>
                       {item.name} {item.amount > 1 && `(${item.amount})`}
                     </td>
-                    <td className='cart-price'>USD {Number(item.price).toFixed(2)}</td>
+                    <td className='cart-price'>
+                      USD {(item.price + (item.valueNight || 0)).toFixed(2)}
+                    </td>
                     <td>
                       <button className='cart-remove-btn' onClick={() => removeCity(item.uniqueId)}>✕</button>
                     </td>
