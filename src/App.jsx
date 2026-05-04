@@ -65,14 +65,18 @@ function App() {
     if (show) setSelectCity(null)
   }
 
-  function chooseCity(id, name, price, img) {
+  const [pendingCityPrice, setPendingCityPrice] = useState(null)
+
+function chooseCity(id, name, price, img) {
     if (selectCity === id) {
       setSelectCity(null)
       setShowCalendar(false)
       setPendingCity(null)
       setCitySelected("")
+      setPendingCityPrice(null)
     } else {
       setPendingCity({ id, name, price, img })
+      setPendingCityPrice(price)
       setShowCalendar(true)
       setSelectCity(id)
       setCitySelected(name)
@@ -100,6 +104,8 @@ function App() {
     setHideHotel(true)  
 }
 
+const [valueNight, setValueNight] = useState(0)
+
 function addHotel() {
   if (!pendingSearchRef.current) return
 
@@ -107,7 +113,8 @@ function addHotel() {
   const newItem = {
     ...pendingSearchRef.current,
     uniqueId: `${pendingSearchRef.current.id}_${crypto.randomUUID()}`,
-    hotelSelected: foundHotel
+    hotelSelected: foundHotel,
+    valueNight: valueNight
   }
 
   setList((prev) => [...prev, newItem]) 
@@ -121,7 +128,8 @@ function onSkip() {
   const newItem = {
     ...pendingSearchRef.current,
     uniqueId: `${pendingSearchRef.current.id}_${crypto.randomUUID()}`, 
-    hotelSelected: null
+    hotelSelected: null,
+    valueNight: valueNight
   }
 
   setList((prev) => [...prev, newItem]) 
@@ -181,6 +189,7 @@ function removeCity(uniqueId) {
     return () => clearTimeout(timer)
   }, [message.isOpen])
 
+
   return (
     <Routes>
       <Route path="/" element={
@@ -189,7 +198,12 @@ function removeCity(uniqueId) {
           <Main />
 
           {showCalendar && (
-            <FlightSearch onSearch={handleSearch} setSelectCity={setSelectCity} />
+            <FlightSearch 
+            onSearch={handleSearch} 
+            setSelectCity={setSelectCity} 
+            setValueNight={setValueNight}
+            list={list}
+            cityPrice={pendingCityPrice}/>
           )}
 
           <button className={`dest-btn ${show ? "open" : ""}`} onClick={showDestinations}>
@@ -273,6 +287,7 @@ function removeCity(uniqueId) {
                   finish={finish}
                   citySelected={citySelected}
                   showCitySelected={showCitySelected}
+                  valueNight={valueNight}
                 />
               )}
             </div>
