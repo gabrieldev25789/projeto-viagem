@@ -1,6 +1,8 @@
 // FlightSearch.jsx
 import { useState, useRef, useEffect } from "react";
+import Message from "../Message/Message";
 import "./FlightSearch.css";
+import Hotel from "../Hotel/Hotel";
 
 const MONTHS = [
   "January","February","March","April","May","June",
@@ -105,7 +107,7 @@ function CalendarMonth({ year, month, startDate, endDate, onPickDay, showPrev, s
   );
 }
 
-export default function FlightSearch({ onSearch }) {
+export default function FlightSearch({ onSearch, setValueNight, cityPrice }) {
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const [base, setBase] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
   const [startDate, setStartDate] = useState(null);
@@ -117,6 +119,12 @@ export default function FlightSearch({ onSearch }) {
   const next = new Date(base.getFullYear(), base.getMonth() + 1, 1);
   const nights = startDate && endDate ? diffDays(startDate, endDate) : null;
 
+useEffect(() => {
+  if (!nights || !cityPrice) return;
+  const extraWeeks = Math.max(0, Math.min(Math.ceil(nights / 7) - 1, 3));
+  setValueNight(extraWeeks * (cityPrice * 0.10));
+}, [nights, cityPrice, setValueNight]);
+
   useEffect(() => {
     function handleClickOutside(e) {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
@@ -125,7 +133,7 @@ export default function FlightSearch({ onSearch }) {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [])
 
   function pickDay(dt) {
     if (!selecting || !startDate || (startDate && endDate)) {
@@ -165,6 +173,7 @@ export default function FlightSearch({ onSearch }) {
   }
 
   return (
+    <>
     <div className="shell" ref={wrapperRef}>
 
       {/* ── Trigger bar ── */}
@@ -216,7 +225,7 @@ export default function FlightSearch({ onSearch }) {
           </div>
         </div>
     </div>
-      
     </div>
+    </>
   );
 }
