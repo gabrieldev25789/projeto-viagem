@@ -106,6 +106,8 @@ function chooseCity(id, name, price, img) {
 
 const [valueNight, setValueNight] = useState(0)
 
+const [priceHotel, setPriceHotel] = useState(0)
+
 function addHotel() {
   if (!pendingSearchRef.current) return
 
@@ -114,8 +116,11 @@ function addHotel() {
     ...pendingSearchRef.current,
     uniqueId: `${pendingSearchRef.current.id}_${crypto.randomUUID()}`,
     hotelSelected: foundHotel,
-    valueNight: valueNight
+    valueNight: valueNight,
+    priceHotel: foundHotel ? parseFloat(foundHotel.price.replace("R$ ", "")) : 0
   }
+
+  setPriceHotel(priceHotel)
 
   setList((prev) => [...prev, newItem]) 
   pendingSearchRef.current = null
@@ -142,6 +147,7 @@ function onSkip() {
 
 function cityAdd() {
   setMessage({ text: "City added successfully", type: "add", isOpen: true })
+  setCitySelected("")
   setShowHotel(false) 
   setHideHotel(false)
   setShowCitySelected(false)
@@ -158,15 +164,15 @@ function removeCity(uniqueId) {
   setList((prev) => prev.filter(item => item.uniqueId !== uniqueId))
 }
 
-  function reset() {
-    setCityValue("")
-    setCountryValue("")
-    setContinentValue("")
-    setCitySearch("")
-    setFilteredPlaces(places)
-    setSortType("")
-    setSortValue("")
-  }
+function reset() {
+  setCityValue("")
+  setCountryValue("")
+  setContinentValue("")
+  setCitySearch("")
+  setFilteredPlaces(places)
+  setSortType("")
+  setSortValue("")
+}
 
   const cities = places.flatMap(place => place.cities)
   let sorted = [...cities]
@@ -188,7 +194,6 @@ function removeCity(uniqueId) {
     const timer = setTimeout(() => setMessage((prev) => ({ ...prev, isOpen: false })), 2000)
     return () => clearTimeout(timer)
   }, [message.isOpen])
-
 
   return (
     <Routes>
@@ -288,6 +293,7 @@ function removeCity(uniqueId) {
                   citySelected={citySelected}
                   showCitySelected={showCitySelected}
                   valueNight={valueNight}
+                  priceHotel={priceHotel}
                 />
               )}
             </div>
