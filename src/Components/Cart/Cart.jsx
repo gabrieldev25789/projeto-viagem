@@ -12,8 +12,9 @@ function Cart({ list = [], removeCity, finish, citySelected }) {
       const existing = acc.find(i => i.id === item.id)
       if (existing) {
         existing.amount += 1
+        existing.totalPrice += item.price + (item.valueNight || 0)
       } else {
-        acc.push({ ...item, amount: 1 })
+        acc.push({ ...item, amount: 1, totalPrice: item.price + (item.valueNight || 0) })
       }
       return acc
     }, [])
@@ -55,7 +56,7 @@ function Cart({ list = [], removeCity, finish, citySelected }) {
                       {item.name} {item.amount > 1 && `(${item.amount})`}
                     </td>
                     <td className='cart-price'>
-                      USD {(item.price + (item.valueNight || 0)).toFixed(2)}
+                      USD {(item.totalPrice ?? 0).toFixed(2)}
                     </td>
                     <td>
                       <button className='cart-remove-btn' onClick={() => removeCity(item.uniqueId)}>✕</button>
