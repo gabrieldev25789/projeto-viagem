@@ -5,13 +5,15 @@ function Requested() {
   const { state } = useLocation()
   const { list = [] , total = 0 } = state || {}
 
-  const formatPrice = (value) =>
-    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
+const formatPrice = (value) =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
 
-  const formatDate = (date) =>
-    new Date(date).toLocaleDateString("en-US", {
-      month: "short", day: "numeric", year: "numeric"
-    })
+const formatDate = (date) => {
+  const [year, month, day] = date.split("-")
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+    month: "short", day: "numeric", year: "numeric"
+  })
+}
 
   const totalPriceHotel = list.reduce((acc, item) => acc + (item.priceHotel || 0), 0)
   const totalValueNight = list.reduce((acc, item) => acc + (item.valueNight || 0), 0)
@@ -35,18 +37,18 @@ return (
                 <span>{item.nights} nights</span>
                 <span>x {item.amount}</span>
                 <span className="order-card__price">
-                  USD {formatPrice(item.price +  + item.valueNight)}
+                  USD {formatPrice(item.price + item.valueNight)}
                 </span>
               </div>
 
-              {item.hotelSelected && (
-                    <div className='order-card-hotel'>
+              {item.hotelSelected ? (
+                <div className='order-card-hotel'>
                       <span style={{fontSize: 14}}>{item.hotelSelected.icon}</span>
                       <span className='order-card-hotel__name'>{item.hotelSelected.name}</span>
                       <span className='order-card-hotel__stars'> · {item.hotelSelected.stars}</span>
                       <span className='order-card-hotel__price'>USD ${item.hotelSelected.price}</span>
-                    </div>
-                )}
+                </div>
+              ): <span style={{fontSize: 16, color: "#973232"}}>No hotel selected</span> }
 
               <div className="order-card__dates">
                 <span>Departure: {formatDate(item.startDate)}</span>
@@ -56,7 +58,7 @@ return (
                 <p className='total-price'>
                   <span style={{color: "#ffff"}}>Total:</span> USD {formatPrice(item.price + (item.priceHotel || 0) + item.valueNight)}
                 </p>
-                
+
             </div>
           </li>
         ))}
