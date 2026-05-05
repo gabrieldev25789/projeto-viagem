@@ -40,9 +40,9 @@ function App() {
   const navigate = useNavigate()
 
   const hotels = [
-    { id: 1, icon: "🏨", name: "Grand Palace", stars: "5 stars · Centro", price: "R$ 680" },
-    { id: 2, icon: "🛏️", name: "Beira Mar Inn", stars: "4 stars · Praia", price: "R$ 420" },
-    { id: 3, icon: "🌿", name: "Pousada Serra", stars: "3 stars · Bairro", price: "R$ 220" },
+    { id: 1, icon: "🏨", name: "Grand Palace", stars: "5 stars · Centro", price: "680" },
+    { id: 2, icon: "🛏️", name: "Beira Mar Inn", stars: "4 stars · Praia", price: "420" },
+    { id: 3, icon: "🌿", name: "Pousada Serra", stars: "3 stars · Bairro", price: "220"},
   ]
 
   const total = list.reduce(
