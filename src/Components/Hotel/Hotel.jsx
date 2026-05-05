@@ -18,7 +18,7 @@ if(showHotel){
               <span className="hotel-icon">{h.icon}</span>
               <p className="hotel-name">{h.name}</p>
               <p className="hotel-stars">{h.stars}</p>
-              <p className="hotel-price">{h.price}<span>/noite</span></p>
+              <p className="hotel-price">USD ${h.price}<span style={{color: "#60a5fa", fontSize: "1rem"}}> /night</span></p>
             </div>
           ))}
         </div>
