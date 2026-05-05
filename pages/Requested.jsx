@@ -35,21 +35,28 @@ return (
                 <span>{item.nights} nights</span>
                 <span>x {item.amount}</span>
                 <span className="order-card__price">
-                  USD {formatPrice(item.price + (item.priceHotel || 0) + item.valueNight)}
+                  USD {formatPrice(item.price +  + item.valueNight)}
                 </span>
               </div>
+
+              {item.hotelSelected && (
+                    <div className='order-card-hotel'>
+                      <span style={{fontSize: 14}}>{item.hotelSelected.icon}</span>
+                      <span className='order-card-hotel__name'>{item.hotelSelected.name}</span>
+                      <span className='order-card-hotel__stars'> · {item.hotelSelected.stars}</span>
+                      <span className='order-card-hotel__price'>USD ${item.hotelSelected.price}</span>
+                    </div>
+                )}
 
               <div className="order-card__dates">
                 <span>Departure: {formatDate(item.startDate)}</span>
                 <span>Return: {formatDate(item.endDate)}</span>
-                {item.hotelSelected && (
-                  <div className='order-card-hotel'>
-                    <span>{item.hotelSelected.icon}</span>
-                    <span>{item.hotelSelected.stars}</span>
-                    <span>{item.hotelSelected.price}</span>
-                  </div>
-                )}
               </div>
+
+                <p className='total-price'>
+                  <span style={{color: "#ffff"}}>Total:</span> USD {formatPrice(item.price + (item.priceHotel || 0) + item.valueNight)}
+                </p>
+                
             </div>
           </li>
         ))}
