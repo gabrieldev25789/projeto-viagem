@@ -12,6 +12,10 @@ function Requested() {
     new Date(date).toLocaleDateString("en-US", {
       month: "short", day: "numeric", year: "numeric"
     })
+
+  const totalPriceHotel = list.reduce((acc, item) => acc + (item.priceHotel || 0), 0)
+  const totalValueNight = list.reduce((acc, item) => acc + (item.valueNight || 0), 0)
+
 return (
   <div className="order-page">
 
@@ -31,13 +35,13 @@ return (
                 <span>{item.nights} nights</span>
                 <span>x {item.amount}</span>
                 <span className="order-card__price">
-                  {formatPrice(item.price * item.amount)}
+                  USD {formatPrice(item.price + (item.priceHotel || 0) + item.valueNight)}
                 </span>
               </div>
 
               <div className="order-card__dates">
                 <span>Departure: {formatDate(item.startDate)}</span>
-
+                <span>Return: {formatDate(item.endDate)}</span>
                 {item.hotelSelected && (
                   <div className='order-card-hotel'>
                     <span>{item.hotelSelected.icon}</span>
@@ -45,7 +49,6 @@ return (
                     <span>{item.hotelSelected.price}</span>
                   </div>
                 )}
-                <span>Return: {formatDate(item.endDate)}</span>
               </div>
             </div>
           </li>
@@ -80,7 +83,7 @@ return (
 
         <div className="order-total">
           <span>Total</span>
-          <span>{formatPrice(total)}</span>
+          <span>USD {formatPrice(total + totalValueNight + totalPriceHotel)}</span>
         </div>
 
         <button type="button" className="payment-btn">
