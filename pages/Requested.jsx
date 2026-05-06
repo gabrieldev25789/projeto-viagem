@@ -1,9 +1,13 @@
-import { useLocation } from 'react-router-dom'
+/*import { useLocation } from 'react-router-dom'*/
 import "./Requested.css"
 
-function Requested() {
-  const { state } = useLocation()
-  const { list = [] , total = 0 } = state || {}
+function Requested({ list, setList, total }) {
+
+  const removeHotelFromOrder = (id) => {
+    setList(prev => prev.map(item =>
+      item.id === id ? { ...item, hotelSelected: null } : item
+    ))
+  }
 
 const formatPrice = (value) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
@@ -15,7 +19,10 @@ const formatDate = (date) => {
   })
 }
 
-  const totalPriceHotel = list.reduce((acc, item) => acc + (item.priceHotel || 0), 0)
+const totalPriceHotel = list.reduce((acc, item) => 
+  acc + (item.hotelSelected ? parseFloat(item.hotelSelected.price) : 0), 0
+);
+
   const totalValueNight = list.reduce((acc, item) => acc + (item.valueNight || 0), 0)
 
 return (
@@ -40,13 +47,14 @@ return (
                   USD {formatPrice(item.price + item.valueNight)}
                 </span>
               </div>
-
+              
               {item.hotelSelected ? (
                 <div className='order-card-hotel'>
                       <span style={{fontSize: 14}}>{item.hotelSelected.icon}</span>
                       <span className='order-card-hotel__name'>{item.hotelSelected.name}</span>
                       <span className='order-card-hotel__stars'> · {item.hotelSelected.stars}</span>
                       <span className='order-card-hotel__price'>USD ${item.hotelSelected.price}</span>
+                      <button onClick={()=> removeHotelFromOrder(item.id)}>X</button>
                 </div>
               ): <span style={{fontSize: 16, color: "#973232"}}>No hotel selected</span> }
 
@@ -55,9 +63,9 @@ return (
                 <span>Return: {formatDate(item.endDate)}</span>
               </div>
 
-                <p className='total-price'>
-                  <span style={{color: "#ffff"}}>Total:</span> USD {formatPrice(item.price + (item.priceHotel || 0) + item.valueNight)}
-                </p>
+              <p className='total-price'>
+                <span style={{color: "#ffff"}}>Total:</span> USD {item.hotelSelected ? formatPrice(item.price + (item.priceHotel || 0) + item.valueNight) : formatPrice(item.price + item.valueNight)}
+              </p>
 
             </div>
           </li>
@@ -92,7 +100,7 @@ return (
 
         <div className="order-total">
           <span>Total</span>
-          <span>USD {formatPrice(total + totalValueNight + totalPriceHotel)}</span>
+            <span>USD {formatPrice(total + totalValueNight + totalPriceHotel)}</span>
         </div>
 
         <button type="button" className="payment-btn">
