@@ -300,7 +300,12 @@ function reset() {
           )}
         </>
       } />
-      <Route path="/requested" element={<Requested />} />
+      <Route path="/requested" element={ 
+        <Requested 
+          list={list}
+          setList={setList}
+          total={total}
+        />} />
     </Routes>
   )
 }
