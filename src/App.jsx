@@ -15,7 +15,6 @@ import Hotel from './Components/Hotel/Hotel'
 
 function App() {
   const [show, setShow] = useState(false)
-  const [list, setList] = useState([])
   const [showCalendar, setShowCalendar] = useState(false)
   const [pendingCity, setPendingCity] = useState(null)
   const [message, setMessage] = useState({ text: "", type: "add", isOpen: false })
@@ -34,6 +33,15 @@ function App() {
   const [continentValue, setContinentValue] = useState("")
   const [countryValue, setCountryValue] = useState("")
   const [removeClass, setRemoveClass] = useState(false)
+  
+  const [list, setList] = useState(() => {
+  const saved = localStorage.getItem("order-list")
+  return saved ? JSON.parse(saved) : []
+})
+
+useEffect(() => {
+  localStorage.setItem("order-list", JSON.stringify(list))
+}, [list])
 
   const pendingSearchRef = useRef(null)
 
