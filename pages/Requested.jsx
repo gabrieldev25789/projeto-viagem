@@ -1,7 +1,11 @@
 /*import { useLocation } from 'react-router-dom'*/
+import { useState } from "react"
+import Finish from "../src/Components/Finish/Finish"
 import "./Requested.css"
 
 function Requested({ list, setList, total }) {
+
+  const [showFinish, setShowFinish] = useState(false)
 
   const removeHotelFromOrder = (id) => {
     setList(prev => prev.map(item =>
@@ -26,6 +30,7 @@ const totalPriceHotel = list.reduce((acc, item) =>
   const totalValueNight = list.reduce((acc, item) => acc + (item.valueNight || 0), 0)
 
 return (
+  <>
   <div className="order-page">
 
     {/* ── Esquerda: cards ── */}
@@ -103,12 +108,23 @@ return (
             <span>USD {formatPrice(total + totalValueNight + totalPriceHotel)}</span>
         </div>
 
-        <button type="button" className="payment-btn">
+        <button type="button" className="payment-btn" 
+          onClick={() => {
+            setShowFinish(true)
+            setList([])
+          }}>
           Confirm Payment
         </button>
       </div>
     </div>
   </div>
+
+    <Finish isOpen={showFinish} 
+      onClose={() => {
+      setShowFinish(false)
+      setList([])
+    }}/>
+  </>
 )
 }
 
