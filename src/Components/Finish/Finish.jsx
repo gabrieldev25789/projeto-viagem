@@ -1,8 +1,20 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useMemo } from "react"
 import "./Finish.css"
 
-function Finish({ isOpen, onClose }) {
+function Finish({ isOpen, onClose, payementMethod, totalValue }) {
   const canvasRef = useRef(null)
+
+  const orderNumber = useMemo(() => Math.floor(1000 + Math.random() * 9000), [isOpen])
+
+  const labels = {
+    credit: "Credit Card",
+    debit: "Debit Card",
+    pix: "Pix",
+    bill: "Bill",
+  }
+
+  const formatPrice = (value) =>
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
 
   useEffect(() => {
     if (!isOpen) return
@@ -72,15 +84,15 @@ function Finish({ isOpen, onClose }) {
         <div className="finish-meta">
           <div className="finish-meta-card">
             <span className="finish-meta-label">Order</span>
-            <span className="finish-meta-val">#8471</span>
+            <span className="finish-meta-val">#{orderNumber}</span>
           </div>
           <div className="finish-meta-card">
             <span className="finish-meta-label">Total</span>
-            <span className="finish-meta-val">$129.90</span>
+            <span className="finish-meta-val">{formatPrice(totalValue)}</span>
           </div>
           <div className="finish-meta-card">
-            <span className="finish-meta-label">Est. delivery</span>
-            <span className="finish-meta-val">May 9–11</span>
+            <span className="finish-meta-label">Payment</span>
+            <span className="finish-meta-val">{labels[payementMethod] ?? "—"}</span>
           </div>
         </div>
 
