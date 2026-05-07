@@ -3,13 +3,13 @@ import { useState } from "react"
 import Finish from "../src/Components/Finish/Finish"
 import "./Requested.css"
 
-function Requested({ list, setList, total }) {
+function Requested({ list, setList, total, totalPriceHotel, totalValueNight }) {
 
   const [showFinish, setShowFinish] = useState(false)
 
   const removeHotelFromOrder = (id) => {
     setList(prev => prev.map(item =>
-      item.id === id ? { ...item, hotelSelected: null } : item
+      item.id === id ? { ...item, hotelSelected: null, priceHotel: 0 } : item
     ))
   }
 
@@ -22,12 +22,6 @@ const formatDate = (date) => {
     month: "short", day: "numeric", year: "numeric"
   })
 }
-
-const totalPriceHotel = list.reduce((acc, item) => 
-  acc + (item.hotelSelected ? parseFloat(item.hotelSelected.price) : 0), 0
-);
-
-  const totalValueNight = list.reduce((acc, item) => acc + (item.valueNight || 0), 0)
 
 return (
   <>
