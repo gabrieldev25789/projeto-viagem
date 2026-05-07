@@ -43,6 +43,8 @@ const formatDate = (date) => {
 
   const totalValue = totalBase - discount
 
+  const [finalTotal, setFinalTotal] = useState(0)
+
 return (
   <>
   <div className="order-page">
@@ -138,6 +140,7 @@ return (
 
         <button type="button" className="payment-btn" 
           onClick={() => {
+            setFinalTotal(totalValue)
             setShowFinish(true)
             setList([])
           }}>
@@ -149,6 +152,8 @@ return (
 
     <Finish 
       isOpen={showFinish} 
+      payementMethod={payementMethod}
+      totalValue={finalTotal}
       onClose={() => {
       setShowFinish(false)
       setList([])
