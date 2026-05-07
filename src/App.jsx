@@ -63,8 +63,7 @@ useEffect(() => {
   }
 
   function resetValue() {
-    setSortType("")
-    setSortValue("")
+    [setSortType, setSortValue].forEach((set)=> set(""))
   }
 
   function showDestinations() {
@@ -77,11 +76,9 @@ useEffect(() => {
 
 function chooseCity(id, name, price, img) {
     if (selectCity === id) {
-      setSelectCity(null)
+      [setSelectCity, setPendingCity, setPendingCityPrice].forEach((set)=> set(null))
       setShowCalendar(false)
-      setPendingCity(null)
       setCitySelected("")
-      setPendingCityPrice(null)
     } else {
       setPendingCity({ id, name, price, img })
       setPendingCityPrice(price)
@@ -156,11 +153,13 @@ function onSkip() {
 function cityAdd() {
   setMessage({ text: "City added successfully", type: "add", isOpen: true })
   setCitySelected("")
-  setShowHotel(false) 
-  setHideHotel(false)
-  setShowCitySelected(false)
-  setSelectCity(null)
-  setSelected(null) 
+
+ const setters = [setShowHotel, setHideHotel, setShowCitySelected]
+ setters.forEach((set) => set(false))
+
+ const settersNull = [setSelectCity, setSelected]
+ settersNull.forEach((set)=> set(null))
+
 }
 
 function error() {
@@ -173,13 +172,8 @@ function removeCity(uniqueId) {
 }
 
 function reset() {
-  setCityValue("")
-  setCountryValue("")
-  setContinentValue("")
-  setCitySearch("")
+  [setCityValue, setCountryValue, setContinentValue, setCitySearch, setSortType, setSortValue].forEach((set)=> set(""))
   setFilteredPlaces(places)
-  setSortType("")
-  setSortValue("")
 }
 
   const cities = places.flatMap(place => place.cities)
