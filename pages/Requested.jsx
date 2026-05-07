@@ -5,6 +5,11 @@ import "./Requested.css"
 
 function Requested({ list, setList, total, totalPriceHotel, totalValueNight }) {
 
+  const [discount, setDiscount] = useState(0)
+  const [payementMethod, setPayementMethod] = useState("credit")
+
+  const totalBase = total + totalValueNight + totalPriceHotel
+
   const [showFinish, setShowFinish] = useState(false)
 
   const removeHotelFromOrder = (id) => {
@@ -22,6 +27,21 @@ const formatDate = (date) => {
     month: "short", day: "numeric", year: "numeric"
   })
 }
+
+  function payement(value){
+    setPayementMethod(value)
+
+    const discounts = {
+      pix: 0.10,
+      debit: 0.03,
+      bill: 0.02, 
+      credit: 0,
+    }
+
+    setDiscount(totalBase * (discounts[value] ?? 0))
+  }
+
+  const totalValue = totalBase - discount
 
 return (
   <>
@@ -78,28 +98,42 @@ return (
 
       <div className="payment-form">
         <label className="payment-option">
-          <input type="radio" name="payment" defaultChecked />
+          <input 
+          type="radio" 
+          name="payment" 
+          defaultChecked 
+          onChange={() => payement("credit")}/>
           <span>Credit Card</span>
         </label>
 
         <label className="payment-option">
-          <input type="radio" name="payment" />
+          <input 
+          type="radio" 
+          name="payment" 
+          onChange={() => payement("debit")}/>
           <span>Debit Card</span>
         </label>
 
         <label className="payment-option">
-          <input type="radio" name="payment" />
+          <input 
+          type="radio" 
+          name="payment" 
+          onChange={() => payement("pix")}/>
           <span>Pix</span>
         </label>
 
         <label className="payment-option">
-          <input type="radio" name="payment" />
-          <span>Boleto</span>
+          <input 
+          type="radio" 
+          name="payment"
+          onChange={() => payement("bill")}
+          />
+          <span>Bill</span>
         </label>
 
         <div className="order-total">
           <span>Total</span>
-            <span>USD {formatPrice(total + totalValueNight + totalPriceHotel)}</span>
+            <span>USD {formatPrice(totalValue)}</span>
         </div>
 
         <button type="button" className="payment-btn" 
@@ -113,7 +147,8 @@ return (
     </div>
   </div>
 
-    <Finish isOpen={showFinish} 
+    <Finish 
+      isOpen={showFinish} 
       onClose={() => {
       setShowFinish(false)
       setList([])
