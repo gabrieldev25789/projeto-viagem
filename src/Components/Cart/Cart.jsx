@@ -5,7 +5,7 @@ function Cart({ list = [], removeCity, finish, citySelected }) {
   const [show, setShow] = useState(false)
 
     const total = list.reduce(
-      (acc, item) => acc + (Number(item.price) + Number(item.valueNight || 0)) + Number(item.priceHotel || 0) * (Number(item.amount) || 0), 0
+      (acc, item) => acc + (Number(item.price) + Number(item.valueNight || 0) + Number(item.priceHotel || 0)) * (Number(item.amount) || 1), 0
     )
 
     const groupedList = list.reduce((acc, item) => {
@@ -14,7 +14,7 @@ function Cart({ list = [], removeCity, finish, citySelected }) {
         existing.amount += 1
         existing.totalPrice += item.price + (item.valueNight || 0) + (item.priceHotel || 0)
       } else {
-        acc.push({ ...item, amount: 1, totalPrice: item.price + (item.valueNight || 0) })
+        acc.push({ ...item, amount: 1, totalPrice: item.price + (item.valueNight || 0) + (item.priceHotel || 0)})
       }
       return acc
     }, [])
@@ -56,7 +56,7 @@ function Cart({ list = [], removeCity, finish, citySelected }) {
                       {item.name} {item.amount > 1 && `(${item.amount})`}
                     </td>
                     <td className='cart-price'>
-                      USD {((item.totalPrice ?? 0) + (item.priceHotel || 0)).toFixed(2)}
+                      USD {(item.totalPrice ?? 0).toFixed(2)}
                     </td>
                     <td>
                       <button className='cart-remove-btn' onClick={() => removeCity(item.uniqueId)}>✕</button>
