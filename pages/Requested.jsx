@@ -157,6 +157,9 @@ return (
       onClose={() => {
       setShowFinish(false)
       setList([])
+      setDiscount(0)         
+      setPayementMethod("credit") 
+      setFinalTotal(0)         
     }}/>
   </>
 )
