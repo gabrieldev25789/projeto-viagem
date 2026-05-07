@@ -5,16 +5,16 @@ import "./Requested.css"
 
 function Requested({ list, setList, total, totalPriceHotel, totalValueNight }) {
 
-  const [discount, setDiscount] = useState(0)
+  const [discountRate, setDiscountRate] = useState(0)
   const [payementMethod, setPayementMethod] = useState("credit")
 
   const totalBase = total + totalValueNight + totalPriceHotel
 
   const [showFinish, setShowFinish] = useState(false)
 
-  const removeHotelFromOrder = (id) => {
+  const removeHotelFromOrder = (uniqueId) => {
     setList(prev => prev.map(item =>
-      item.id === id ? { ...item, hotelSelected: null, priceHotel: 0 } : item
+      item.uniqueId === uniqueId ? { ...item, hotelSelected: null, priceHotel: 0 } : item
     ))
   }
 
@@ -37,10 +37,10 @@ const formatDate = (date) => {
       bill: 0.02, 
       credit: 0,
     }
-
-    setDiscount(totalBase * (discounts[value] ?? 0))
+    setDiscountRate(discounts[value] ?? 0)
   }
 
+  const discount = totalBase * discountRate
   const totalValue = totalBase - discount
 
   const [finalTotal, setFinalTotal] = useState(0)
@@ -71,11 +71,11 @@ return (
               
               {item.hotelSelected ? (
                 <div className='order-card-hotel'>
-                      <span style={{fontSize: 14}}>{item.hotelSelected.icon}</span>
+                    <span style={{fontSize: 14}}>{item.hotelSelected.icon}</span>
                       <span className='order-card-hotel__name'>{item.hotelSelected.name}</span>
                       <span className='order-card-hotel__stars'> · {item.hotelSelected.stars}</span>
-                      <span className='order-card-hotel__price'>USD ${item.hotelSelected.price}</span>
-                      <button onClick={()=> removeHotelFromOrder(item.id)}>X</button>
+                    <span className='order-card-hotel__price'>USD ${item.hotelSelected.price}</span>
+                      <button onClick={()=> removeHotelFromOrder(item.uniqueId)}>X</button>
                 </div>
               ): <span style={{fontSize: 16, color: "#973232"}}>No hotel selected</span> }
 
@@ -157,7 +157,7 @@ return (
       onClose={() => {
       setShowFinish(false)
       setList([])
-      setDiscount(0)         
+      setDiscountRate(0)         
       setPayementMethod("credit") 
       setFinalTotal(0)         
     }}/>
