@@ -21,6 +21,17 @@ function Cart({ list = [], removeCity, finish, citySelected }) {
 
   return (
     <>
+
+    {citySelected && (
+      <div className="city-badge">
+        <div className="city-badge__top">
+          <span className="city-badge__dot" />
+          <span className="city-badge__label">Destination:</span>
+        </div>
+        <span className="city-badge__value">{citySelected}</span>
+      </div>
+    )}
+
     <aside className={`cart-aside ${show ? 'open' : ''}`}>
 
       <button className='cart-btn' onClick={() => setShow(prev => !prev)}>
@@ -78,8 +89,6 @@ function Cart({ list = [], removeCity, finish, citySelected }) {
           )}
         </div>
       </div>
-
-    {citySelected && <h3>City selected: <span style={{color: "green"}}>{citySelected}</span></h3>} 
     </aside>
     </>
   )
