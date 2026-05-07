@@ -12,15 +12,21 @@ function Places({ placesData, chooseCity, selectCity, citySearch, sortedCities, 
 
   const notFound = (countryValue || citySearch || continentValue) && placesFound.length === 0
 
-  useEffect(() => {
-    if (notFound) {
-      setHide(true)
+useEffect(() => {
+  if (notFound) {
+    setHide(true)
+    if (citySearch) {
       setMessage({ text: "City not found", type: "erro", isOpen: true })
+    } else if (countryValue) {
+      setMessage({ text: "Country not found", type: "erro", isOpen: true })
     } else {
-      setHide(false)
+      setMessage({ text: "Continent not found", type: "erro", isOpen: true })
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [notFound])
+  } else {
+    setHide(false)
+  }
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [notFound])
 
   if (sortedCities) {
     return (
@@ -81,7 +87,10 @@ function Places({ placesData, chooseCity, selectCity, citySearch, sortedCities, 
                     <img className='city-img' src={city.img} alt={city.name} />
                     <div className='city-info'>
                       <h3 className='city-name'>{city.name}</h3>
-                      <p className='city-price'>USD {city.price.toFixed(2)}</p>
+                    <p className='city-price'>
+                      USD {city.price.toFixed(2)}
+                      <span style={{ color: "#b7791f" }}> (+10% per week)</span>
+                    </p>
                       <p className='city-description'>{city.description}</p>
                     </div>
                   </li>
