@@ -1,9 +1,12 @@
 /*import { useLocation } from 'react-router-dom'*/
 import { useState } from "react"
 import Finish from "../src/Components/Finish/Finish"
+import { useNavigate } from 'react-router-dom'
 import "./Requested.css"
 
 function Requested({ list, setList, total, totalPriceHotel, totalValueNight }) {
+
+  const navigate = useNavigate()
 
   const [discountRate, setDiscountRate] = useState(0)
   const [payementMethod, setPayementMethod] = useState("credit")
@@ -159,7 +162,8 @@ return (
       setList([])
       setDiscountRate(0)         
       setPayementMethod("credit") 
-      setFinalTotal(0)         
+      setFinalTotal(0)     
+      navigate("/")    
     }}/>
   </>
 )
