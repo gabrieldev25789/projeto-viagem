@@ -203,6 +203,12 @@ function reset() {
     return () => clearTimeout(timer)
   }, [message.isOpen])
 
+  const totalPriceHotel = list.reduce((acc, item) => 
+  acc + (item.hotelSelected ? parseFloat(item.hotelSelected.price) : 0), 0
+);
+
+  const totalValueNight = list.reduce((acc, item) => acc + (item.valueNight || 0), 0)
+
   return (
     <Routes>
       <Route path="/" element={
@@ -302,6 +308,8 @@ function reset() {
                   showCitySelected={showCitySelected}
                   valueNight={valueNight}
                   priceHotel={priceHotel}
+                  totalPriceHotel={totalPriceHotel}
+                  totalValueNight={totalValueNight}
                 />
               )}
             </div>
@@ -313,6 +321,8 @@ function reset() {
           list={list}
           setList={setList}
           total={total}
+          totalPriceHotel={totalPriceHotel}
+          totalValueNight={totalValueNight}
         />} />
     </Routes>
   )
