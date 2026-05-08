@@ -78,7 +78,7 @@ return (
                       <span className='order-card-hotel__name'>{item.hotelSelected.name}</span>
                       <span className='order-card-hotel__stars'> · {item.hotelSelected.stars}</span>
                     <span className='order-card-hotel__price'>USD ${item.hotelSelected.price}</span>
-                      <button onClick={()=> removeHotelFromOrder(item.uniqueId)}>X</button>
+                      <button className="remove-hotel-btn" onClick={()=> removeHotelFromOrder(item.uniqueId)}>X</button>
                 </div>
               ): <span style={{fontSize: 16, color: "#973232"}}>No hotel selected</span> }
 
@@ -98,6 +98,7 @@ return (
     </div>
 
     {/* ── Direita: pagamento ── */}
+  <div className="order-right-wrapper">
     <div className="order-right">
       <h3 className="payment-title">Payment Method</h3>
 
@@ -151,7 +152,21 @@ return (
         </button>
       </div>
     </div>
+        {/* ── Rodapé de agradecimento ── */}
+        <div className="order-thanks">
+          <div className="order-thanks__divider" />
+          <p className="order-thanks__title">Thank you for choosing us! 🌍</p>
+          <p className="order-thanks__text">
+            Your adventure is in good hands. We're committed to making every trip unforgettable.
+          </p>
+          <div className="order-thanks__links">
+            <span>📧 support@GrizzyFlyes.com</span>
+            <span>📞 +1 (800) 123-4567</span>
+          </div>
+          <p className="order-thanks__copy">© 2026 TravelApp · All rights reserved</p>
+        </div>
   </div>
+</div>
 
     <Finish 
       isOpen={showFinish} 
