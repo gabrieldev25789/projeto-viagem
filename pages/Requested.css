@@ -1,223 +1,415 @@
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
+
+/* ══════════════════════════════
+   LAYOUT PRINCIPAL
+══════════════════════════════ */
 
 .order-page {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
-  width: 100%;
+  align-items: start;
 }
 
+/* ══════════════════════════════
+   LADO ESQUERDO — dark
+   Lista de itens do pedido
+══════════════════════════════ */
+
 .order-left {
-      background: repeating-linear-gradient(45deg, black, transparent 100px);
-  color: #fff;
-  padding: 2rem 1.5rem;
+  background: #0d0d0d;
+  color: #f0f0f0;
+  padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
   animation: fadeInRight 0.5s ease-out both;
 }
 
-
-.order-right {
-  height: 50vh;
-  background: #fff;
-  color: #1a1a18;
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  border-left: 0.5px solid #D3D1C7;
-  animation: fadeInRight 0.5s ease-out 0.15s both;
-}
-
+/* Título da seção esquerda */
 .order-title {
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: 500;
-  margin-bottom: 1.5rem;
-  color: inherit;
+  margin-bottom: 2rem;
+  color: #f0f0f0;
+  letter-spacing: -0.03em;
 }
 
+/* Lista de cards */
 .order-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
   flex: 1;
 }
 
+/* ── Card individual ── */
 .order-card {
   display: flex;
   flex-direction: row;
-  gap: 0.75rem;
-  padding: 1rem;
-  border-radius: 12px;
-  border: 0.5px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.06);
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 0.5px solid #2a2a2a;
+  background: #161616;
+  transition: border-color 0.15s;
 }
 
+.order-card:hover {
+  border-color: #3d3d3d;
+}
+
+/* Imagem do card */
 .order-card__img {
-  width: 110px;
-  height: 110px;
+  width: 12.5rem;
+  height: auto;
+  align-self: stretch;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 0.625rem;
   flex-shrink: 0;
+  background: #222;
 }
 
+/* Informações do card */
 .order-card__info {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.4375rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0.125rem 0;
 }
 
+/* Nome do destino */
 .order-card__name {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 500;
   margin: 0;
-  color: #fff;
+  color: #f0f0f0;
+  letter-spacing: -0.01em;
 }
 
+/* Detalhes: noites, quantidade, preço */
 .order-card__details {
   display: flex;
-  gap: 12px;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.55);
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: #bebebe;
+  flex-wrap: wrap;
 }
 
+/* Preço destacado em verde */
 .order-card__price {
   font-weight: 500;
   font-size: 1rem;
-  color: #7FCFB8;
+  color: #5DCAA5;
+  margin-top: auto;
 }
 
+/* Datas de ida e volta */
 .order-card__dates {
   display: flex;
-  gap: 16px;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.4);
+  gap: 0.875rem;
+  font-size: 1rem;
+  color: #bebebe;
+  flex-wrap: wrap;
 }
 
+/* ── Tag do hotel selecionado ── */
+.order-card-hotel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  background: #1e1e1e;
+  color: #888;
+  padding: 0.3125rem 0.625rem;
+  border-radius: 0.5rem;
+  border: 0.5px solid #2a2a2a;
+  margin-top: 0.25rem;
+  width: fit-content;
+}
+
+.order-card-hotel__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+.order-card-hotel__stars {
+  font-size: 0.9rem;
+  color: #d4a91b;
+}
+
+.order-card-hotel__price {
+  font-size: 0.9rem;
+  margin-left: auto;
+  font-weight: 500;
+  color: #5DCAA5;
+}
+
+/* Total do card individual */
 .order-total {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;        
-  padding-top: 1rem;
-  border-top: 0.5px solid #D3D1C7;   
-  font-size: 1.2rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 0.5px solid #1e1e1e;
+  font-size: 1.1rem;
   font-weight: 500;
-  color: #1a1a18;         
+  color: #109b6c;
 }
 
-.payment-title {
-  font-size: 1.25rem;
+/* Preço total com underline verde */
+.total-price {
+  font-size: 1.1rem;
   font-weight: 500;
-  margin: 0 0 1.5rem;
+  color: #5DCAA5;
+  letter-spacing: -0.01em;
+  background: transparent;
+  padding: 0.5rem 0;
+  border-bottom: 0.0625rem solid #5DCAA5;
+  width: fit-content;
+  margin-top: auto;
+}
+
+/* ── Botão de remover hotel ── */
+.remove-hotel-btn {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: none;
+  background-color: #fee2e2;
+  color: #ef4444;
+  font-size: 0.8125rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-hotel-btn:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.remove-hotel-btn:active {
+  transform: scale(0.95);
+}
+
+/* ══════════════════════════════
+   LADO DIREITO — branco
+   Pagamento + agradecimento
+══════════════════════════════ */
+
+/* Wrapper sticky que mantém a direita fixa enquanto a esquerda scrolla */
+.order-right-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-left: 0.5px solid #e5e5e5;
+  background: #ffffff;
+  animation: fadeInRight 0.5s ease-out 0.15s both;
+}
+
+/* Container do formulário de pagamento */
+.order-right {
   color: #1a1a18;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Título da seção de pagamento */
+.payment-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 1.75rem;
+  color: #1a1a18;
+  letter-spacing: -0.02em;
+}
+
+/* Formulário com opções de pagamento */
 .payment-form {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  flex: 1;
 }
 
+/* ── Opção de pagamento (radio) ── */
 .payment-option {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.85rem 1rem;
-  border-radius: 10px;
-  border: 0.5px solid #D3D1C7;
+  gap: 0.875rem;
+  padding: 1rem 1.125rem;
+  border-radius: 0.75rem;
+  border: 0.5px solid #e0e0e0;
   background: #fff;
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 }
 
+/* Opção selecionada */
 .payment-option:has(input:checked) {
-  border-color: #04342C;
-  background: #F0F7F4;
+  border-color: #0d0d0d;
+  background: #f5f5f3;
 }
 
 .payment-option input[type="radio"] {
-  accent-color: #04342C;
-  width: 16px;
-  height: 16px;
+  accent-color: #0d0d0d;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 
 .payment-option span {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #2C2C2A;
 }
 
+/* Botão de confirmar pagamento */
 .payment-btn {
-  margin-top: 0.75rem;
-  padding: 0.9rem;
-  border-radius: 10px;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
   border: none;
-  background: #04342C;
-  color: #fff;
+  background: #0d0d0d;
+  color: #f0f0f0;
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.15s;
   width: 100%;
+  letter-spacing: 0.01em;
 }
 
-.payment-btn:hover { background: #065c4e; }
-.payment-btn:active { background: #032820; }
+.payment-btn:hover  { background: #222; }
+.payment-btn:active { background: #000; }
 
+/* ══════════════════════════════
+   SEÇÃO DE AGRADECIMENTO
+   Ocupa o espaço restante abaixo do formulário
+══════════════════════════════ */
 
-/* ════════════════════════════════════════
-   RESPONSIVO
-   ════════════════════════════════════════ */
+.order-thanks {
+  flex: 1; /* cresce pra preencher o espaço restante */
+  padding: 1.5rem 2rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+}
+
+/* Linha divisória com degradê */
+.order-thanks__divider {
+  width: 50%;
+  height: 0.0625rem;
+  background: linear-gradient(to right, transparent, #d0d0d0, transparent);
+  margin-bottom: 0.75rem;
+}
+
+/* Título de agradecimento */
+.order-thanks__title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #1a1a18;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+/* Texto descritivo */
+.order-thanks__text {
+  font-size: 0.8125rem;
+  color: #777;
+  margin: 0;
+  line-height: 1.6;
+  max-width: 16.25rem;
+}
+
+/* Links de contato */
+.order-thanks__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin-top: 0.25rem;
+}
+
+/* Pílulas de contato */
+.order-thanks__links span {
+  font-size: 0.8125rem;
+  color: #555;
+  background: #f5f5f3;
+  padding: 0.375rem 0.875rem;
+  border-radius: 1.25rem;
+  border: 0.5px solid #e5e5e5;
+}
+
+/* Copyright */
+.order-thanks__copy {
+  font-size: 0.75rem;
+  color: #bbb;
+  margin: 0.375rem 0 0;
+  letter-spacing: 0.02em;
+}
+
+/* ══════════════════════════════
+   RESPONSIVO — tablet (≤ 900px)
+   Empilha as colunas
+══════════════════════════════ */
 
 @media (max-width: 900px) {
   .order-page {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
     min-height: unset;
   }
 
+  /* Cards ficam abaixo do pagamento */
   .order-left {
-    order: 2;
-    padding: 1.5rem 1.25rem;
-    animation: fadeInUp 0.5s ease-out both;
-  }
-
-  .order-right {
     order: 1;
-    border-left: none;
-    border-bottom: 0.5px solid #D3D1C7;
-    padding: 1.5rem 1.25rem;
+    padding: 1.75rem 1.5rem;
     animation: fadeInUp 0.5s ease-out both;
   }
 
-  .payment-btn {
-    margin-top: 1.25rem;
+  /* Pagamento vai pro topo, deixa de ser sticky */
+  .order-right-wrapper {
+    order: 2;
+    position: static;
+    height: auto;
+    border-left: none;
+    border-bottom: 0.5px solid #e5e5e5;
+    animation: fadeInUp 0.5s ease-out both;
+  }
+
+  /* Agradecimento some no mobile — sem espaço */
+  .order-thanks {
+    display: flex;
+    padding: 1.5rem;
   }
 }
+
+/* ══════════════════════════════
+   RESPONSIVO — mobile (≤ 480px)
+   Ajustes de tamanho e espaçamento
+══════════════════════════════ */
 
 @media (max-width: 480px) {
   .order-left,
@@ -225,54 +417,25 @@
     padding: 1.25rem 1rem;
   }
 
-  .order-title,
-  .payment-title {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-  }
+  .order-title   { font-size: 1.4rem;  margin-bottom: 1.25rem; }
+  .payment-title { font-size: 1.2rem;  margin-bottom: 1.25rem; }
 
-  .order-card {
-    gap: 0.625rem;
-    padding: 0.75rem;
-  }
+  .order-card         { gap: 0.875rem; padding: 0.875rem; border-radius: 0.75rem; }
+  .order-card__img    { width: 5.625rem; height: 5.625rem; }
+  .order-card__name   { font-size: 1rem; }
+  .order-card__details{ font-size: 0.82rem; flex-wrap: wrap; gap: 0.5rem; }
+  .order-card__dates  { flex-direction: column; gap: 0.1875rem; font-size: 0.78rem; }
+  .order-total        { font-size: 1rem; }
 
-  .order-card__img {
-    width: 80px;
-    height: 80px;
-  }
-
-  .order-card__name {
-    font-size: 0.95rem;
-  }
-
-  .order-card__details {
-    flex-wrap: wrap;
-    gap: 6px;
-    font-size: 0.8rem;
-  }
-
-  .order-card__dates {
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .order-total {
-    font-size: 1rem;
-  }
-
-  .payment-option {
-    padding: 0.75rem;
-  }
-
-  .payment-option span {
-    font-size: 0.85rem;
-  }
-
-  .payment-btn {
-    font-size: 0.9rem;
-    padding: 0.8rem;
-  }
+  .payment-option     { padding: 0.85rem 1rem; }
+  .payment-option span{ font-size: 0.875rem; }
+  .payment-btn        { font-size: 0.9rem; padding: 0.875rem; }
 }
+
+/* ══════════════════════════════
+   RESPONSIVO — mobile pequeno (≤ 360px)
+   Card vira coluna
+══════════════════════════════ */
 
 @media (max-width: 360px) {
   .order-card {
@@ -281,8 +444,7 @@
 
   .order-card__img {
     width: 100%;
-    height: 160px;
-    border-radius: 6px;
+    height: 10rem;
+    border-radius: 0.5rem;
   }
 }
-
