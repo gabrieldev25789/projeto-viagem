@@ -1,3 +1,67 @@
 button{
     cursor: pointer;
 }
+
+.place-cart-container {
+    display: flex;
+    flex-direction: row;  /* search+places na esquerda, cart na direita */
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.search-places-wrapper {
+    display: flex;
+    flex-direction: column;  /* search em cima, places embaixo */
+    gap: 1rem;
+    flex: 1;
+}
+
+.dest-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.65rem 1.5rem;
+  border-radius: 999px;
+  border: 0.5px solid rgba(255, 255, 255, 0.18);
+  background: rgb(0, 0, 0);
+  color: #f0f0f0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  backdrop-filter: blur(8px);
+}
+
+.dest-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.dest-btn:active {
+  transform: scale(0.97);
+}
+
+.dest-btn .icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.dest-btn.open .icon {
+  transform: rotate(180deg); /* seta vira pra cima quando aberto */
+}
+
+@media (max-width: 1024px) {
+    .place-cart-container {
+        margin-left: 0;          /* Remove a margem fixa */
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        gap: 1rem;
+        width: 100%;             /* Garante que ocupa a largura total */
+        box-sizing: border-box;  /* Padding não extrapola a largura */
+    }
+}
