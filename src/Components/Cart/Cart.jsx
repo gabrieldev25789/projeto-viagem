@@ -4,6 +4,9 @@ import "./Cart.css"
 function Cart({ list = [], removeCity, finish, citySelected }) {
   const [show, setShow] = useState(false)
 
+  const formatPrice = (value) =>
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
+
     const total = list.reduce(
       (acc, item) => acc + (Number(item.price) + Number(item.valueNight || 0) + Number(item.priceHotel || 0)) * (Number(item.amount) || 1), 0
     )
@@ -67,7 +70,7 @@ function Cart({ list = [], removeCity, finish, citySelected }) {
                       {item.name} {item.amount > 1 && `(${item.amount})`}
                     </td>
                     <td className='cart-price'>
-                      USD {(item.totalPrice ?? 0).toFixed(2)}
+                      USD {formatPrice(item.totalPrice ?? 0)}
                     </td>
                     <td>
                       <button className='cart-remove-btn' onClick={() => removeCity(item.uniqueId)}>✕</button>
@@ -81,7 +84,7 @@ function Cart({ list = [], removeCity, finish, citySelected }) {
 
         <div className='cart-footer'>
           <p className='cart-total-label'>Total</p>
-          <p className='cart-total-value'>USD {total.toFixed(2)}</p>
+          <p className='cart-total-value'>USD {formatPrice(total)}</p>
           {total > 0 && (
             <button className='cart-finish-btn' onClick={finish}>
               Finish
