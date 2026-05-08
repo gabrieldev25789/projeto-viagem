@@ -6,15 +6,21 @@ Site de viagens com interface moderna e interativa para busca, filtragem e compr
 
 ## 📸 Preview
 
-| Home | Destinos | Carrinho |
-|------|----------|----------|
-| ![home](src/assets/prints/print1.png) | ![destinos](prints/destinos.png) | ![carrinho](prints/carrinho.png) |
+| Home | Locais | Pesquisa |
+|------|--------|----------|
+| ![home](src/assets/prints/print1.png) | ![locais](src/assets/prints/print2.png) | ![pesquisa](src/assets/prints/print3.png) |
 
-| Seleção de Datas | Hotel | Confirmação |
-|------------------|-------|-------------|
-| ![datas](prints/datas.png) | ![hotel](prints/hotel.png) | ![confirmacao](prints/confirmacao.png) |
+| Pesquisa | Pesquisa | Filtro |
+|----------|----------|--------|
+| ![pesquisa](src/assets/prints/print4.png) | ![pesquisa](src/assets/prints/print5.png) | ![filtro](src/assets/prints/print6.png) |
 
-> Adicione os prints na pasta `/prints` na raiz do projeto com os nomes acima.
+| Calendário | Hotel | Carrinho |
+|------------|-------|----------|
+| ![calendario](src/assets/prints/print7.png) | ![hotel](src/assets/prints/print8.png) | ![carrinho](src/assets/prints/print9.png) |
+
+| Resumo do Pedido | Modal de Agradecimento |
+|------------------|------------------------|
+| ![resumo](src/assets/prints/print10.png) | ![agradecimento](src/assets/prints/print11.png) |
 
 ---
 
@@ -89,7 +95,8 @@ npm run dev
 ```bash
 /src
   ├── assets/
-  │     └── city-imgs/
+  │     ├── city-imgs/
+  │     └── prints/
   ├── Components/
   │     ├── Cart/
   │     ├── Data/
@@ -105,7 +112,7 @@ npm run dev
   ├── App.jsx
   └── main.jsx
 /pages
-  └── Requested.jsx 
+  └── Requested.jsx
 ```
 
 ---
@@ -122,4 +129,3 @@ npm run dev
 ---
 
 📧 support@GrizzyFlyes.com · © 2026 GrizzyFlyes · All rights reserved
-
