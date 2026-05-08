@@ -283,9 +283,33 @@
 /* ─────────────────────────────────────────────
    MOBILE: Largura do container se adapta à tela
 ───────────────────────────────────────────── */
+
+/*
 @media (max-width: 768px) {
   .cart-aside.open .cart-container {
     width: min(22rem, calc(100vw - 2rem));
+  }
+
+  .cart-body { max-height: 50vh; }
+}
+  */
+
+  @media (max-width: 768px) {
+  .cart-aside {
+    position: relative;
+    top: unset;
+    right: unset;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .cart-aside.open .cart-container {
+    width: 100%;
+  }
+
+  .cart-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .cart-body { max-height: 50vh; }
