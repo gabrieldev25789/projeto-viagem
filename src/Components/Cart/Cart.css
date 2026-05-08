@@ -283,7 +283,7 @@
 /* ─────────────────────────────────────────────
    MOBILE: Largura do container se adapta à tela
 ───────────────────────────────────────────── */
-@media (max-width: 48rem) {
+@media (max-width: 768px) {
   .cart-aside.open .cart-container {
     width: min(22rem, calc(100vw - 2rem));
   }
