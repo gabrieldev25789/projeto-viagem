@@ -4,8 +4,14 @@
   box-sizing: border-box;
 }
 
-body{
-  background-color: rgb(22, 22, 22);
+body {
+  background: #080808;
+  background-image:
+    radial-gradient(ellipse at 20% 30%, rgba(63, 60, 60, 0.6) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 65% 85%, rgba(85, 85, 85, 0.3) 0%, transparent 50%);
+  min-height: 100vh;
   color: white;
-  margin-bottom: 500px;
-}
+
+} 
+
