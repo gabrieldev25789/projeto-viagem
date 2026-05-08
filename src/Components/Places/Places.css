@@ -3,7 +3,10 @@
 ───────────────────────────────────────────── */
 .infos-container {
     display: grid;
+    /*
     grid-template-columns: repeat(auto-fit, minmax(0, 30rem));
+    */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
     justify-content: space-around;
     align-items: start;
     min-height: 50vh;
@@ -31,8 +34,8 @@
     background-color: #111111;
     border-radius: 1rem;
     padding: 1.25rem;
-    width: 110%;
-    max-width: 110%;
+    width: 100%;
+    max-width: 100%;
     list-style: none;
     margin: 0;
     box-sizing: border-box;
