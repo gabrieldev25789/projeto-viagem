@@ -1,97 +1,125 @@
+/* ─────────────────────────────────────────────
+   OVERLAY: Fundo escurecido com blur ao abrir o modal
+───────────────────────────────────────────── */
 .hotel-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+  inset: 0; /* cobre toda a tela */
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
 }
 
+/* ─────────────────────────────────────────────
+   MODAL: Glassmorphism — vidro fosco sobre o overlay
+───────────────────────────────────────────── */
 .hotel-modal {
-  background: #1a1a1a;
-  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-radius: 1.25rem;
   padding: 1.75rem;
   width: 100%;
-  max-width: 560px;
-  border: 1px solid #2e2e2e;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  max-width: 35rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 1rem 3rem rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
 .hotel-modal h2 {
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 600;
-  margin: 0 0 6px;
+  margin: 0 0 0.375rem;
   color: #f0f0f0;
 }
 
 .hotel-subtitle {
-  font-size: 16px;
+  font-size: 1rem;
   color: #888;
   margin: 0 0 1.5rem;
 }
 
+/* ─────────────────────────────────────────────
+   CARDS: Grid de 3 colunas com os hotéis
+───────────────────────────────────────────── */
 .hotel-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 0.625rem;
   margin-bottom: 1.5rem;
 }
 
 .hotel-card {
-  background: #242424;
-  border: 1px solid #333;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.875rem;
   padding: 1rem;
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
 }
 
 .hotel-card:hover {
-  background: #2a2a2a;
-  border-color: #555;
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
+/* Card ativo — borda azul + fundo levemente azulado */
 .hotel-card--selected {
   border: 2px solid #378ADD;
-  background: #1a2a3a;
+  background: rgba(55, 138, 221, 0.15);
 }
 
-.hotel-icon  { font-size: 22px; display: block; margin-bottom: 10px; }
-.hotel-name  { font-size: 16px; font-weight: 600; margin: 0 0 4px; color: #f0f0f0; }
-.hotel-stars { font-size: 13px; color: #777; margin: 0 0 10px; }
-.hotel-price { font-size: 17px; font-weight: 600; margin: 0; color: #e0e0e0; }
-.hotel-price span { font-size: 12px; font-weight: 400; color: #666; }
+/* ── Conteúdo interno do card ── */
+.hotel-icon  { font-size: 1.375rem; display: block; margin-bottom: 0.625rem; }
+.hotel-name  { font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem; color: #f0f0f0; }
+.hotel-stars { font-size: 0.8125rem; color: rgba(255, 231, 12, 0.842); margin: 0 0 0.625rem; }
+.hotel-price { font-size: 1.0625rem; font-weight: 600; margin: 0; color: #e0e0e0; }
+.hotel-price span { font-size: 0.75rem; font-weight: 400; color: rgba(255,255,255,0.35); }
 
-.hotel-actions { display: flex; gap: 10px; }
+/* ─────────────────────────────────────────────
+   ACTIONS: Botões lado a lado
+───────────────────────────────────────────── */
+.hotel-actions { display: flex; gap: 0.625rem; }
 
+/* Confirmar — verde, desabilitado com opacity baixa */
 .btn-add {
   flex: 1;
-  padding: 12px;
-  font-size: 16px;
+  padding: 0.75rem;
+  font-size: 1rem;
   font-weight: 600;
   background: #4cb332;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.625rem;
   cursor: pointer;
+  opacity: 0.4; /* desabilitado por padrão até haver seleção */
   transition: opacity 0.15s, background 0.15s;
 }
 
 .btn-add:not(:disabled) { opacity: 1; }
-.btn-add:not(:disabled):hover { background: #07ff55; }
+.btn-add:not(:disabled):hover { background: #3a9926; } /* verde mais escuro no hover */
 
+/* Pular — vermelho semitransparente com blur */
 .btn-skip {
   flex: 1;
-  padding: 12px;
-  font-size: 16px;
+  padding: 0.75rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #fff;
-  background: #7a1a1a;
-  border: none;
-  border-radius: 8px;
+  background: rgba(180, 40, 40, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 80, 80, 0.2);
+  border-radius: 0.625rem;
   cursor: pointer;
   transition: background 0.15s;
 }
 
-.btn-skip:hover { background: #9e2020; }
+.btn-skip:hover { background: rgba(210, 50, 50, 0.9); }
+
+/* Utilitário — esconde o overlay sem remover do DOM */
+.hide { display: none !important; }
