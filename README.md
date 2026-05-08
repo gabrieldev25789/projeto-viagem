@@ -8,7 +8,7 @@ Site de viagens com interface moderna e interativa para busca, filtragem e compr
 
 | Home | Destinos | Carrinho |
 |------|----------|----------|
-| ![home]("../assets/imgs/prints/print1.png") | ![destinos](prints/destinos.png) | ![carrinho](prints/carrinho.png) |
+| ![home](src/assets/imgs/prints/print1.png) | ![destinos](prints/destinos.png) | ![carrinho](prints/carrinho.png) |
 
 | Seleção de Datas | Hotel | Confirmação |
 |------------------|-------|-------------|
