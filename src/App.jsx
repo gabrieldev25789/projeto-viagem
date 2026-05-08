@@ -14,69 +14,90 @@ import OrderValue from './Components/OrderValue/OrderValue'
 import Hotel from './Components/Hotel/Hotel'
 
 function App() {
-  const [show, setShow] = useState(false)
-  const [showCalendar, setShowCalendar] = useState(false)
-  const [pendingCity, setPendingCity] = useState(null)
-  const [message, setMessage] = useState({ text: "", type: "add", isOpen: false })
-  const [filteredPlaces, setFilteredPlaces] = useState(places)
-  const [selectCity, setSelectCity] = useState(null)
-  const [cityValue, setCityValue] = useState("")
-  const [citySearch, setCitySearch] = useState("")
-  const [sortValue, setSortValue] = useState("")
-  const [hide, setHide] = useState(false)
+
+  // ── UI ───────────────────────────────────────
+  const [show, setShow] = useState(false)               // exibe painel de destinos
+  const [showCalendar, setShowCalendar] = useState(false) // exibe FlightSearch
+  const [hide, setHide] = useState(false)               // esconde OrderValue ao não encontrar resultados
   const [showCitySelected, setShowCitySelected] = useState(false)
-  const [citySelected, setCitySelected] = useState("")
-  const [selected, setSelected] = useState(null)
-  const [hideHotel, setHideHotel] = useState(false)
-  const [showHotel, setShowHotel] = useState(true)
-  const [sortType, setSortType] = useState("")
+  const [citySelected, setCitySelected] = useState("")  // nome da cidade ativa no calendário
+  const [message, setMessage] = useState({ text: "", type: "add", isOpen: false })
+
+  // ── Filtros / busca ──────────────────────────
+  const [filteredPlaces, setFilteredPlaces] = useState(places)
+  const [selectCity, setSelectCity] = useState(null)    // ID da cidade selecionada nos cards
+  const [cityValue, setCityValue] = useState("")        // input de busca por cidade
+  const [citySearch, setCitySearch] = useState("")      // valor repassado ao Places para filtrar
   const [continentValue, setContinentValue] = useState("")
   const [countryValue, setCountryValue] = useState("")
-  const [removeClass, setRemoveClass] = useState(false)
-  
+  const [removeClass, setRemoveClass] = useState(false) // controla layout de lista no Places
+
+  // ── Ordenação ────────────────────────────────
+  const [sortValue, setSortValue] = useState("")
+  const [sortType, setSortType] = useState("")          // "asc" | "desc" | ""
+
+  // ── Hotel ────────────────────────────────────
+  const [selected, setSelected] = useState(null)        // ID do hotel selecionado no modal
+  const [hideHotel, setHideHotel] = useState(false)     // visibilidade do overlay do modal
+  const [showHotel, setShowHotel] = useState(true)      // monta/desmonta o modal Hotel
+
+  // ── Preços ───────────────────────────────────
+  const [valueNight, setValueNight] = useState(0)       // custo calculado por noite no FlightSearch
+
+  // ── Cidade pendente (entre selecionar e confirmar datas) ──
+  const [pendingCity, setPendingCity] = useState(null)
+  const [pendingCityPrice, setPendingCityPrice] = useState(null)
+  const pendingSearchRef = useRef(null) // armazena dados do item até o modal Hotel ser resolvido
+
+  // ── Lista do carrinho — persiste no localStorage ──
   const [list, setList] = useState(() => {
-  const saved = localStorage.getItem("order-list")
-  return saved ? JSON.parse(saved) : []
-})
+    const saved = localStorage.getItem("order-list")
+    return saved ? JSON.parse(saved) : []
+  })
 
-useEffect(() => {
-  localStorage.setItem("order-list", JSON.stringify(list))
-}, [list])
-
-  const pendingSearchRef = useRef(null)
+  useEffect(() => {
+    localStorage.setItem("order-list", JSON.stringify(list))
+  }, [list])
 
   const navigate = useNavigate()
 
+  // Dados dos hotéis disponíveis para seleção
   const hotels = [
     { id: 1, icon: "🏨", name: "Grand Palace", stars: "5 stars · Centro", price: "680" },
-    { id: 2, icon: "🛏️", name: "Beira Mar Inn", stars: "4 stars · Praia", price: "420" },
-    { id: 3, icon: "🌿", name: "Pousada Serra", stars: "3 stars · Bairro", price: "220"},
+    { id: 2, icon: "🛏️", name: "Over Sea Inn", stars: "4 stars · Praia",  price: "420" },
+    { id: 3, icon: "🌿", name: "Rest Place",   stars: "3 stars · Bairro", price: "220" },
   ]
 
+  // Soma dos preços base × quantidade de cada destino no carrinho
   const total = list.reduce(
     (acc, item) => acc + (Number(item.price) || 0) * (Number(item.amount) || 0),
     0
   )
 
+  // Navega para a página de confirmação passando os dados do pedido
   function finish() {
     navigate('/requested', { state: { list, total } })
   }
 
+  // Reseta ordenação sem mexer nos filtros de busca
   function resetValue() {
-    [setSortType, setSortValue].forEach((set)=> set(""))
+    [setSortType, setSortValue].forEach(set => set(""))
   }
 
+  // Alterna painel de destinos e limpa seleção ao fechar
   function showDestinations() {
     setShowCalendar(false)
-    setShow((prev) => !prev)
+    setShow(prev => !prev)
     if (show) setSelectCity(null)
   }
 
-  const [pendingCityPrice, setPendingCityPrice] = useState(null)
-
-function chooseCity(id, name, price, img) {
+  // ─────────────────────────────────────────────
+  // HANDLER: Selecionar cidade nos cards
+  // Clique duplo no mesmo card desmarca e fecha o calendário
+  // ─────────────────────────────────────────────
+  function chooseCity(id, name, price, img) {
     if (selectCity === id) {
-      [setSelectCity, setPendingCity, setPendingCityPrice].forEach((set)=> set(null))
+      [setSelectCity, setPendingCity, setPendingCityPrice].forEach(set => set(null))
       setShowCalendar(false)
       setCitySelected("")
     } else {
@@ -88,12 +109,17 @@ function chooseCity(id, name, price, img) {
     }
   }
 
+  // ─────────────────────────────────────────────
+  // HANDLER: Confirmar datas no FlightSearch
+  // Valida limite de 30 noites e abre modal de hotel
+  // ─────────────────────────────────────────────
   function handleSearch({ startDate, endDate, nights }) {
     if (!pendingCity) return
     if (nights > 30) { error(); return }
 
     const toISODate = (date) => new Date(date).toISOString().split("T")[0]
 
+    // Salva na ref para aguardar decisão do modal Hotel antes de adicionar ao carrinho
     pendingSearchRef.current = {
       ...pendingCity,
       amount: 1,
@@ -104,81 +130,80 @@ function chooseCity(id, name, price, img) {
 
     setPendingCity(null)
     setShowCalendar(false)
-
-    setShowHotel(true)  
-    setHideHotel(true)  
-}
-
-const [valueNight, setValueNight] = useState(0)
-
-const [priceHotel, setPriceHotel] = useState(0)
-
-function addHotel() {
-  if (!pendingSearchRef.current) return
-
-  const foundHotel = hotels.find(h => h.id === selected) ?? null
-  const newItem = {
-    ...pendingSearchRef.current,
-    uniqueId: `${pendingSearchRef.current.id}_${crypto.randomUUID()}`,
-    hotelSelected: foundHotel,
-    valueNight: valueNight,
-    priceHotel: foundHotel ? parseFloat(foundHotel.price.replace("R$ ", "")) : 0
+    setShowHotel(true)
+    setHideHotel(true)
   }
 
-  setPriceHotel(priceHotel)
+  // ─────────────────────────────────────────────
+  // HANDLER: Confirmar hotel e adicionar ao carrinho
+  // ─────────────────────────────────────────────
+  function addHotel() {
+    if (!pendingSearchRef.current) return
 
-  setList((prev) => [...prev, newItem]) 
-  pendingSearchRef.current = null
-  cityAdd()
-}
+    const foundHotel = hotels.find(h => h.id === selected) ?? null
+    const newItem = {
+      ...pendingSearchRef.current,
+      uniqueId: `${pendingSearchRef.current.id}_${crypto.randomUUID()}`,
+      hotelSelected: foundHotel,
+      valueNight: valueNight,
+      priceHotel: foundHotel ? parseFloat(foundHotel.price.replace("R$ ", "")) : 0
+    }
 
-function onSkip() {
-  if (!pendingSearchRef.current) return
-
-  const newItem = {
-    ...pendingSearchRef.current,
-    uniqueId: `${pendingSearchRef.current.id}_${crypto.randomUUID()}`, 
-    hotelSelected: null,
-    valueNight: valueNight
+    setList(prev => [...prev, newItem])
+    pendingSearchRef.current = null
+    cityAdd()
   }
 
-  setList((prev) => [...prev, newItem]) 
+  // ─────────────────────────────────────────────
+  // HANDLER: Pular seleção de hotel
+  // Adiciona o item sem hotel e fecha o modal
+  // ─────────────────────────────────────────────
+  function onSkip() {
+    if (!pendingSearchRef.current) return
 
-  pendingSearchRef.current = null
-  setCitySelected("")
-  setHideHotel(false)
-  cityAdd()
-}
+    const newItem = {
+      ...pendingSearchRef.current,
+      uniqueId: `${pendingSearchRef.current.id}_${crypto.randomUUID()}`,
+      hotelSelected: null,
+      valueNight: valueNight
+    }
 
-function cityAdd() {
-  setMessage({ text: "City added successfully", type: "add", isOpen: true })
-  setCitySelected("")
+    setList(prev => [...prev, newItem])
+    pendingSearchRef.current = null
+    setCitySelected("")
+    setHideHotel(false)
+    cityAdd()
+  }
 
- const setters = [setShowHotel, setHideHotel, setShowCitySelected]
- setters.forEach((set) => set(false))
+  // Exibe toast de sucesso e reseta estados pós-adição
+  function cityAdd() {
+    setMessage({ text: "City added successfully", type: "add", isOpen: true })
+    setCitySelected("")
+    ;[setShowHotel, setHideHotel, setShowCitySelected].forEach(set => set(false))
+    ;[setSelectCity, setSelected].forEach(set => set(null))
+  }
 
- const settersNull = [setSelectCity, setSelected]
- settersNull.forEach((set)=> set(null))
+  // Toast de erro para limite de noites excedido
+  function error() {
+    setMessage({ text: "You can only stay for 30 nights", type: "erro", isOpen: true })
+  }
 
-}
+  // Remove item do carrinho pelo uniqueId
+  function removeCity(uniqueId) {
+    setList(prev => prev.filter(item => item.uniqueId !== uniqueId))
+  }
 
-function error() {
-  setMessage({ text: "You can only stay for 30 nights", type: "erro", isOpen: true })
-}
+  // Reseta todos os filtros e restaura lista completa
+  function reset() {
+    [setCityValue, setCountryValue, setContinentValue, setCitySearch, setSortType, setSortValue].forEach(set => set(""))
+    setFilteredPlaces(places)
+  }
 
-
-function removeCity(uniqueId) {
-  setList((prev) => prev.filter(item => item.uniqueId !== uniqueId))
-}
-
-function reset() {
-  [setCityValue, setCountryValue, setContinentValue, setCitySearch, setSortType, setSortValue].forEach((set)=> set(""))
-  setFilteredPlaces(places)
-}
-
+  // ── Ordenação de cidades ─────────────────────
   const cities = places.flatMap(place => place.cities)
   let sorted = [...cities]
 
+  // sortedCities só existe quando há ordenação ativa — repassado ao Places
   const sortedCities = sortType
     ? [...cities].sort((a, b) =>
         sortType === "asc" ? a.price - b.price : b.price - a.price
@@ -187,38 +212,46 @@ function reset() {
 
   function handleSort(type) {
     setSortType(type)
-    if (type === "asc") sorted.sort((a, b) => a.price - b.price)
+    if (type === "asc")  sorted.sort((a, b) => a.price - b.price)
     if (type === "desc") sorted.sort((a, b) => b.price - a.price)
   }
 
+  // Fecha o toast automaticamente após 2s
   useEffect(() => {
     if (!message.isOpen) return
-    const timer = setTimeout(() => setMessage((prev) => ({ ...prev, isOpen: false })), 2000)
+    const timer = setTimeout(() => setMessage(prev => ({ ...prev, isOpen: false })), 2000)
     return () => clearTimeout(timer)
   }, [message.isOpen])
 
-  const totalPriceHotel = list.reduce((acc, item) => 
-  acc + (item.hotelSelected ? parseFloat(item.hotelSelected.price) : 0), 0
-);
+  // Totais derivados da lista — repassados ao Cart e Requested
+  const totalPriceHotel  = list.reduce((acc, item) =>
+    acc + (item.hotelSelected ? parseFloat(item.hotelSelected.price) : 0), 0)
 
   const totalValueNight = list.reduce((acc, item) => acc + (item.valueNight || 0), 0)
 
+  // ─────────────────────────────────────────────
+  // RENDER
+  // ─────────────────────────────────────────────
   return (
     <Routes>
+
+      {/* ── Página principal ── */}
       <Route path="/" element={
         <>
           <NavBar />
           <Main />
 
           {showCalendar && (
-            <FlightSearch 
-            onSearch={handleSearch} 
-            setSelectCity={setSelectCity} 
-            setValueNight={setValueNight}
-            list={list}
-            cityPrice={pendingCityPrice}/>
+            <FlightSearch
+              onSearch={handleSearch}
+              setSelectCity={setSelectCity}
+              setValueNight={setValueNight}
+              list={list}
+              cityPrice={pendingCityPrice}
+            />
           )}
 
+          {/* Botão que abre/fecha o painel de destinos */}
           <button className={`dest-btn ${show ? "open" : ""}`} onClick={showDestinations}>
             <svg className="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6">
               <path d="M3 6l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
@@ -229,6 +262,8 @@ function reset() {
           {show && (
             <div className="place-cart-container">
               <div className="search-places-wrapper">
+
+                {/* Search fica oculto durante seleção de datas */}
                 {!showCalendar &&
                   <Search
                     chooseCity={chooseCity}
@@ -248,6 +283,7 @@ function reset() {
                   />
                 }
 
+                {/* Modal de hotel — sempre montado, visibilidade via hideHotel/showHotel */}
                 <Hotel
                   onSkip={onSkip}
                   onAdd={addHotel}
@@ -260,7 +296,7 @@ function reset() {
 
                 {!showCalendar &&
                   <OrderValue
-                    handleSort={(type) => handleSort(type)}
+                    handleSort={type => handleSort(type)}
                     sorted={sorted}
                     sortValue={sortValue}
                     setSortValue={setSortValue}
@@ -290,9 +326,10 @@ function reset() {
                 isOpen={message.isOpen}
                 type={message.type}
                 message={message.text}
-                onClose={() => setMessage((prev) => ({ ...prev, isOpen: false }))}
+                onClose={() => setMessage(prev => ({ ...prev, isOpen: false }))}
               />
 
+              {/* Cart fica oculto enquanto o modal Hotel está aberto */}
               {!hideHotel && (
                 <Cart
                   list={list}
@@ -301,7 +338,6 @@ function reset() {
                   citySelected={citySelected}
                   showCitySelected={showCitySelected}
                   valueNight={valueNight}
-                  priceHotel={priceHotel}
                   totalPriceHotel={totalPriceHotel}
                   totalValueNight={totalValueNight}
                 />
@@ -310,14 +346,18 @@ function reset() {
           )}
         </>
       } />
-      <Route path="/requested" element={ 
-        <Requested 
+
+      {/* ── Página de confirmação do pedido ── */}
+      <Route path="/requested" element={
+        <Requested
           list={list}
           setList={setList}
           total={total}
           totalPriceHotel={totalPriceHotel}
           totalValueNight={totalValueNight}
-        />} />
+        />
+      } />
+
     </Routes>
   )
 }
