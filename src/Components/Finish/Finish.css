@@ -1,52 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap');
 
+/* ─────────────────────────────────────────────
+   OVERLAY: Fundo escuro estilo céu noturno
+───────────────────────────────────────────── */
 .finish-overlay {
   position: fixed;
   inset: 0;
-  background: #0a0a0f;
+  background: linear-gradient(160deg, #060d1f 0%, #0a1628 50%, #06111e 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   font-family: 'Syne', sans-serif;
-  animation: finishFadeIn 0.3s ease;
+  animation: finishFadeIn 0.4s ease;
   overflow: hidden;
 }
 
+/* ─────────────────────────────────────────────
+   ORBS: Brilhos atmosféricos de fundo
+───────────────────────────────────────────── */
 .finish-orb {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
 }
 .finish-orb--1 {
-  width: 500px; height: 500px;
-  left: -100px; top: -100px;
-  background: radial-gradient(circle, rgba(63,185,120,0.09) 0%, transparent 70%);
-  animation: orbFloat 8s ease-in-out infinite;
+  width: 600px; height: 600px;
+  left: -150px; top: -150px;
+  background: radial-gradient(circle, rgba(30, 80, 160, 0.18) 0%, transparent 65%);
+  animation: orbFloat 10s ease-in-out infinite;
 }
 .finish-orb--2 {
-  width: 400px; height: 400px;
-  right: -80px; bottom: -80px;
-  background: radial-gradient(circle, rgba(85,100,250,0.08) 0%, transparent 70%);
-  animation: orbFloat 10s ease-in-out 2s infinite reverse;
+  width: 500px; height: 500px;
+  right: -100px; bottom: -100px;
+  background: radial-gradient(circle, rgba(63, 185, 120, 0.10) 0%, transparent 65%);
+  animation: orbFloat 13s ease-in-out 3s infinite reverse;
 }
 
+/* ─────────────────────────────────────────────
+   MODAL: Card principal
+───────────────────────────────────────────── */
 .finish-modal {
   position: relative;
   width: 100%;
-  max-width: 580px;
+  max-width: 560px;
   margin: 2rem;
-  padding: 3.5rem 3rem;
+  padding: 3rem 2.75rem;
   border-radius: 28px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   text-align: center;
   overflow: hidden;
-  animation: modalIn 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
+  animation: modalIn 0.55s cubic-bezier(0.34, 1.2, 0.64, 1);
 }
 
+/* ─────────────────────────────────────────────
+   CANVAS: Animação de rastros de voo + estrelas
+───────────────────────────────────────────── */
 .finish-canvas {
   position: absolute;
   inset: 0;
@@ -55,6 +67,9 @@
   pointer-events: none;
 }
 
+/* ─────────────────────────────────────────────
+   TAG: "booking confirmed"
+───────────────────────────────────────────── */
 .finish-tag {
   display: inline-flex;
   align-items: center;
@@ -64,11 +79,11 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #a8f5c8;
-  background: rgba(168, 245, 200, 0.1);
-  border: 1px solid rgba(168, 245, 200, 0.2);
+  background: rgba(168, 245, 200, 0.08);
+  border: 1px solid rgba(168, 245, 200, 0.18);
   border-radius: 100px;
   padding: 5px 16px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
   opacity: 0;
   animation: fadeUp 0.5s ease 0.2s forwards;
 }
@@ -80,90 +95,154 @@
   animation: pulse 1.5s ease-in-out infinite;
 }
 
+/* ─────────────────────────────────────────────
+   ÍCONE: Avião centralizado
+───────────────────────────────────────────── */
 .finish-icon {
   width: 88px; height: 88px;
   border-radius: 50%;
-  background: rgba(168, 245, 200, 0.1);
-  border: 1.5px solid rgba(168, 245, 200, 0.3);
-  margin: 0 auto 2rem;
+  background: rgba(168, 245, 200, 0.07);
+  border: 1.5px solid rgba(168, 245, 200, 0.22);
+  margin: 0 auto 1.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s forwards;
 }
-.finish-icon svg { width: 40px; height: 40px; }
-.finish-check {
-  stroke-dasharray: 35;
-  stroke-dashoffset: 35;
-  animation: dash 0.5s ease 0.9s forwards;
+.finish-icon svg { width: 42px; height: 42px; }
+
+/* Avião aparece e levanta levemente */
+.finish-plane {
+  transform-origin: center;
+  animation: planeTakeoff 1s cubic-bezier(0.34, 1.4, 0.64, 1) 0.9s both;
 }
 
+/* ─────────────────────────────────────────────
+   TEXTOS: Título e subtítulo
+───────────────────────────────────────────── */
 .finish-title {
-  font-size: 36px;
+  font-size: 34px;
   font-weight: 700;
   color: #fff;
   letter-spacing: -0.02em;
-  line-height: 1.15;
+  line-height: 1.2;
   margin-bottom: 0.75rem;
   opacity: 0;
   animation: fadeUp 0.5s ease 0.55s forwards;
 }
 
 .finish-sub {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.45);
-  line-height: 1.7;
-  margin-bottom: 2.5rem;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.75;
+  margin-bottom: 2rem;
   opacity: 0;
   animation: fadeUp 0.5s ease 0.65s forwards;
 }
 
+/* ─────────────────────────────────────────────
+   DIVIDER
+───────────────────────────────────────────── */
 .finish-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.07);
+  margin-bottom: 1.75rem;
   opacity: 0;
   animation: fadeUp 0.4s ease 0.7s forwards;
 }
 
+/* ─────────────────────────────────────────────
+   META CARDS: Booking / Total / Payment
+───────────────────────────────────────────── */
 .finish-meta {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 2.5rem;
+  gap: 10px;
+  margin-bottom: 1.75rem;
   opacity: 0;
   animation: fadeUp 0.5s ease 0.75s forwards;
 }
 
 .finish-meta-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 14px;
-  padding: 1rem 0.75rem;
+  padding: 0.9rem 0.6rem;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .finish-meta-label {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.35);
-  letter-spacing: 0.06em;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .finish-meta-val {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #fff;
 }
 
+/* ─────────────────────────────────────────────
+   ROTA: Linha de voo decorativa
+───────────────────────────────────────────── */
+.finish-route {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.82s forwards;
+}
+
+.finish-route__city {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.05em;
+}
+
+.finish-route__line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  max-width: 180px;
+}
+
+.finish-route__dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(168, 245, 200, 0.5);
+  flex-shrink: 0;
+}
+
+.finish-route__track {
+  flex: 1;
+  height: 1px;
+  background: rgba(168, 245, 200, 0.2);
+}
+
+.finish-route__plane {
+  width: 16px; height: 16px;
+  color: #a8f5c8;
+  flex-shrink: 0;
+  animation: planeSlide 2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────
+   BOTÕES
+───────────────────────────────────────────── */
 .finish-actions {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   opacity: 0;
-  animation: fadeUp 0.5s ease 0.85s forwards;
+  animation: fadeUp 0.5s ease 0.9s forwards;
 }
 
 .finish-btn-primary {
@@ -171,7 +250,7 @@
   padding: 0.9rem;
   border-radius: 14px;
   background: #a8f5c8;
-  color: #0a2018;
+  color: #042018;
   border: none;
   font-family: 'Syne', sans-serif;
   font-size: 14px;
@@ -179,14 +258,14 @@
   cursor: pointer;
   transition: all 0.2s;
 }
-.finish-btn-primary:hover { background: #7fedb0; transform: translateY(-1px); }
+.finish-btn-primary:hover { background: #7fedb0; transform: translateY(-2px); }
 
 .finish-btn-secondary {
-  padding: 0.9rem 1.5rem;
+  padding: 0.9rem 1.4rem;
   border-radius: 14px;
   background: transparent;
-  color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   font-family: 'Syne', sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -194,12 +273,16 @@
   transition: all 0.2s;
   white-space: nowrap;
 }
-.finish-btn-secondary:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+.finish-btn-secondary:hover { color: #fff; border-color: rgba(255,255,255,0.28); }
 
-@keyframes finishFadeIn { from { opacity: 0 } to { opacity: 1 } }
-@keyframes modalIn { from { opacity: 0; transform: scale(0.94) translateY(20px) } to { opacity: 1; transform: none } }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: none } }
-@keyframes popIn { from { opacity: 0; transform: scale(0.3) } to { opacity: 1; transform: scale(1) } }
-@keyframes dash { to { stroke-dashoffset: 0 } }
-@keyframes pulse { 0%, 100% { opacity: 1 } 50% { opacity: 0.3 } }
-@keyframes orbFloat { 0%, 100% { transform: translate(0, 0) } 50% { transform: translate(10px, -15px) } }
+/* ─────────────────────────────────────────────
+   KEYFRAMES
+───────────────────────────────────────────── */
+@keyframes finishFadeIn   { from { opacity: 0 } to { opacity: 1 } }
+@keyframes modalIn        { from { opacity: 0; transform: scale(0.93) translateY(24px) } to { opacity: 1; transform: none } }
+@keyframes fadeUp         { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
+@keyframes popIn          { from { opacity: 0; transform: scale(0.2) } to { opacity: 1; transform: scale(1) } }
+@keyframes pulse          { 0%, 100% { opacity: 1 } 50% { opacity: 0.25 } }
+@keyframes orbFloat       { 0%, 100% { transform: translate(0,0) } 50% { transform: translate(12px,-18px) } }
+@keyframes planeTakeoff   { from { transform: scale(0.7) rotate(-10deg); opacity: 0 } to { transform: scale(1) rotate(0deg); opacity: 1 } }
+@keyframes planeSlide     { 0%, 100% { transform: translateX(0) } 50% { transform: translateX(4px) } }
