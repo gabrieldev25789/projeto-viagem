@@ -197,9 +197,8 @@
 /* ─────────────────────────────────────────────
    RESPONSIVO
 ───────────────────────────────────────────── */
-
 /* ── Tablet ── */
-@media (max-width: 64rem) {
+@media (max-width: 1024px) {
     .infos-container {
         width: 92vw;
         gap: 1.5rem;
@@ -214,7 +213,7 @@
 }
 
 /* ── Mobile grande ── */
-@media (max-width: 48rem) {
+@media (max-width: 768px) {
     .infos-container {
         width: 95vw;
         margin: 1rem auto;
@@ -229,8 +228,8 @@
     }
 
     .city-img {
-        width: 6.25rem;
-        min-width: 6.25rem;
+        width: 100px;
+        min-width: 100px;
     }
 
     .city-name   { font-size: 0.9rem; }
@@ -239,7 +238,7 @@
 }
 
 /* ── Mobile pequeno ── */
-@media (max-width: 30rem) {
+@media (max-width: 480px) {
     .infos-container {
         width: 100%;
         margin: 0.5rem 0;
@@ -256,7 +255,6 @@
         font-size: 1.1rem;
     }
 
-    /* Card vira coluna no mobile pequeno */
     .city-card {
         flex-direction: column;
     }
@@ -264,7 +262,7 @@
     .city-img {
         width: 100%;
         min-width: unset;
-        height: 9rem;
+        height: 144px;
     }
 
     .city-name  { font-size: 0.85rem; }
