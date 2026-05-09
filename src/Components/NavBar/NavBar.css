@@ -77,7 +77,6 @@
 */ 
 
 #intro {
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -132,6 +131,9 @@
 /* MOBILE */
 @media (max-width: 600px) {
     #intro {
+        position: fixed; /* só aqui */
+        top: 0;
+        left: 0;
         flex-direction: column;
         gap: 0.5rem;
         padding: 0.75rem 1rem;
