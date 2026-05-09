@@ -22,11 +22,11 @@
 ══════════════════════════════ */
 
 #opacity {
-   /* width: 100%;
+    width: 100%;
     height: 70.2vh;
-    margin-top: 7vh; */
+    margin-top: -70.2vh; 
     position: absolute;
-    inset: 0; /* top/right/bottom/left: 0 — cobre exatamente o #img */
+    /*inset: 0; /* top/right/bottom/left: 0 — cobre exatamente o #img */
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
@@ -82,14 +82,10 @@
 ══════════════════════════════ */
 
 @media (max-width: 600px) {
-    #img {
-        width: 125%;
-    }
 
     #opacity{
-        width: 100%;
-        height: 45vh;
-        margin-top: 5.5rem;
+        margin-top: -32.5rem;
+        height: 60vh;
     }
 
     #intro-infos {
