@@ -63,9 +63,9 @@ function App() {
 
   // Dados dos hotéis disponíveis para seleção
   const hotels = [
-    { id: 1, icon: "🏨", name: "Grand Palace", stars: "5 stars · Centro", price: "680" },
-    { id: 2, icon: "🛏️", name: "Over Sea Inn", stars: "4 stars · Praia",  price: "420" },
-    { id: 3, icon: "🌿", name: "Rest Place",   stars: "3 stars · Bairro", price: "220" },
+    { id: 1, icon: "🏨", name: "Grand Palace", stars: "5 stars · Downtown", price: "680" },
+    { id: 2, icon: "🛏️", name: "Over Sea Inn", stars: "4 stars · South Side",  price: "420" },
+    { id: 3, icon: "🌿", name: "Rest Place",   stars: "3 stars · Suburbio", price: "220" },
   ]
 
   // Soma dos preços base × quantidade de cada destino no carrinho
