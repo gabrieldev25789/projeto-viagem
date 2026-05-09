@@ -2,10 +2,19 @@
    HERO: Imagem de fundo
 ══════════════════════════════ */
 
+/*
 #img {
-    position: relative; /* contexto para o #opacity */
+    position: relative; /* contexto para o #opacity 
     width: 100%;
     height: 70vh;
+}
+*/
+
+#img {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    padding-top: 4rem; /* altura aprox do NavBar */
 }
 
 #img img {
@@ -134,7 +143,7 @@
     #intro-infos p  { font-size: 1.2rem; }
 }
 @media (max-width: 600px) {
-    #img { height: 50vh; }
+    #img { height: 100svh; padding-top: 5.5rem; }
     #intro-infos { padding: 1.5rem; width: 92%; border-radius: 14px; }
     #intro-infos h2 { font-size: 1.7rem; }
     #intro-infos p  { font-size: 1rem; }

@@ -1,4 +1,4 @@
-#intro{
+/*#intro{
     background-color: rgba(20, 20, 20, 0.39); 
     display: flex;
     justify-content: space-around;
@@ -43,7 +43,7 @@
 }
 
 
-/* TABLETS */
+/* TABLETS 
 @media (max-width: 900px){
 
     #intro{
@@ -62,7 +62,7 @@
 }
 
 
-/* CELULARES */
+/* CELULARES 
 @media (max-width: 600px){
 
     #list{
@@ -74,4 +74,74 @@
         font-size: 0.95rem;
     }
 }
+*/ 
 
+#intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: rgba(20, 20, 20, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+#list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+}
+
+#list li {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #d3d3d3;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+#list li:hover { color: #0077ff; }
+
+#list li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: #0077ff;
+    transition: width 0.3s ease;
+}
+
+#list li:hover::after { width: 100%; }
+
+/* TABLETS */
+@media (max-width: 900px) {
+    #intro { padding: 0.8rem 1.5rem; }
+    #list  { gap: 1.2rem; }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    #intro {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+    }
+
+    #list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    #list li { font-size: 0.85rem; }
+}
