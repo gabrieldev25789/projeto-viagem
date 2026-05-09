@@ -94,7 +94,8 @@
    RESPONSIVO
 ───────────────────────────────────────────── */
 
-/* ── Tablet: inputs empilham em coluna ── */
+/*
+/* ── Tablet: inputs empilham em coluna ── 
 @media (max-width: 768px) {
   .search-group {
     flex-direction: column;
@@ -102,7 +103,7 @@
   }
 }
 
-/* ── Mobile pequeno: campo menor ── */
+/* ── Mobile pequeno: campo menor ── 
 @media (max-width: 480px) {
   .search-group {
     flex-direction: column;
@@ -118,3 +119,4 @@
     font-size: 0.8125rem;
   }
 }
+  */

@@ -374,7 +374,7 @@
 /* ══════════════════════════════
    RESPONSIVO — tablet (≤ 900px)
    Empilha as colunas
-══════════════════════════════ */
+══════════════════════════════ 
 
 @media (max-width: 900px) {
   .order-page {
@@ -382,14 +382,14 @@
     min-height: unset;
   }
 
-  /* Cards ficam abaixo do pagamento */
+
   .order-left {
     order: 1;
     padding: 1.75rem 1.5rem;
     animation: fadeInUp 0.5s ease-out both;
   }
 
-  /* Pagamento vai pro topo, deixa de ser sticky */
+
   .order-right-wrapper {
     order: 2;
     position: static;
@@ -399,7 +399,7 @@
     animation: fadeInUp 0.5s ease-out both;
   }
 
-  /* Agradecimento some no mobile — sem espaço */
+
   .order-thanks {
     display: flex;
     padding: 1.5rem;
@@ -409,7 +409,7 @@
 /* ══════════════════════════════
    RESPONSIVO — mobile (≤ 480px)
    Ajustes de tamanho e espaçamento
-══════════════════════════════ */
+══════════════════════════════ 
 
 @media (max-width: 480px) {
   .order-left,
@@ -435,7 +435,7 @@
 /* ══════════════════════════════
    RESPONSIVO — mobile pequeno (≤ 360px)
    Card vira coluna
-══════════════════════════════ */
+══════════════════════════════ 
 
 @media (max-width: 360px) {
   .order-card {
@@ -448,3 +448,5 @@
     border-radius: 0.5rem;
   }
 }
+
+*/

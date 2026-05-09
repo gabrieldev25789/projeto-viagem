@@ -292,7 +292,7 @@
 
   .cart-body { max-height: 50vh; }
 }
-  */
+  
 
   @media (max-width: 768px) {
   .cart-aside {
@@ -314,3 +314,4 @@
 
   .cart-body { max-height: 50vh; }
 }
+  */ 

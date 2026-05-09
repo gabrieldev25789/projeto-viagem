@@ -42,8 +42,8 @@
     width: 100%;
 }
 
-
-/* TABLETS */
+/*
+/* TABLETS 
 @media (max-width: 900px){
 
     #intro{
@@ -62,7 +62,7 @@
 }
 
 
-/* CELULARES */
+/* CELULARES 
 @media (max-width: 600px){
 
     #intro{
@@ -78,5 +78,6 @@
     #list li{
         font-size: 0.95rem;
     }
-
 }
+
+*/

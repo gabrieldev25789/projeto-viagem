@@ -197,7 +197,8 @@
 /* ─────────────────────────────────────────────
    RESPONSIVO
 ───────────────────────────────────────────── */
-/* ── Tablet ── */
+/*
+/* ── Tablet ── 
 @media (max-width: 1024px) {
     .infos-container {
         width: 92vw;
@@ -212,7 +213,7 @@
     }
 }
 
-/* ── Mobile grande ── */
+/* ── Mobile grande ── 
 @media (max-width: 768px) {
     .infos-container {
         width: 95vw;
@@ -237,7 +238,7 @@
     .city-description { font-size: 0.8rem; }
 }
 
-/* ── Mobile pequeno ── */
+/* ── Mobile pequeno ── 
 @media (max-width: 480px) {
     .infos-container {
         width: 100%;
@@ -269,3 +270,4 @@
     .city-price,
     .city-description { font-size: 0.72rem; }
 }
+    */

@@ -54,15 +54,16 @@ button{
   transform: rotate(180deg); /* seta vira pra cima quando aberto */
 }
 
+/*
 @media (max-width: 1024px) {
     .place-cart-container {
-        margin-left: 0;          /* Remove a margem fixa */
+        margin-left: 0;         
         flex-direction: column;
         align-items: center;
         padding: 1rem;
         gap: 1rem;
-        width: 100%;             /* Garante que ocupa a largura total */
-        box-sizing: border-box;  /* Padding não extrapola a largura */
+        width: 100%;             
+        box-sizing: border-box;  
     }
 }
 
@@ -78,3 +79,4 @@ button{
     width: 100%;
   }
 }
+*/
