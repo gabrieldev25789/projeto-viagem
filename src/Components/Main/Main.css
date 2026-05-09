@@ -21,19 +21,29 @@
    — muito mais seguro em mobile
 ══════════════════════════════ */
 
+/*
 #opacity {
     width: 100%;
     height: 70.2vh;
     margin-top: -70.2vh; 
     position: absolute;
-    /*inset: 0; /* top/right/bottom/left: 0 — cobre exatamente o #img */
+    /*inset: 0; /* top/right/bottom/left: 0 — cobre exatamente o #img 
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem; /* evita texto colado nas bordas em telas pequenas */
+    padding: 1rem; /* evita texto colado nas bordas em telas pequenas 
 }
-
+*/ 
+#opacity {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
 /* ══════════════════════════════
    CARD DE INTRODUÇÃO
 ══════════════════════════════ */
@@ -68,6 +78,7 @@
    RESPONSIVO — tablet (≤ 900px)
 ══════════════════════════════ */
 
+/*
 @media (max-width: 900px) {
     #img {
         height: 60vh;
@@ -79,7 +90,7 @@
 
 /* ══════════════════════════════
    RESPONSIVO — mobile (≤ 600px)
-══════════════════════════════ */
+══════════════════════════════ 
 
 @media (max-width: 600px) {
 
@@ -100,7 +111,7 @@
 
 /* ══════════════════════════════
    RESPONSIVO — mobile pequeno (≤ 380px)
-══════════════════════════════ */
+══════════════════════════════ 
 
 @media (max-width: 380px) {
     #img {
@@ -113,6 +124,24 @@
         width: 100%;
     }
 
+    #intro-infos h2 { font-size: 1.4rem; }
+    #intro-infos p  { font-size: 0.9rem; }
+}*/
+
+@media (max-width: 900px) {
+    #img { height: 60vh; } /* opacity acompanha sozinho */
+    #intro-infos h2 { font-size: 2.2rem; }
+    #intro-infos p  { font-size: 1.2rem; }
+}
+@media (max-width: 600px) {
+    #img { height: 50vh; }
+    #intro-infos { padding: 1.5rem; width: 92%; border-radius: 14px; }
+    #intro-infos h2 { font-size: 1.7rem; }
+    #intro-infos p  { font-size: 1rem; }
+}
+@media (max-width: 380px) {
+    #img { height: 45vh; }
+    #intro-infos { padding: 1.25rem; width: 100%; }
     #intro-infos h2 { font-size: 1.4rem; }
     #intro-infos p  { font-size: 0.9rem; }
 }
