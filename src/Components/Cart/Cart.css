@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────
-   BADGE: Destino selecionado (fixo no canto)
+   BADGE
 ───────────────────────────────────────────── */
 .city-badge {
   display: inline-flex;
@@ -11,7 +11,6 @@
   padding: 0.375rem 0.875rem;
   border-radius: 999px;
   width: fit-content;
-
   position: fixed;
   top: 19.5rem;
   right: 1.5rem;
@@ -24,7 +23,6 @@
   gap: 0.5rem;
 }
 
-/* Ponto verde pulsante */
 .city-badge__dot {
   width: 0.4375rem;
   height: 0.4375rem;
@@ -41,12 +39,11 @@
 
 .city-badge__label {
   font-size: 0.7rem;
-  color: rgb(255, 255, 255);
+  color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
-/* Nome da cidade em verde com borda inferior */
 .city-badge__value {
   font-size: 0.9375rem;
   font-weight: 700;
@@ -57,12 +54,11 @@
 }
 
 /* ─────────────────────────────────────────────
-   ASIDE: Container fixo no canto superior direito
-   Alinha botão e container à direita
+   ASIDE — desktop: fixo no canto superior direito
 ───────────────────────────────────────────── */
 .cart-aside {
   position: fixed;
-  top: 1.5rem;
+  top: 5.5rem;
   right: 1.5rem;
   z-index: 100;
   display: flex;
@@ -71,7 +67,7 @@
 }
 
 /* ─────────────────────────────────────────────
-   BOTÃO: Abre/fecha o carrinho
+   BOTÃO
 ───────────────────────────────────────────── */
 .cart-btn {
   white-space: nowrap;
@@ -96,8 +92,7 @@
 .cart-btn:hover { background-color: #f5f5f5; }
 
 /* ─────────────────────────────────────────────
-   CONTAINER: Fechado por padrão (width: 0, invisible)
-   Anima para largura total ao abrir
+   CONTAINER
 ───────────────────────────────────────────── */
 .cart-container {
   display: flex;
@@ -116,7 +111,6 @@
   transition: width 0.25s ease, opacity 0.2s ease;
 }
 
-/* ── Estado aberto: expande para largura total ── */
 .cart-aside.open .cart-container {
   width: 22rem;
   opacity: 1;
@@ -124,7 +118,7 @@
 }
 
 /* ─────────────────────────────────────────────
-   HEADER: Título "Cart" + botão fechar
+   HEADER
 ───────────────────────────────────────────── */
 .cart-header {
   padding: 0.75rem 1rem;
@@ -145,7 +139,6 @@
   margin: 0;
 }
 
-/* Botão X vermelho no header */
 .cart-close {
   background: none;
   border: none;
@@ -159,7 +152,7 @@
 .cart-close:hover { color: #fa0000; }
 
 /* ─────────────────────────────────────────────
-   BODY: Área scrollável com a tabela de itens
+   BODY
 ───────────────────────────────────────────── */
 .cart-body {
   overflow-y: auto;
@@ -167,7 +160,7 @@
 }
 
 /* ─────────────────────────────────────────────
-   TABELA: Lista de cidades no carrinho
+   TABELA
 ───────────────────────────────────────────── */
 .cart-table {
   width: 100%;
@@ -176,7 +169,6 @@
   box-sizing: border-box;
 }
 
-/* Cabeçalho da tabela */
 .cart-th {
   padding: 0.5rem 1rem;
   text-align: left;
@@ -188,7 +180,6 @@
   border-bottom: 0.0625rem solid #f0f0f0;
 }
 
-/* Células de cada item */
 .cart-item td {
   padding: 0.4rem 1rem;
   vertical-align: middle;
@@ -196,14 +187,12 @@
 
 .cart-item:hover td { background-color: #fafafa; }
 
-/* Coluna do botão remover: alinhada à direita com largura fixa */
 .cart-item td:last-child {
   text-align: right;
   white-space: nowrap;
   width: 3rem;
 }
 
-/* Nome da cidade: trunca com ellipsis se longo */
 .cart-name {
   font-size: 0.95rem;
   font-weight: 500;
@@ -219,7 +208,6 @@
   white-space: nowrap;
 }
 
-/* Botão X vermelho para remover item */
 .cart-remove-btn {
   background: none;
   border: none;
@@ -233,7 +221,7 @@
 .cart-remove-btn:hover { color: #fa0000; }
 
 /* ─────────────────────────────────────────────
-   FOOTER: Total + botão Finish
+   FOOTER
 ───────────────────────────────────────────── */
 .cart-footer {
   display: flex;
@@ -264,7 +252,6 @@
   text-align: right;
 }
 
-/* Botão escuro arredondado — só aparece se total > 0 */
 .cart-finish-btn {
   padding: 0.4rem 0.9rem;
   border-radius: 2rem;
@@ -281,30 +268,21 @@
 .cart-finish-btn:hover { background-color: #333; }
 
 /* ─────────────────────────────────────────────
-   MOBILE: Largura do container se adapta à tela
+   MOBILE — carrinho no topo, no fluxo normal
 ───────────────────────────────────────────── */
-
-
 @media (max-width: 768px) {
-  .cart-aside.open .cart-container {
-    width: min(22rem, calc(100vw - 2rem));
-  }
-
-  .cart-body { max-height: 50vh; }
-}
-  
-
-  @media (max-width: 768px) {
   .cart-aside {
-    position: relative;
+    position: relative; /* sai do fixed, entra no fluxo */
     top: unset;
     right: unset;
     width: 100%;
     align-items: stretch;
+    order: -1; /* aparece antes dos cards no flex do pai */
   }
 
   .cart-aside.open .cart-container {
     width: 100%;
+    max-height: 60vh;
   }
 
   .cart-btn {
@@ -313,5 +291,8 @@
   }
 
   .cart-body { max-height: 50vh; }
+
+  /* badge some no mobile — sem espaço */
+  .city-badge { display: none; }
 }
   
