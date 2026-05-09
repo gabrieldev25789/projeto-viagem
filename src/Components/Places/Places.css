@@ -1,11 +1,8 @@
 /* ─────────────────────────────────────────────
-   CONTAINER PRINCIPAL: Grid de cards com glassmorphism
+   CONTAINER PRINCIPAL
 ───────────────────────────────────────────── */
 .infos-container {
     display: grid;
-    /*
-    grid-template-columns: repeat(auto-fit, minmax(0, 30rem));
-    */
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
     justify-content: space-around;
     align-items: start;
@@ -14,7 +11,7 @@
     padding: 2rem;
     margin: 2rem auto;
     width: 70%;
-    border-radius: 1rem;
+    max-width: 100%;          /* nunca estoura a tela */
     box-sizing: border-box;
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(16px);
@@ -42,7 +39,6 @@
     border: 0.03rem solid rgba(255, 255, 255, 0.08);
 }
 
-/* Label do continente — pequeno e esmaecido */
 .continent-country-li {
     font-size: 0.65rem;
     font-weight: 500;
@@ -52,7 +48,6 @@
     margin-bottom: 0.2rem;
 }
 
-/* Nome do país — maior e com separador inferior */
 .continent-country-li + .continent-country-li {
     font-size: 1.25rem;
     font-weight: 500;
@@ -64,7 +59,7 @@
     border-bottom: 0.03rem solid rgba(255, 255, 255, 0.08);
 }
 
-/* ── Lista de cidades ── */
+/* ── Listas ── */
 .cities-li {
     list-style: none;
     padding: 0;
@@ -84,7 +79,6 @@
    CARD DE CIDADE
 ───────────────────────────────────────────── */
 
-/* Wrapper com animação de entrada */
 .city-card-wrapper {
     opacity: 0;
     animation: fadeInUp 0.3s ease forwards;
@@ -101,6 +95,9 @@
     opacity: 0;
     animation: fadeInUp 0.3s ease forwards;
     transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    /* impede card de estourar o pai */
+    min-width: 0;
+    width: 100%;
 }
 
 .city-card:hover {
@@ -109,13 +106,12 @@
     transform: translateY(-0.125rem);
 }
 
-/* Card selecionado — borda e fundo verde suave */
 .city-card.select {
     background-color: rgba(26, 189, 61, 0.1);
     border-color: rgba(26, 189, 61, 0.3);
 }
 
-/* ── Imagem do destino ── */
+/* ── Imagem ── */
 .city-img {
     width: 10.625rem;
     min-width: 10.625rem;
@@ -126,7 +122,7 @@
     flex-shrink: 0;
 }
 
-/* ── Informações do destino ── */
+/* ── Info ── */
 .city-info {
     display: flex;
     flex-direction: column;
@@ -134,7 +130,7 @@
     gap: 0.3rem;
     padding: 1.1rem 1.25rem;
     flex: 1;
-    min-width: 0;
+    min-width: 0; /* impede texto de estourar */
 }
 
 .city-name {
@@ -155,7 +151,6 @@
     letter-spacing: 0.02em;
 }
 
-/* Descrição com clamp de 2 linhas */
 .city-description {
     font-size: 0.9rem;
     color: rgb(255, 255, 255);
@@ -169,18 +164,9 @@
 }
 
 /* ─────────────────────────────────────────────
-   ANIMAÇÕES
-───────────────────────────────────────────── */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(0.625rem); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ─────────────────────────────────────────────
    UTILITÁRIOS
 ───────────────────────────────────────────── */
 
-/* Modo lista — centralizado em coluna única */
 .infos-container--list {
     display: flex;
     flex-direction: column;
@@ -195,60 +181,80 @@
 .hide { display: none; }
 
 /* ─────────────────────────────────────────────
-   RESPONSIVO
+   ANIMAÇÕES
 ───────────────────────────────────────────── */
-/*
-/* ── Tablet ── 
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(0.625rem); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVO — tablet largo (≤ 1024px)
+   Container ocupa quase tudo, grid some pro modo coluna
+───────────────────────────────────────────── */
+
 @media (max-width: 1024px) {
     .infos-container {
-        width: 92vw;
-        gap: 1.5rem;
+        width: 100%;
+        margin: 1rem 0;
         padding: 1.5rem;
-        grid-template-columns: repeat(auto-fit, minmax(0, 100%));
+        gap: 1.5rem;
+        /* força coluna única — sem colunas lado a lado */
+        grid-template-columns: 1fr;
     }
 
     .continent-country-ul {
-        width: 100%;
         max-width: 100%;
     }
 }
 
-/* ── Mobile grande ── 
+/* ─────────────────────────────────────────────
+   RESPONSIVO — mobile (≤ 768px)
+   Imagem menor, padding reduzido
+───────────────────────────────────────────── */
+
 @media (max-width: 768px) {
     .infos-container {
-        width: 95vw;
-        margin: 1rem auto;
+        width: 100%;
+        margin: 0.5rem 0;
         padding: 1rem;
         gap: 1rem;
-        justify-content: center;
+        border-radius: 0.75rem;
     }
 
     .continent-country-ul {
-        max-width: 100%;
         padding: 1rem;
     }
 
     .city-img {
-        width: 100px;
-        min-width: 100px;
+        width: 7rem;
+        min-width: 7rem;
+        min-height: 7rem;
     }
 
-    .city-name   { font-size: 0.9rem; }
-    .city-price,
+    .city-info {
+        padding: 0.875rem 1rem;
+    }
+
+    .city-name        { font-size: 0.95rem; }
+    .city-price       { font-size: 0.9rem; }
     .city-description { font-size: 0.8rem; }
 }
 
-/* ── Mobile pequeno ── 
+/* ─────────────────────────────────────────────
+   RESPONSIVO — mobile pequeno (≤ 480px)
+   Card vira coluna: imagem em cima, texto embaixo
+───────────────────────────────────────────── */
+
 @media (max-width: 480px) {
     .infos-container {
-        width: 100%;
-        margin: 0.5rem 0;
         padding: 0.75rem;
+        gap: 0.75rem;
         border-radius: 0.5rem;
     }
 
     .continent-country-ul {
-        max-width: 100%;
         padding: 0.875rem;
     }
 
@@ -256,6 +262,7 @@
         font-size: 1.1rem;
     }
 
+    /* card empilha verticalmente */
     .city-card {
         flex-direction: column;
     }
@@ -263,11 +270,16 @@
     .city-img {
         width: 100%;
         min-width: unset;
-        height: 144px;
+        height: 10rem;
+        min-height: unset;
     }
 
-    .city-name  { font-size: 0.85rem; }
-    .city-price,
-    .city-description { font-size: 0.72rem; }
+    .city-info {
+        padding: 0.875rem;
+        gap: 0.25rem;
+    }
+
+    .city-name        { font-size: 0.9rem; }
+    .city-price       { font-size: 0.85rem; }
+    .city-description { font-size: 0.78rem; }
 }
-    */
