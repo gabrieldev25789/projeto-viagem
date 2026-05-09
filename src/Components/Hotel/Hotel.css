@@ -1,9 +1,9 @@
 /* ─────────────────────────────────────────────
-   OVERLAY: Fundo escurecido com blur ao abrir o modal
+   OVERLAY
 ───────────────────────────────────────────── */
 .hotel-overlay {
   position: fixed;
-  inset: 0; /* cobre toda a tela */
+  inset: 0;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -11,21 +11,17 @@
   align-items: center;
   justify-content: center;
   z-index: 100;
+  padding: 1rem; /* evita modal colar nas bordas em mobile */
 }
 
 /* ─────────────────────────────────────────────
-   MODAL: Glassmorphism — vidro fosco sobre o overlay
+   MODAL
 ───────────────────────────────────────────── */
 .hotel-modal {
   background: #1a1a1a;
- /* background: rgba(255, 255, 255, 0.07); */
-  /*backdrop-filter: blur(24px) saturate(160%); 
-  -webkit-backdrop-filter: blur(24px) saturate(160%);*/
   border-radius: 1.25rem;
   padding: 1.75rem;
-  /*width: 100%; */ 
   width: min(100%, 35rem);
-  margin: 1rem;
   max-width: 35rem;
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 1rem 3rem rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
@@ -45,7 +41,7 @@
 }
 
 /* ─────────────────────────────────────────────
-   CARDS: Grid de 3 colunas com os hotéis
+   CARDS
 ───────────────────────────────────────────── */
 .hotel-cards {
   display: grid;
@@ -56,8 +52,6 @@
 
 .hotel-card {
   background: rgba(255, 255, 255, 0.06);
- /* backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px); */
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.875rem;
   padding: 1rem;
@@ -70,13 +64,11 @@
   border-color: rgba(255, 255, 255, 0.22);
 }
 
-/* Card ativo — borda azul + fundo levemente azulado */
 .hotel-card--selected {
   border: 2px solid #378ADD;
   background: rgba(55, 138, 221, 0.15);
 }
 
-/* ── Conteúdo interno do card ── */
 .hotel-icon  { font-size: 1.375rem; display: block; margin-bottom: 0.625rem; }
 .hotel-name  { font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem; color: #f0f0f0; }
 .hotel-stars { font-size: 0.8125rem; color: rgba(255, 231, 12, 0.842); margin: 0 0 0.625rem; }
@@ -84,11 +76,10 @@
 .hotel-price span { font-size: 0.75rem; font-weight: 400; color: rgba(255,255,255,0.35); }
 
 /* ─────────────────────────────────────────────
-   ACTIONS: Botões lado a lado
+   ACTIONS
 ───────────────────────────────────────────── */
 .hotel-actions { display: flex; gap: 0.625rem; }
 
-/* Confirmar — verde, desabilitado com opacity baixa */
 .btn-add {
   flex: 1;
   padding: 0.75rem;
@@ -99,14 +90,13 @@
   border: none;
   border-radius: 0.625rem;
   cursor: pointer;
-  opacity: 0.4; /* desabilitado por padrão até haver seleção */
+  opacity: 0.4;
   transition: opacity 0.15s, background 0.15s;
 }
 
 .btn-add:not(:disabled) { opacity: 1; }
-.btn-add:not(:disabled):hover { background: #3a9926; } /* verde mais escuro no hover */
+.btn-add:not(:disabled):hover { background: #3a9926; }
 
-/* Pular — vermelho semitransparente com blur */
 .btn-skip {
   flex: 1;
   padding: 0.75rem;
@@ -114,8 +104,6 @@
   font-weight: 600;
   color: #fff;
   background: rgba(180, 40, 40, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 80, 80, 0.2);
   border-radius: 0.625rem;
   cursor: pointer;
@@ -124,5 +112,66 @@
 
 .btn-skip:hover { background: rgba(210, 50, 50, 0.9); }
 
-/* Utilitário — esconde o overlay sem remover do DOM */
 .hide { display: none !important; }
+
+/* ─────────────────────────────────────────────
+   RESPONSIVO — tablet (≤ 600px)
+   Cards de hotel viram 1 coluna
+───────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .hotel-modal {
+    padding: 1.25rem;
+    border-radius: 1rem;
+  }
+
+  .hotel-modal h2    { font-size: 1.1rem; }
+  .hotel-subtitle    { font-size: 0.875rem; margin-bottom: 1rem; }
+
+  /* 3 colunas fica apertado — vira 1 coluna */
+  .hotel-cards {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* card horizontal em mobile: ícone + info lado a lado */
+  .hotel-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .hotel-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .hotel-name  { font-size: 0.9rem; }
+  .hotel-stars { font-size: 0.75rem; margin-bottom: 0.25rem; }
+  .hotel-price { font-size: 0.95rem; }
+
+  .btn-add,
+  .btn-skip {
+    padding: 0.65rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVO — mobile pequeno (≤ 380px)
+───────────────────────────────────────────── */
+@media (max-width: 380px) {
+  .hotel-modal {
+    padding: 1rem;
+    border-radius: 0.875rem;
+  }
+
+  .hotel-modal h2 { font-size: 1rem; }
+
+  .hotel-actions  { flex-direction: column; }
+
+  .btn-add,
+  .btn-skip { padding: 0.6rem; font-size: 0.85rem; }
+}
