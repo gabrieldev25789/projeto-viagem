@@ -270,9 +270,10 @@
 /* ─────────────────────────────────────────────
    MOBILE — carrinho no topo, no fluxo normal
 ───────────────────────────────────────────── */
+
 @media (max-width: 768px) {
   .cart-aside {
-    position: relative; /* sai do fixed, entra no fluxo */
+    position: relative; /* sai do fixed, entra no fluxo */ 
     top: unset;
     right: unset;
     width: 100%;
@@ -292,7 +293,5 @@
 
   .cart-body { max-height: 50vh; }
 
-  /* badge some no mobile — sem espaço */
-  .city-badge { display: none; }
+  /* badge some no mobile — sem espaço  */
 }
-  
