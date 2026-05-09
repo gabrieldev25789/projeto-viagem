@@ -374,7 +374,7 @@
 /* ══════════════════════════════
    RESPONSIVO — tablet (≤ 900px)
    Empilha as colunas
-══════════════════════════════ 
+══════════════════════════════ */
 
 @media (max-width: 900px) {
   .order-page {
@@ -409,7 +409,7 @@
 /* ══════════════════════════════
    RESPONSIVO — mobile (≤ 480px)
    Ajustes de tamanho e espaçamento
-══════════════════════════════ 
+══════════════════════════════ */
 
 @media (max-width: 480px) {
   .order-left,
@@ -435,7 +435,7 @@
 /* ══════════════════════════════
    RESPONSIVO — mobile pequeno (≤ 360px)
    Card vira coluna
-══════════════════════════════ 
+══════════════════════════════ */
 
 @media (max-width: 360px) {
   .order-card {
@@ -449,4 +449,4 @@
   }
 }
 
-*/
+
