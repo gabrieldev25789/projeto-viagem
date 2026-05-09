@@ -80,7 +80,12 @@
 
 @media (max-width: 600px) {
     #img {
-        height: 50vh;
+        width: 125%;
+    }
+
+    #opacity{
+    width: 125%;
+    height: 68vh;
     }
 
     #intro-infos {
