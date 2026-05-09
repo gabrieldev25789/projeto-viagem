@@ -104,6 +104,11 @@
 
 /* ── Mobile pequeno: campo menor ── */
 @media (max-width: 480px) {
+  .search-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   .search-field {
     height: 2.625rem;
     padding: 0 1rem;
