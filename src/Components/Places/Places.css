@@ -11,7 +11,7 @@
     padding: 2rem;
     margin: 2rem auto;
     width: 70%;
-    max-width: 100%;          /* nunca estoura a tela */
+    max-width: 100%;         
     box-sizing: border-box;
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(16px);
@@ -95,7 +95,6 @@
     opacity: 0;
     animation: fadeInUp 0.3s ease forwards;
     transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-    /* impede card de estourar o pai */
     min-width: 0;
     width: 100%;
 }
@@ -130,7 +129,7 @@
     gap: 0.3rem;
     padding: 1.1rem 1.25rem;
     flex: 1;
-    min-width: 0; /* impede texto de estourar */
+    min-width: 0; 
 }
 
 .city-name {
@@ -191,7 +190,6 @@
 
 /* ─────────────────────────────────────────────
    RESPONSIVO — tablet largo (≤ 1024px)
-   Container ocupa quase tudo, grid some pro modo coluna
 ───────────────────────────────────────────── */
 
 @media (max-width: 1024px) {
@@ -200,7 +198,6 @@
         margin: 1rem 0;
         padding: 1.5rem;
         gap: 1.5rem;
-        /* força coluna única — sem colunas lado a lado */
         grid-template-columns: 1fr;
     }
 
@@ -211,7 +208,6 @@
 
 /* ─────────────────────────────────────────────
    RESPONSIVO — mobile (≤ 768px)
-   Imagem menor, padding reduzido
 ───────────────────────────────────────────── */
 
 @media (max-width: 768px) {
@@ -244,7 +240,6 @@
 
 /* ─────────────────────────────────────────────
    RESPONSIVO — mobile pequeno (≤ 480px)
-   Card vira coluna: imagem em cima, texto embaixo
 ───────────────────────────────────────────── */
 
 @media (max-width: 480px) {
@@ -262,7 +257,6 @@
         font-size: 1.1rem;
     }
 
-    /* card empilha verticalmente */
     .city-card {
         flex-direction: column;
     }

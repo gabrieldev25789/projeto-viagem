@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   z-index: 100;
-  padding: 1rem; /* evita modal colar nas bordas em mobile */
+  padding: 1rem; 
 }
 
 /* ─────────────────────────────────────────────

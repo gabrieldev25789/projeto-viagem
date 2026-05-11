@@ -273,12 +273,12 @@
 
 @media (max-width: 768px) {
   .cart-aside {
-    position: relative; /* sai do fixed, entra no fluxo */ 
+    position: relative; 
     top: unset;
     right: unset;
     width: 100%;
     align-items: stretch;
-    order: -1; /* aparece antes dos cards no flex do pai */
+    order: -1; 
   }
 
   .cart-aside.open .cart-container {
@@ -293,5 +293,4 @@
 
   .cart-body { max-height: 50vh; }
 
-  /* badge some no mobile — sem espaço  */
 }
